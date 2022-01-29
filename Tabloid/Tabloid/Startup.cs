@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Infrastructure;
+using Tabloid.Middlewares;
+using Tabloid.ServiceConfigurations;
 
 namespace Tabloid
 {
@@ -20,6 +22,12 @@ namespace Tabloid
                     Configuration["ConnectionStrings:DatabaseConnection"]);
             });
 
+            services
+                .AddRepositories()
+                .AddValidation()
+                .AddMediatr()
+                .AddUnitOfWork();
+
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
@@ -29,13 +37,22 @@ namespace Tabloid
         {
             if (env.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
             app.UseAuthorization();
+
+            app.UseCrossOriginResourceSharing();
 
             app.UseEndpoints(endpoints =>
             {
