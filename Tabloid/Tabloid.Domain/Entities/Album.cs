@@ -15,6 +15,6 @@
 
         public Guid AlbumSongId { get; set; }
 
-        public AlbumSong AlbumSong { get; set; }
+        public ICollection<Song> Songs { get; set; }
     }
 }

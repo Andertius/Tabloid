@@ -17,8 +17,6 @@ namespace Tabloid.Infrastructure
 
         public DbSet<Album> Albums { get; set; }
 
-        public DbSet<AlbumSong> AlbumSongs { get; set;}
-
         public DbSet<Song> Songs { get; set; }
 
         public DbSet<Tab> Tabs { get; set; }
@@ -44,7 +42,7 @@ namespace Tabloid.Infrastructure
 
             modelBuilder
                 .Entity<Album>()
-                .HasOne(x => x.AlbumSong)
+                .HasMany(x => x.Songs)
                 .WithOne(x => x.Album);
 
             modelBuilder
@@ -56,11 +54,6 @@ namespace Tabloid.Infrastructure
                 .Entity<Tab>()
                 .HasOne(x => x.Tuning)
                 .WithMany(x => x.Tabs);
-
-            modelBuilder
-                .Entity<Song>()
-                .HasOne(x => x.AlbumSong)
-                .WithOne(x => x.Song);
         }
     }
 }

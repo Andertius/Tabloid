@@ -1,4 +1,8 @@
-﻿namespace Tabloid
+﻿using Microsoft.EntityFrameworkCore;
+
+using Tabloid.Infrastructure;
+
+namespace Tabloid
 {
     public class Startup
     {
@@ -11,6 +15,11 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TabDbContext>(opts => {
+                opts.UseSqlServer(
+                    Configuration["ConnectionStrings:DatabaseConnection"]);
+            });
+
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

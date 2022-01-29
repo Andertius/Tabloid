@@ -6,7 +6,7 @@ namespace Tabloid.Application.Interfaces.Repositories
     {
         Task<IList<Album>> GetAllAlbumsByName(string name);
 
-        Task<IList<Album>> GetAllAlbumsBySong(Song song);
+        Task<Album> FindAlbumBySong(Song song);
 
         Task<IList<Album>> GetAllAlbumsByArtist(Artist artist);
     }

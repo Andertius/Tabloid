@@ -12,7 +12,7 @@ namespace Tabloid.Application.Interfaces.Repositories
 
         Task<IList<Song>> GetAllSongsByTuning(GuitarTuning tuning);
 
-        Task<IList<Song>> GetAllSongsByGenre(Genre genre);
+        Task<IList<Song>> GetAllSongsByGenres(IEnumerable<Genre> genres);
 
         Task<IList<Song>> GetAllSongsByArtists(IEnumerable<Artist> artists);
     }

@@ -1,11 +1,8 @@
-﻿using Tabloid.Application.Interfaces.Repositories;
-using Tabloid.Domain.Entities;
-
-namespace Tabloid.Application.Interfaces
+﻿namespace Tabloid.Application.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork<TId>
     {
-        Task<TRepository> GetRepository<TRepository>() where TRepository : IRepository<IEntity<Guid>>;
+        TRepository GetRepository<TRepository>() where TRepository : class;
 
         Task Save();
     }
