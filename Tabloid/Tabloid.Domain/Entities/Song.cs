@@ -6,7 +6,7 @@
 
         public string SongName { get; set; }
 
-        public int SongNumberInAlbum { get; set; }
+        public int? SongNumberInAlbum { get; set; }
 
 
         public Guid AlbumId { get; set; }

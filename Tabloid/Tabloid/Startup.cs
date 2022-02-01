@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+
+using Newtonsoft.Json;
 
 using Tabloid.Infrastructure;
 using Tabloid.Middlewares;
@@ -17,20 +20,28 @@ namespace Tabloid
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TabDbContext>(opts => {
-                opts.UseSqlServer(
-                    Configuration["ConnectionStrings:DatabaseConnection"]);
-            });
+            services.AddDbContext<TabDbContext>(opts => 
+                opts.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
             services
-                .AddRepositories()
-                .AddValidation()
+                //.AddRepositories()
+                //.AddValidation()
                 .AddMediatr()
                 .AddUnitOfWork();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Tabloid",
+                    Version = "v1",
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,7 +50,7 @@ namespace Tabloid
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tabloid v1"));
             }
 
             app.UseMiddleware<ExceptionMiddleware>();

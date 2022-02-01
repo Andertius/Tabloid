@@ -12,7 +12,10 @@ namespace Tabloid.Tests.UnitOfWork
 
         public UnitOfWorkFixture()
         {
-            var opts = new DbContextOptionsBuilder().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+            var opts = new DbContextOptionsBuilder<TabDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+
             _context = new TabDbContext(opts);
             UnitOfWork = new UnitOfWork<Guid>(_context);
         }

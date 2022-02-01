@@ -6,7 +6,7 @@ namespace Tabloid.Infrastructure
 {
     public class TabDbContext : DbContext
     {
-        public TabDbContext(DbContextOptions opts)
+        public TabDbContext(DbContextOptions<TabDbContext> opts)
             : base(opts)
         {
         }
@@ -38,22 +38,30 @@ namespace Tabloid.Infrastructure
             modelBuilder
                 .Entity<Album>()
                 .HasOne(x => x.Artist)
-                .WithMany(x => x.Albums);
+                .WithMany(x => x.Albums)
+                .HasForeignKey(x => x.ArtistId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<Album>()
                 .HasMany(x => x.Songs)
-                .WithOne(x => x.Album);
+                .WithOne(x => x.Album)
+                .HasForeignKey(x => x.AlbumId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<Tab>()
                 .HasOne(x => x.Song)
-                .WithMany(x => x.Tabs);
+                .WithMany(x => x.Tabs)
+                .HasForeignKey(x => x.SongId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder
                 .Entity<Tab>()
                 .HasOne(x => x.Tuning)
-                .WithMany(x => x.Tabs);
+                .WithMany(x => x.Tabs)
+                .HasForeignKey(x => x.TuningId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

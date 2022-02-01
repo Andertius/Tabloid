@@ -6,7 +6,9 @@
 
         public string TabContent { get; set; }
 
-        public double Difficulty { get; set; }
+        public double? Difficulty { get; set; }
+
+        public string Instrument { get; set; }
 
 
         public Guid TuningId { get; set; }

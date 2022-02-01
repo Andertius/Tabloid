@@ -11,7 +11,10 @@
 
         public void SeedData()
         {
-
+            if (!_context.Albums.Any())
+            {
+                //_context.Albums.Add
+            }
         }
     }
 }
