@@ -8,12 +8,13 @@
 
         public string Cover { get; set; }
 
+        public int Year { get; set; }
+
 
         public Guid ArtistId { get; set; }
 
         public Artist Artist { get; set; }
 
-        public Guid AlbumSongId { get; set; }
 
         public ICollection<Song> Songs { get; set; }
     }
