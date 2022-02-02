@@ -32,6 +32,7 @@ namespace Tabloid.Middlewares
             await context.Response.WriteAsJsonAsync(new ErrorResponse()
             {
                 StatusCode = HttpStatusCode.InternalServerError,
+                StackTrace = exception.StackTrace,
                 Message = exception.Message
             }, typeof(ErrorResponse));
         }

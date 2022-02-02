@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
-
-using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
 
 namespace Tabloid.Infrastructure.Repositories
@@ -19,7 +12,7 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
-        public async Task<IList<Album>> GetAllAlbumsByName(string name)
+        public async Task<ICollection<Album>> GetAllAlbumsByName(string name)
         {
             return await _context
                 .Albums
@@ -40,7 +33,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<Album>> GetAllAlbumsByArtist(Artist artist)
+        public async Task<ICollection<Album>> GetAllAlbumsByArtist(Artist artist)
         {
             return await _context
                 .Albums

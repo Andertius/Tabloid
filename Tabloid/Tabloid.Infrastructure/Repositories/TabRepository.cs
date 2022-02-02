@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
 
 namespace Tabloid.Infrastructure.Repositories
@@ -11,7 +11,7 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
-        public async Task<IList<Tab>> GetAllTabsBySong(Song song)
+        public async Task<ICollection<Tab>> GetAllTabsBySong(Song song)
         {
             return await _context
                 .Tabs

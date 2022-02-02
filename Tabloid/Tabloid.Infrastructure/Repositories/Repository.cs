@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -26,7 +21,7 @@ namespace Tabloid.Infrastructure.Repositories
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<IList<TEntity>> GetAll(Expression filter = null, IQueryable include = null)
+        public async Task<ICollection<TEntity>> GetAll(Expression filter = null, IQueryable include = null)
         {
             return await _context
                 .Set<TEntity>()

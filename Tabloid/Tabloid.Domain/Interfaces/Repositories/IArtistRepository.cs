@@ -1,8 +1,8 @@
 ﻿using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.Interfaces.Repositories
+namespace Tabloid.Domain.Interfaces.Repositories
 {
-    public interface IArtistRepository
+    public interface IArtistRepository : IRepository<Artist, Guid>
     {
         public Task<Artist> FindArtistByName(string artistName);
 

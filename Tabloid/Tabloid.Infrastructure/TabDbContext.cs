@@ -36,6 +36,11 @@ namespace Tabloid.Infrastructure
                 .WithMany(x => x.Genres);
 
             modelBuilder
+                .Entity<Genre>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
+
+            modelBuilder
                 .Entity<Album>()
                 .HasOne(x => x.Artist)
                 .WithMany(x => x.Albums)

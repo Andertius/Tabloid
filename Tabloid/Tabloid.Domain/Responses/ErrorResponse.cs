@@ -6,6 +6,8 @@ namespace TestProject.Domain.Responses
     {
         public HttpStatusCode StatusCode { get; set; }
 
+        public string StackTrace { get; set; }
+
         public string Message { get; set; }
     }
 }

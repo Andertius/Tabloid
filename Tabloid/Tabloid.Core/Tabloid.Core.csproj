@@ -5,8 +5,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tabloid.Domain\Tabloid.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

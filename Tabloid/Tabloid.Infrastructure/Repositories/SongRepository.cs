@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
 
 namespace Tabloid.Infrastructure.Repositories
@@ -12,7 +12,7 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
-        public async Task<IList<Song>> GetAllSongsByAlbum(Album album)
+        public async Task<ICollection<Song>> GetAllSongsByAlbum(Album album)
         {
             return await _context
                 .Songs
@@ -23,7 +23,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<Song>> GetAllSongsByArtists(IEnumerable<Artist> artists)
+        public async Task<ICollection<Song>> GetAllSongsByArtists(IEnumerable<Artist> artists)
         {
             return await _context
                 .Songs
@@ -34,7 +34,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<Song>> GetAllSongsByGenres(IEnumerable<Genre> genres)
+        public async Task<ICollection<Song>> GetAllSongsByGenres(IEnumerable<Genre> genres)
         {
             return await _context
                 .Songs
@@ -45,7 +45,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<Song>> GetAllSongsByName(string name)
+        public async Task<ICollection<Song>> GetAllSongsByName(string name)
         {
             return await _context
                 .Songs
@@ -56,7 +56,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<Song>> GetAllSongsByTabDifficulty(double difficulty)
+        public async Task<ICollection<Song>> GetAllSongsByTabDifficulty(double difficulty)
         {
             return await _context
                 .Songs
@@ -68,7 +68,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<Song>> GetAllSongsByTuning(GuitarTuning tuning)
+        public async Task<ICollection<Song>> GetAllSongsByTuning(GuitarTuning tuning)
         {
             return await _context
                 .Songs

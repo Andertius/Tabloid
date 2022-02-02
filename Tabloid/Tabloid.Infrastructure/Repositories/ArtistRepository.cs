@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
 
 namespace Tabloid.Infrastructure.Repositories

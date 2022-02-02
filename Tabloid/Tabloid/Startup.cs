@@ -24,10 +24,10 @@ namespace Tabloid
                 opts.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
             services
-                //.AddRepositories()
                 //.AddValidation()
                 .AddMediatr()
-                .AddUnitOfWork();
+                .AddUnitOfWork()
+                .AddMapper();
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -52,8 +52,10 @@ namespace Tabloid
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tabloid v1"));
             }
-
-            app.UseMiddleware<ExceptionMiddleware>();
+            else
+            {
+                app.UseMiddleware<ExceptionMiddleware>();
+            }
 
             app.UseHttpsRedirection();
 

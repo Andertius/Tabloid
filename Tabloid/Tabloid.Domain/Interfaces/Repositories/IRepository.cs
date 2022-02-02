@@ -2,11 +2,11 @@
 
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.Interfaces.Repositories
+namespace Tabloid.Domain.Interfaces.Repositories
 {
     public interface IRepository<TEntity, TId> where TEntity : class, IEntity<TId>
     {
-        Task<IList<TEntity>> GetAll(Expression filter = null, IQueryable include = null);
+        Task<ICollection<TEntity>> GetAll(Expression filter = null, IQueryable include = null);
 
         Task<TEntity> FindById(TId id);
 

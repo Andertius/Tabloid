@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
 
 namespace Tabloid.Infrastructure.Repositories
@@ -16,11 +16,10 @@ namespace Tabloid.Infrastructure.Repositories
         {
             return await _context
                 .Tunings
-                .Where(x => x.Tuning == tuning)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(x => x.Name == tuning);
         }
 
-        public async Task<IList<GuitarTuning>> GetAllGuitarTuningsByStringNumber(int number)
+        public async Task<ICollection<GuitarTuning>> GetAllGuitarTuningsByStringNumber(int number)
         {
             return await _context
                 .Tunings

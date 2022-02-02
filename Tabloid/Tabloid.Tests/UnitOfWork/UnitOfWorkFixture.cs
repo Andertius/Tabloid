@@ -2,7 +2,9 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Infrastructure;
+using Tabloid.Infrastructure.Repositories;
 
 namespace Tabloid.Tests.UnitOfWork
 {
@@ -18,6 +20,7 @@ namespace Tabloid.Tests.UnitOfWork
 
             _context = new TabDbContext(opts);
             UnitOfWork = new UnitOfWork<Guid>(_context);
+            UnitOfWork.RegisterRepositories(typeof(IRepository<,>).Assembly, typeof(Repository<,>).Assembly);
         }
 
         public UnitOfWork<Guid> UnitOfWork { get; }
