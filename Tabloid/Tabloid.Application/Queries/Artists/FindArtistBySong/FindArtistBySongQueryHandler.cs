@@ -6,14 +6,14 @@ using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
 using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Application.Queries.Albums.GetAlbumBySong
+namespace Tabloid.Application.Queries.Artists.FindArtistBySong
 {
-    public class GetAlbumBySongQueryHandler : IRequestHandler<GetAlbumBySongQuery, AlbumDto>
+    public class FindArtistBySongQueryHandler : IRequestHandler<FindArtistBySongQuery, ArtistDto>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAlbumBySongQueryHandler(
+        public FindArtistBySongQueryHandler(
             IUnitOfWork<Guid> unitOfWork,
             IMapper mapper)
         {
@@ -21,17 +21,17 @@ namespace Tabloid.Application.Queries.Albums.GetAlbumBySong
             _mapper = mapper;
         }
 
-        public async Task<AlbumDto> Handle(GetAlbumBySongQuery request, CancellationToken cancellationToken)
+        public async Task<ArtistDto> Handle(FindArtistBySongQuery request, CancellationToken cancellationToken)
         {
             var song = await _unitOfWork
                 .GetRepository<ISongRepository>()
                 .FindById(request.Song.Id);
 
             var result = await _unitOfWork
-                .GetRepository<IAlbumRepository>()
-                .FindAlbumBySong(song);
+                .GetRepository<IArtistRepository>()
+                .FindArtistBySong(song);
 
-            return _mapper.Map<AlbumDto>(result);
+            return _mapper.Map<ArtistDto>(result);
         }
     }
 }

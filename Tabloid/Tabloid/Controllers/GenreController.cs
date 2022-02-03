@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 using Tabloid.Application.Queries.Genres.GetAllGenres;
 using Tabloid.Application.Queries.Genres.GetAllMetalGenres;
+using Tabloid.Application.Queries.Genres.GetEveryOtherGenre;
 using Tabloid.Application.Queries.Genres.GetAllRockGenres;
 using Tabloid.Application.Queries.Genres.GetGenreByName;
+using Tabloid.Application.Queries.Genres.GetAllElectroGenres;
 
 namespace Tabloid.Controllers
 {
@@ -44,6 +46,20 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllMetalGenres()
         {
             var response = await _mediator.Send(new GetAllMetalGenresQuery());
+            return Ok(response);
+        }
+
+        [HttpGet("genres/electro")]
+        public async Task<IActionResult> GetAllElectroGenres()
+        {
+            var response = await _mediator.Send(new GetAllElectroGenresQuery());
+            return Ok(response);
+        }
+
+        [HttpGet("genres/every-other")]
+        public async Task<IActionResult> GetEveryOtherGenre()
+        {
+            var response = await _mediator.Send(new GetEveryOtherGenreQuery());
             return Ok(response);
         }
     }

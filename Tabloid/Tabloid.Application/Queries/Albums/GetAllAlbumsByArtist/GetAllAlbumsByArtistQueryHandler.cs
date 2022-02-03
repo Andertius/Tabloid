@@ -4,7 +4,7 @@ using MediatR;
 
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
 namespace Tabloid.Application.Queries.Albums.GetAllAlbumsByArtist
 {
@@ -31,7 +31,9 @@ namespace Tabloid.Application.Queries.Albums.GetAllAlbumsByArtist
                 .GetRepository<IAlbumRepository>()
                 .GetAllAlbumsByArtist(artist);
 
-            return result.Select(album => _mapper.Map<AlbumDto>(album)).ToArray();
+            return result
+                .Select(album => _mapper.Map<AlbumDto>(album))
+                .ToArray();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Tabloid.Domain.Entities;
 
-namespace Tabloid.Domain.Interfaces.Repositories
+namespace Tabloid.Infrastructure.Repositories.Interfaces
 {
     public interface IGenreRepository : IRepository<Genre, Guid>
     {
@@ -11,5 +11,9 @@ namespace Tabloid.Domain.Interfaces.Repositories
         Task<ICollection<Genre>> GetAllRockGenres();
 
         Task<ICollection<Genre>> GetAllMetalGenres();
+
+        Task<ICollection<Genre>> GetEveryOtherGenre();
+
+        Task<ICollection<Genre>> GetAllElectroGenres();
     }
 }

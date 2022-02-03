@@ -2,20 +2,18 @@
 
 using MediatR;
 
-using Microsoft.EntityFrameworkCore;
-
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
 using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Application.Queries.Albums.GetAllAlbums
+namespace Tabloid.Application.Queries.Artists.GetAllArtists
 {
-    public class GetAllAlbumsQueryHandler : IRequestHandler<GetAllAlbumsQuery, AlbumDto[]>
+    public class GetAllArtistsQueryHandler : IRequestHandler<GetAllArtistsQuery, ArtistDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllAlbumsQueryHandler(
+        public GetAllArtistsQueryHandler(
             IUnitOfWork<Guid> unitOfWork,
             IMapper mapper)
         {
@@ -23,14 +21,14 @@ namespace Tabloid.Application.Queries.Albums.GetAllAlbums
             _mapper = mapper;
         }
 
-        public async Task<AlbumDto[]> Handle(GetAllAlbumsQuery request, CancellationToken cancellationToken)
+        public async Task<ArtistDto[]> Handle(GetAllArtistsQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
-                .GetRepository<IAlbumRepository>()
-                .GetAll(include: src => src.Include(x => x.Artist));
+                .GetRepository<IArtistRepository>()
+                .GetAll();
 
             return result
-                .Select(album => _mapper.Map<AlbumDto>(album))
+                .Select(x => _mapper.Map<ArtistDto>(x))
                 .ToArray();
         }
     }

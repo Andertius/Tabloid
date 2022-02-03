@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Infrastructure.Repositories
+namespace Tabloid.Infrastructure.Repositories.Implementations
 {
     public class SongRepository : Repository<Song, Guid>, ISongRepository
     {

@@ -1,9 +1,9 @@
 ﻿using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Core.Extensions;
 using Tabloid.Domain.Entities;
 using System.Reflection;
-using Tabloid.Infrastructure.Repositories;
+using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Infrastructure.Repositories.Implementations;
 
 namespace Tabloid.Infrastructure
 {

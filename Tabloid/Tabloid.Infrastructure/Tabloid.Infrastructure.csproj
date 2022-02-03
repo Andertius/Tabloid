@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tabloid.Application\Tabloid.Application.csproj" />
+    <ProjectReference Include="..\Tabloid.Core\Tabloid.Core.csproj" />
+    <ProjectReference Include="..\Tabloid.Domain\Tabloid.Domain.csproj" />
   </ItemGroup>
 
 </Project>

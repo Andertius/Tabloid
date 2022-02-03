@@ -1,7 +1,8 @@
 ﻿using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Infrastructure;
 using Tabloid.Infrastructure.Repositories;
+using Tabloid.Infrastructure.Repositories.Implementations;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
 namespace Tabloid.ServiceConfigurations
 {

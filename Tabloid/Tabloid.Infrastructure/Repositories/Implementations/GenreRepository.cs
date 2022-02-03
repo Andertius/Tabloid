@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Infrastructure.Repositories
+namespace Tabloid.Infrastructure.Repositories.Implementations
 {
     public class GenreRepository : Repository<Genre, Guid>, IGenreRepository
     {
@@ -48,6 +48,26 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<ICollection<Genre>> GetAllElectroGenres()
+        {
+            return await _context
+                .Genres
+                .Where(x => AllElectroGenres.Contains(x.Name))
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+        }
+
+        public async Task<ICollection<Genre>> GetEveryOtherGenre()
+        {
+            return await _context
+                .Genres
+                .Where(x => !x.Name.Contains("Rock"))
+                .Where(x => !x.Name.Contains("Metal") && !AllMetalGenresWithoutMetalInTheirName.Contains(x.Name))
+                .Where(x => !AllElectroGenres.Contains(x.Name))
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+        }
+
         private static ICollection<string> AllMetalGenresWithoutMetalInTheirName
             => new[]
             {
@@ -61,6 +81,23 @@ namespace Tabloid.Infrastructure.Repositories
                 "Grindcore",
                 "Goregrind",
                 "Pornogrind",
+            };
+
+        private static ICollection<string> AllElectroGenres
+            => new[]
+            {
+                "Electro",
+                "Dubstep",
+                "Chillstep",
+                "Glichhop",
+                "Ambient",
+                "Wave",
+                "Lofi" ,
+                "Drumstep",
+                "Hardcore",
+                "House",
+                "Trap",
+                "Tance",
             };
     }
 }

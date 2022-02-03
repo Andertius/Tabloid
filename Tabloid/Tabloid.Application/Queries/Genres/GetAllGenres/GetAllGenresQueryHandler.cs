@@ -2,9 +2,11 @@
 
 using MediatR;
 
+using Microsoft.EntityFrameworkCore;
+
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
 namespace Tabloid.Application.Queries.Genres.GetAllGenres
 {
@@ -27,7 +29,9 @@ namespace Tabloid.Application.Queries.Genres.GetAllGenres
                 .GetRepository<IGenreRepository>()
                 .GetAll();
 
-            return result.Select(x => _mapper.Map<GenreDto>(x)).ToArray();
+            return result
+                .Select(x => _mapper.Map<GenreDto>(x))
+                .ToArray();
         }
     }
 }

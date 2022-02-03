@@ -4,7 +4,7 @@ using MediatR;
 
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
 namespace Tabloid.Application.Queries.Tunings.GetAllTunings
 {
@@ -27,7 +27,9 @@ namespace Tabloid.Application.Queries.Tunings.GetAllTunings
                 .GetRepository<IGuitarTuningRepository>()
                 .GetAll();
 
-            return tunings.Select(x => _mapper.Map<GuitarTuningDto>(x)).ToArray();
+            return tunings
+                .Select(x => _mapper.Map<GuitarTuningDto>(x))
+                .ToArray();
         }
     }
 }

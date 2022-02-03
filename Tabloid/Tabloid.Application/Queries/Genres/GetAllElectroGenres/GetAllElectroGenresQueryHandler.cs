@@ -6,14 +6,14 @@ using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
 using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Application.Queries.Genres.GetAllRockGenres
+namespace Tabloid.Application.Queries.Genres.GetAllElectroGenres
 {
-    public class GetAllRockGenresQueryHandler : IRequestHandler<GetAllRockGenresQuery, GenreDto[]>
+    public class GetAllElectroGenresQueryHandler : IRequestHandler<GetAllElectroGenresQuery, GenreDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllRockGenresQueryHandler(
+        public GetAllElectroGenresQueryHandler(
             IUnitOfWork<Guid> unitOfWork,
             IMapper mapper)
         {
@@ -21,13 +21,13 @@ namespace Tabloid.Application.Queries.Genres.GetAllRockGenres
             _mapper = mapper;
         }
 
-        public async Task<GenreDto[]> Handle(GetAllRockGenresQuery request, CancellationToken cancellationToken)
+        public async Task<GenreDto[]> Handle(GetAllElectroGenresQuery request, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork
                 .GetRepository<IGenreRepository>()
-                .GetAllRockGenres();
+                .GetAllElectroGenres();
 
-            return result.Select(genre => _mapper.Map<GenreDto>(genre)).ToArray();
+            return result.Select(x => _mapper.Map<GenreDto>(x)).ToArray();
         }
     }
 }

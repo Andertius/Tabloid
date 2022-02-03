@@ -97,6 +97,8 @@ namespace Tabloid.Infrastructure
             {
                 new Genre { Name = "Instrumental" },
                 new Genre { Name = "Jazz" },
+                new Genre { Name = "Swing" },
+                new Genre { Name = "Latino" },
                 new Genre { Name = "Blues" },
                 new Genre { Name = "Punk" },
                 new Genre { Name = "Pop" },
@@ -105,7 +107,11 @@ namespace Tabloid.Infrastructure
                 new Genre { Name = "Hip-hop" },
                 new Genre { Name = "Country" },
                 new Genre { Name = "Reggae" },
+                new Genre { Name = "New wave" },
+                new Genre { Name = "Soul" },
                 new Genre { Name = "Meme" },
+                new Genre { Name = "Anime" },
+                new Genre { Name = "K-pop" },
 
                 new Genre { Name = "Rock" },
                 new Genre { Name = "Hard Rock" },
@@ -152,6 +158,10 @@ namespace Tabloid.Infrastructure
                 new Genre { Name = "Sludge Metal" },
                 new Genre { Name = "Viking Metal" },
                 new Genre { Name = "Pirate Metal" },
+                new Genre { Name = "National Socialist Black Metal" },
+                new Genre { Name = "Depressive Suicidal Black Metal" },
+                new Genre { Name = "Red and Anarchist Black Metal" },
+                new Genre { Name = "Blackened Heavy Metal" },
                 new Genre { Name = "Metalcore" },
                 new Genre { Name = "Deathcore" },
                 new Genre { Name = "Mathcore" },
@@ -164,7 +174,14 @@ namespace Tabloid.Infrastructure
                 new Genre { Name = "Dubstep" },
                 new Genre { Name = "Chillstep" },
                 new Genre { Name = "Glichhop" },
-                new Genre { Name = "Drum and Bass" },
+                new Genre { Name = "Ambient" },
+                new Genre { Name = "Wave" },
+                new Genre { Name = "Lofi" },
+                new Genre { Name = "Drumstep" },
+                new Genre { Name = "Hardcore" },
+                new Genre { Name = "House" },
+                new Genre { Name = "Trap" },
+                new Genre { Name = "Tance" },
             });
 
             _context.AddRange(_genres);

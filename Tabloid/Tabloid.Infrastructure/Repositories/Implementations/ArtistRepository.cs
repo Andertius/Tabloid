@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
+using Tabloid.Infrastructure.Repositories.Interfaces;
 
-namespace Tabloid.Infrastructure.Repositories
+namespace Tabloid.Infrastructure.Repositories.Implementations
 {
     public class ArtistRepository : Repository<Artist, Guid>, IArtistRepository
     {
@@ -17,6 +17,7 @@ namespace Tabloid.Infrastructure.Repositories
             return await _context
                 .Artists
                 .Include(x => x.Albums)
+                .Include(x => x.Songs)
                 .Where(x => x.Albums.Contains(album))
                 .FirstOrDefaultAsync();
         }
@@ -25,6 +26,8 @@ namespace Tabloid.Infrastructure.Repositories
         {
             return await _context
                 .Artists
+                .Include(x => x.Albums)
+                .Include(x => x.Songs)
                 .Where(x => x.Name == artistName)
                 .FirstOrDefaultAsync();
         }
@@ -33,6 +36,7 @@ namespace Tabloid.Infrastructure.Repositories
         {
             return await _context
                 .Artists
+                .Include(x => x.Albums)
                 .Include(x => x.Songs)
                 .Where(x => x.Songs.Contains(song))
                 .FirstOrDefaultAsync();
