@@ -2,7 +2,7 @@
 
 using Tabloid.Application.Commands;
 using Tabloid.Domain.Enums;
-using Tabloid.Domain.Responses.HttpResponses;
+using Tabloid.Domain.Responses;
 
 namespace Tabloid.Helpers
 {
@@ -12,36 +12,40 @@ namespace Tabloid.Helpers
         {
             return response.Result switch
             {
-                CommandResult.Success => new OkObjectResult(new OkHttpResponse<CommandResponse<T>>(response)),
+                CommandResult.Success => new OkObjectResult(new OkResponse<CommandResponse<T>>(response)),
                 CommandResult.Failure => new BadRequestObjectResult(
-                    new BadRequestHttpResponse<CommandResponse<T>>(
+                    new BadRequestResponse<CommandResponse<T>>(
+                        response,
+                        response.ErrorMessage)),
+                CommandResult.NotFound => new NotFoundObjectResult(
+                    new NotFoundResponse<CommandResponse<T>>(
                         response,
                         response.ErrorMessage)),
                 _ => throw new NotSupportedException(),
             };
         }
 
-        public static IActionResult ReturnQueryResult<T>(T response)
+        public static IActionResult ReturnQueryResult<T>(T response) where T : class
         {
             return response switch
             {
-                null => new OkObjectResult(new OkHttpResponse<T>(response)),
-                _ => new BadRequestObjectResult(
-                    new BadRequestHttpResponse<T>(
+                null => new NotFoundObjectResult(
+                    new NotFoundResponse<T>(
                         response,
                         "Object could not be found")),
+                _ => new OkObjectResult(new OkResponse<T>(response)),
             };
         }
 
-        public static IActionResult ReturnQueryResult<T>(T[] response)
+        public static IActionResult ReturnQueryResult<T>(T[] response) where T : class
         {
             return response.Length switch
             {
-                0 => new BadRequestObjectResult(
-                    new BadRequestHttpResponse<T[]>(
+                0 => new NotFoundObjectResult(
+                    new NotFoundResponse<T[]>(
                         response,
                         "Objects could not be found")),
-                _ => new OkObjectResult(new OkHttpResponse<T[]>(response)),
+                _ => new OkObjectResult(new OkResponse<T[]>(response)),
             };
         }
     }

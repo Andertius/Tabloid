@@ -1,10 +1,10 @@
 ﻿using System.Net;
 
-namespace Tabloid.Domain.Responses.HttpResponses
+namespace Tabloid.Domain.Responses
 {
-    public class NotFoundHttpResponse<T> : IHttpResponse<T>
+    public class NotFoundResponse<T> : IResponse<T>
     {
-        public NotFoundHttpResponse(T obj, string error)
+        public NotFoundResponse(T obj, string error)
         {
             Object = obj;
             Error = error;

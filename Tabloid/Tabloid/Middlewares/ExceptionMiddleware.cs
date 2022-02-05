@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-using TestProject.Domain.Responses;
+using Tabloid.Domain.Responses;
 
 namespace Tabloid.Middlewares
 {
@@ -29,12 +29,9 @@ namespace Tabloid.Middlewares
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            await context.Response.WriteAsJsonAsync(new ErrorResponse()
-            {
-                StatusCode = HttpStatusCode.InternalServerError,
-                StackTrace = exception.StackTrace,
-                Message = exception.Message
-            }, typeof(ErrorResponse));
+            await context.Response.WriteAsJsonAsync(
+                new InternalServerErrorResponse<int>(0, exception.Message),
+                typeof(InternalServerErrorResponse<int>));
         }
     }
 }

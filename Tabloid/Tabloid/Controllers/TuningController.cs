@@ -10,9 +10,6 @@ using Tabloid.Application.Queries.Tunings.GetAllTunings;
 using Tabloid.Application.Queries.Tunings.GetTuningByName;
 using Tabloid.Application.Queries.Tunings.GetTuningsByStringNumber;
 
-using Tabloid.Domain.DataTransferObjects;
-using Tabloid.Domain.Enums;
-using Tabloid.Domain.Responses.HttpResponses;
 using Tabloid.Helpers;
 using Tabloid.Requests.TuningRequests;
 

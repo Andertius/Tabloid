@@ -2,7 +2,9 @@
 {
     public enum CommandResult
     {
-        Failure = 0,
-        Success = 1,
+        Failure = 400,
+        NotFound = 404,
+        Success = 200,
+        InternalServerError = 500,
     }
 }

@@ -31,12 +31,14 @@ namespace Tabloid.Application.Commands.Tunings.DeleteTuning
             if (await repository.Contains(entity))
             {
                 repository.Remove(entity);
+                await _unitOfWork.Save();
+                
                 return new CommandResponse<GuitarTuningDto>(_mapper.Map<GuitarTuningDto>(entity));
             }
 
             return new CommandResponse<GuitarTuningDto>(
                 _mapper.Map<GuitarTuningDto>(entity),
-                CommandResult.Failure,
+                CommandResult.NotFound,
                 "The tuning could not be found");
         }
     }

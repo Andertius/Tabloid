@@ -1,10 +1,10 @@
 ﻿using System.Net;
 
-namespace Tabloid.Domain.Responses.HttpResponses
+namespace Tabloid.Domain.Responses
 {
-    public class BadRequestHttpResponse<T> : IHttpResponse<T>
+    public class BadRequestResponse<T> : IResponse<T>
     {
-        public BadRequestHttpResponse(T obj, string error)
+        public BadRequestResponse(T obj, string error)
         {
             Object = obj;
             Error = error;

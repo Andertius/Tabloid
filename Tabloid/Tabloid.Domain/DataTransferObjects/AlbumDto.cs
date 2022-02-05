@@ -1,6 +1,6 @@
 ﻿namespace Tabloid.Domain.DataTransferObjects
 {
-    public class AlbumDto
+    public class AlbumDto : IDto<Guid>
     {
         public Guid Id { get; set; }
 

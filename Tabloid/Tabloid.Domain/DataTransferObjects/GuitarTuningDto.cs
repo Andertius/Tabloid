@@ -1,6 +1,6 @@
 ﻿namespace Tabloid.Domain.DataTransferObjects
 {
-    public class GuitarTuningDto
+    public class GuitarTuningDto : IDto<Guid>
     {
         public Guid Id { get; set; }
 

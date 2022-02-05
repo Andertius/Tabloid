@@ -31,6 +31,11 @@ namespace Tabloid.Infrastructure
                 .WithMany(x => x.Artists);
 
             modelBuilder
+                .Entity<Artist>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
+
+            modelBuilder
                 .Entity<Genre>()
                 .HasMany(x => x.Songs)
                 .WithMany(x => x.Genres);
@@ -63,6 +68,11 @@ namespace Tabloid.Infrastructure
                 .WithOne(x => x.Album)
                 .HasForeignKey(x => x.AlbumId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<Album>()
+                .HasIndex(p => new { p.Name, p.ArtistId })
+                .IsUnique();
 
             modelBuilder
                 .Entity<Tab>()

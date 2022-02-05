@@ -2,10 +2,14 @@
 
 using Microsoft.AspNetCore.Mvc;
 
+using Tabloid.Application.Commands.Albums.AddAlbum;
+using Tabloid.Application.Commands.Albums.DeleteAlbum;
+using Tabloid.Application.Commands.Albums.UpdateAlbum;
 using Tabloid.Application.Queries.Albums.GetAlbumBySong;
 using Tabloid.Application.Queries.Albums.GetAllAlbums;
 using Tabloid.Application.Queries.Albums.GetAllAlbumsByArtist;
 using Tabloid.Application.Queries.Albums.GetAllAlbumsByName;
+using Tabloid.Helpers;
 using Tabloid.Requests.AlbumRequests;
 
 namespace Tabloid.Controllers
@@ -18,6 +22,27 @@ namespace Tabloid.Controllers
         public AlbumController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost("albums/add")]
+        public async Task<IActionResult> AddAlbum([FromBody] AlbumRequest request)
+        {
+            var response = await _mediator.Send(new AddAlbumCommand(request.Album));
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPut("albums/update")]
+        public async Task<IActionResult> UpdateAlbum([FromBody] AlbumRequest request)
+        {
+            var response = await _mediator.Send(new UpdateAlbumCommand(request.Album));
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpDelete("albums/delete")]
+        public async Task<IActionResult> DeleteAlbum([FromBody] AlbumRequest request)
+        {
+            var response = await _mediator.Send(new DeleteAlbumCommand(request.Album));
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpGet("albums")]

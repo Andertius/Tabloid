@@ -32,22 +32,14 @@ namespace Tabloid.Application.Commands.Tunings.AddTuning
 
             if ((await repository.GetAll()).All(x => x.Name != entity.Name && x.Tuning != entity.Tuning))
             {
-                try
-                {
-                    await repository.Insert(entity);
-                }
-                catch (OperationCanceledException ex)
-                {
-                    return new CommandResponse<GuitarTuningDto>(
-                        result: CommandResult.Failure,
-                        errorMessage: ex.Message);
-                }
+                await repository.Insert(entity);
+                await _unitOfWork.Save();
 
                 return new CommandResponse<GuitarTuningDto>(_mapper.Map<GuitarTuningDto>(entity));
             }
 
             return new CommandResponse<GuitarTuningDto>(
-                result: CommandResult.Failure,
+                result: CommandResult.NotFound,
                 errorMessage: "The tuning already exists");
         }
     }

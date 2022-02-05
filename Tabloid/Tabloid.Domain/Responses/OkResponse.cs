@@ -1,10 +1,10 @@
 ﻿using System.Net;
 
-namespace Tabloid.Domain.Responses.HttpResponses
+namespace Tabloid.Domain.Responses
 {
-    public class OkHttpResponse<T> : IHttpResponse<T>
+    public class OkResponse<T> : IResponse<T>
     {
-        public OkHttpResponse(T obj)
+        public OkResponse(T obj)
         {
             Object = obj;
         }

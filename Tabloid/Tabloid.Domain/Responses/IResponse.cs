@@ -1,8 +1,8 @@
 ﻿using System.Net;
 
-namespace Tabloid.Domain.Responses.HttpResponses
+namespace Tabloid.Domain.Responses
 {
-    public interface IHttpResponse<T>
+    public interface IResponse<T>
     {
         HttpStatusCode StatusCode { get; }
 
