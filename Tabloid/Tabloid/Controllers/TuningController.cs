@@ -35,14 +35,14 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPost("tunings/update")]
+        [HttpPut("tunings/update")]
         public async Task<IActionResult> UpdateTuning([FromBody] TuningRequest request)
         {
             var response = await _mediator.Send(new UpdateTuningCommand(request.Tuning));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPost("tunings/delete")]
+        [HttpDelete("tunings/delete")]
         public async Task<IActionResult> DeleteTuning([FromBody] TuningRequest request)
         {
             var response = await _mediator.Send(new DeleteTuningCommand(request.Tuning));
