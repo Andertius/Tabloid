@@ -82,8 +82,7 @@ namespace Tabloid.Infrastructure
                     new GuitarTuning { StringNumber = 8, Name = "E Standard (8-string)", Tuning = "E A D G C F A D" },
                     new GuitarTuning { StringNumber = 8, Name = "D# Standard (8-string)", Tuning = "D# G# C# F# B E G# d" },
                     new GuitarTuning { StringNumber = 8, Name = "A Standard (8-string)", Tuning = "A D G C F A D G" },
-                    new GuitarTuning { StringNumber = 8, Name = "High A (8-string)", Tuning = "E B E A D G B e" },
-                    new GuitarTuning { StringNumber = 8, Name = "Drop E (8-string)", Tuning = "G C G C G C E" },
+                    new GuitarTuning { StringNumber = 8, Name = "Drop E (8-string)", Tuning = "E B E A D G B e" },
                     new GuitarTuning { StringNumber = 8, Name = "Drop D# (8-string)", Tuning = "D# A# D# G# C# F# A# d#" },
                     new GuitarTuning { StringNumber = 8, Name = "Drop D (8-string)", Tuning = "D A D G C F A d" },
                 });
@@ -100,7 +99,6 @@ namespace Tabloid.Infrastructure
                 new Genre { Name = "Swing" },
                 new Genre { Name = "Latino" },
                 new Genre { Name = "Blues" },
-                new Genre { Name = "Punk" },
                 new Genre { Name = "Pop" },
                 new Genre { Name = "Rap" },
                 new Genre { Name = "RnB" },

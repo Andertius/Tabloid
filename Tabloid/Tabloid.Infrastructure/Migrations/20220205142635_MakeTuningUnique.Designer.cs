@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tabloid.Infrastructure;
 
@@ -11,9 +12,10 @@ using Tabloid.Infrastructure;
 namespace Tabloid.Infrastructure.Migrations
 {
     [DbContext(typeof(TabDbContext))]
-    partial class TabDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220205142635_MakeTuningUnique")]
+    partial class MakeTuningUnique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

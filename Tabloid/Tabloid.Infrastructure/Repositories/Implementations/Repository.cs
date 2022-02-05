@@ -57,5 +57,12 @@ namespace Tabloid.Infrastructure.Repositories.Implementations
         {
             _context.Set<TEntity>().Remove(entity);
         }
+
+        public virtual async Task<bool> Contains(TEntity entity)
+        {
+            return await _context
+                .Set<TEntity>()
+                .ContainsAsync(entity);
+        }
     }
 }

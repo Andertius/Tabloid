@@ -41,6 +41,16 @@ namespace Tabloid.Infrastructure
                 .IsUnique();
 
             modelBuilder
+                .Entity<GuitarTuning>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
+
+            modelBuilder
+                .Entity<GuitarTuning>()
+                .HasIndex(x => x.Tuning)
+                .IsUnique();
+
+            modelBuilder
                 .Entity<Album>()
                 .HasOne(x => x.Artist)
                 .WithMany(x => x.Albums)
