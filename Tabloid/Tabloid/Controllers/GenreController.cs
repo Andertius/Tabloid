@@ -8,6 +8,11 @@ using Tabloid.Application.Queries.Genres.GetEveryOtherGenre;
 using Tabloid.Application.Queries.Genres.GetAllRockGenres;
 using Tabloid.Application.Queries.Genres.GetGenreByName;
 using Tabloid.Application.Queries.Genres.GetAllElectroGenres;
+using Tabloid.Helpers;
+using Tabloid.Requests.GenreRequest;
+using Tabloid.Application.Commands.Genres.AddGenre;
+using Tabloid.Application.Commands.Genres.UpdateGenre;
+using Tabloid.Application.Commands.Genres.DeleteGenre;
 
 namespace Tabloid.Controllers
 {
@@ -19,6 +24,27 @@ namespace Tabloid.Controllers
         public GenreController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost("genres/add")]
+        public async Task<IActionResult> AddGenre([FromBody] GenreRequest request)
+        {
+            var response = await _mediator.Send(new AddGenreCommand(request.Genre));
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPut("genres/update")]
+        public async Task<IActionResult> UpdateGenre([FromBody] GenreRequest request)
+        {
+            var response = await _mediator.Send(new UpdateGenreCommand(request.Genre));
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpDelete("genres/delete")]
+        public async Task<IActionResult> DeleteGenre([FromBody] GenreRequest request)
+        {
+            var response = await _mediator.Send(new DeleteGenreCommand(request.Genre));
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpGet("genres")]

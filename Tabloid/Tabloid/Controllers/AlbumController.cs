@@ -59,15 +59,15 @@ namespace Tabloid.Controllers
             return Ok(response);
         }
 
-        [HttpPost("albums/song")]
-        public async Task<IActionResult> GetAlbumBySong(AlbumBySongRequest request)
+        [HttpGet("albums/song")]
+        public async Task<IActionResult> GetAlbumBySong([FromQuery] AlbumBySongRequest request)
         {
             var response = await _mediator.Send(new GetAlbumBySongQuery(request.Song));
             return Ok(response);
         }
 
-        [HttpPost("albums/artist")]
-        public async Task<IActionResult> GetAlbumByArtist(AlbumsByArtistRequest request)
+        [HttpGet("albums/artist")]
+        public async Task<IActionResult> GetAlbumByArtist([FromQuery] AlbumsByArtistRequest request)
         {
             var response = await _mediator.Send(new GetAllAlbumsByArtistQuery(request.Artist));
             return Ok(response);

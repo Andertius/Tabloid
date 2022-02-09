@@ -38,7 +38,7 @@ namespace Tabloid.Application.Commands.Albums.DeleteAlbum
 
             return new CommandResponse<AlbumDto>(
                 _mapper.Map<AlbumDto>(entity),
-                CommandResult.Failure,
+                CommandResult.NotFound,
                 "The album could not be found");
         }
     }
