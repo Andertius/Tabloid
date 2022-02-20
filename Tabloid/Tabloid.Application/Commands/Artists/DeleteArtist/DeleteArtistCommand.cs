@@ -6,11 +6,11 @@ namespace Tabloid.Application.Commands.Artists.DeleteArtist
 {
     public class DeleteArtistCommand : IRequest<CommandResponse<ArtistDto>>
     {
-        public DeleteArtistCommand(ArtistDto artist)
+        public DeleteArtistCommand(Guid id)
         {
-            Artist = artist;
+            Id = id;
         }
 
-        public ArtistDto Artist { get; set; }
+        public Guid Id { get; set; }
     }
 }

@@ -15,6 +15,7 @@ using Tabloid.Requests.ArtistRequests;
 namespace Tabloid.Controllers
 {
     [ApiController]
+    [Route("api/artists")]
     public class ArtistController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -24,49 +25,49 @@ namespace Tabloid.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("artists/add")]
+        [HttpPost("add")]
         public async Task<IActionResult> AddArtist([FromBody] ArtistRequest request)
         {
             var response = await _mediator.Send(new AddArtistCommand(request.Artist));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("artists/update")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateArtist([FromBody] ArtistRequest request)
         {
             var response = await _mediator.Send(new UpdateArtistCommand(request.Artist));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("artists/delete")]
-        public async Task<IActionResult> DeleteArtist([FromBody] ArtistRequest request)
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteArtist(Guid id)
         {
-            var response = await _mediator.Send(new DeleteArtistCommand(request.Artist));
+            var response = await _mediator.Send(new DeleteArtistCommand(id));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpGet("artists")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllArtistsQuery());
             return Ok(result);
         }
 
-        [HttpGet("artists/{name}")]
+        [HttpGet("{name}")]
         public async Task<IActionResult> FindArtistByName(string name)
         {
             var result = await _mediator.Send(new FindArtistByNameQuery(name));
             return Ok(result);
         }
 
-        [HttpGet("artists/album")]
+        [HttpGet("album")]
         public async Task<IActionResult> FindArtistByAlbum([FromQuery] ArtistByAlbumRequest request)
         {
             var result = await _mediator.Send(new FindArtistByAlbumQuery(request.Album));
             return Ok(result);
         }
 
-        [HttpGet("artists/song")]
+        [HttpGet("song")]
         public async Task<IActionResult> FindArtistBySong([FromQuery] ArtistBySongRequest request)
         {
             var result = await _mediator.Send(new FindArtistBySongQuery(request.Song));

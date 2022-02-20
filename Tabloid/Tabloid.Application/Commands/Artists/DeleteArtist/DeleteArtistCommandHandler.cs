@@ -26,7 +26,7 @@ namespace Tabloid.Application.Commands.Artists.DeleteArtist
         public async Task<CommandResponse<ArtistDto>> Handle(DeleteArtistCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IArtistRepository>();
-            var entity = _mapper.Map<Artist>(request.Artist);
+            var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))
             {

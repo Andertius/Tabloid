@@ -26,7 +26,7 @@ namespace Tabloid.Application.Commands.Albums.DeleteAlbum
         public async Task<CommandResponse<AlbumDto>> Handle(DeleteAlbumCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IAlbumRepository>();
-            var entity = _mapper.Map<Album>(request.Album);
+            var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))
             {

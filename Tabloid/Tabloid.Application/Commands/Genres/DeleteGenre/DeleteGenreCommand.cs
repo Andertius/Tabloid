@@ -6,11 +6,11 @@ namespace Tabloid.Application.Commands.Genres.DeleteGenre
 {
     public class DeleteGenreCommand : IRequest<CommandResponse<GenreDto>>
     {
-        public DeleteGenreCommand(GenreDto genre)
+        public DeleteGenreCommand(Guid id)
         {
-            Genre = genre;
+            Id = id;
         }
 
-        public GenreDto Genre { get; set; }
+        public Guid Id { get; set; }
     }
 }

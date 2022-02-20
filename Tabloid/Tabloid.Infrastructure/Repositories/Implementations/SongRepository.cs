@@ -56,7 +56,7 @@ namespace Tabloid.Infrastructure.Repositories.Implementations
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Song>> GetAllSongsByTabDifficulty(double difficulty)
+        public async Task<ICollection<Song>> GetAllSongsByTabDifficulty(double? difficulty)
         {
             return await _context
                 .Songs
@@ -64,7 +64,7 @@ namespace Tabloid.Infrastructure.Repositories.Implementations
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
                 .Include(x => x.Tabs)
-                .Where(x => x.Tabs.Any(x => x.Difficulty == difficulty))
+                .Where(x => !difficulty.HasValue || x.Tabs.Any(y => y.Difficulty == difficulty))
                 .ToListAsync();
         }
 

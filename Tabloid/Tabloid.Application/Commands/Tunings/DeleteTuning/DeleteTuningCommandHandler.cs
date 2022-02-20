@@ -26,7 +26,7 @@ namespace Tabloid.Application.Commands.Tunings.DeleteTuning
         public async Task<CommandResponse<GuitarTuningDto>> Handle(DeleteTuningCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IGuitarTuningRepository>();
-            var entity = _mapper.Map<GuitarTuning>(request.Tuning);
+            var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))
             {

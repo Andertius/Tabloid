@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Tabloid.Infrastructure\Tabloid.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Songs\" />
+  </ItemGroup>
+
 </Project>

@@ -26,7 +26,7 @@ namespace Tabloid.Application.Commands.Genres.DeleteGenre
         public async Task<CommandResponse<GenreDto>> Handle(DeleteGenreCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IGenreRepository>();
-            var entity = _mapper.Map<Genre>(request.Genre);
+            var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))
             {

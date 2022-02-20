@@ -6,11 +6,11 @@ namespace Tabloid.Application.Commands.Tunings.DeleteTuning
 {
     public class DeleteTuningCommand : IRequest<CommandResponse<GuitarTuningDto>>
     {
-        public DeleteTuningCommand(GuitarTuningDto tuning)
+        public DeleteTuningCommand(Guid id)
         {
-            Tuning = tuning;
+            Id = id;
         }
 
-        public GuitarTuningDto Tuning { get; set; }
+        public Guid Id { get; set; }
     }
 }

@@ -6,11 +6,11 @@ namespace Tabloid.Application.Commands.Albums.DeleteAlbum
 {
     public class DeleteAlbumCommand : IRequest<CommandResponse<AlbumDto>>
     {
-        public DeleteAlbumCommand(AlbumDto album)
+        public DeleteAlbumCommand(Guid id)
         {
-            Album = album;
+            Id = id;
         }
 
-        public AlbumDto Album { get; set; }
+        public Guid Id { get; set; }
     }
 }

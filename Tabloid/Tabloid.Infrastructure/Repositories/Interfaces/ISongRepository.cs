@@ -8,7 +8,7 @@ namespace Tabloid.Infrastructure.Repositories.Interfaces
 
         Task<ICollection<Song>> GetAllSongsByAlbum(Album album);
 
-        Task<ICollection<Song>> GetAllSongsByTabDifficulty(double difficulty);
+        Task<ICollection<Song>> GetAllSongsByTabDifficulty(double? difficulty);
 
         Task<ICollection<Song>> GetAllSongsByTuning(GuitarTuning tuning);
 
