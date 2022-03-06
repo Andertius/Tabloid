@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Domain.Entities;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
-namespace Tabloid.Infrastructure.Repositories.Implementations
+namespace Tabloid.Infrastructure.Repositories
 {
     public class GuitarTuningRepository : Repository<GuitarTuning, Guid>, IGuitarTuningRepository
     {

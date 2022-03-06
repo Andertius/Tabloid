@@ -3,6 +3,7 @@
 using MediatR;
 
 using Tabloid.Application.Services;
+using Tabloid.Application.Validators.Commands;
 
 namespace Tabloid.ServiceConfigurations
 {
@@ -10,14 +11,13 @@ namespace Tabloid.ServiceConfigurations
     {
         public static IServiceCollection AddValidation(this IServiceCollection services)
         {
-            throw new NotImplementedException();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-            //AssemblyScanner.FindValidatorsInAssemblyContaining<AddBookingCommandValidator>()
-            //    .ForEach(result => {
-            //        services.AddTransient(result.InterfaceType, result.ValidatorType);
-            //    });
-
+            AssemblyScanner.FindValidatorsInAssemblyContaining<AddAlbumCommandValidator>()
+                .ForEach(result =>
+                {
+                    services.AddTransient(result.InterfaceType, result.ValidatorType);
+                });
 
             return services;
         }

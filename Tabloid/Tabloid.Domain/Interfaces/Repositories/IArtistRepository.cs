@@ -1,6 +1,6 @@
 ﻿using Tabloid.Domain.Entities;
 
-namespace Tabloid.Infrastructure.Repositories.Interfaces
+namespace Tabloid.Domain.Interfaces.Repositories
 {
     public interface IArtistRepository : IRepository<Artist, Guid>
     {

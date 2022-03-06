@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
 using Tabloid.Domain.Entities;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
-namespace Tabloid.Infrastructure.Repositories.Implementations
+namespace Tabloid.Infrastructure.Repositories
 {
     public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class, IEntity<TId>
     {
@@ -17,33 +17,20 @@ namespace Tabloid.Infrastructure.Repositories.Implementations
             _context = context;
         }
 
-        public async virtual Task<TEntity> FindById(TId id)
+        public virtual async Task<TEntity> FindById(TId id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public async virtual Task<ICollection<TEntity>> GetAll(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null)
+        public virtual async Task<ICollection<TEntity>> GetAll()
         {
-            var query = _context
+            return await _context
                 .Set<TEntity>()
-                .AsQueryable();
-
-            if (filter is not null)
-            {
-                query = query.Where(filter);
-            }
-
-            if (include is not null)
-            {
-                query = include(query);
-            }
-
-            return await query.ToListAsync();
+                .AsQueryable()
+                .ToListAsync();
         }
 
-        public async virtual Task Insert(TEntity entity)
+        public virtual async Task Insert(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
         }

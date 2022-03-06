@@ -1,8 +1,7 @@
 using System;
 
+using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Infrastructure.Repositories;
-using Tabloid.Infrastructure.Repositories.Implementations;
-using Tabloid.Infrastructure.Repositories.Interfaces;
 
 using Xunit;
 

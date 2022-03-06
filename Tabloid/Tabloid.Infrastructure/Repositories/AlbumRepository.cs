@@ -1,15 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Domain.Entities;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
-namespace Tabloid.Infrastructure.Repositories.Implementations
+namespace Tabloid.Infrastructure.Repositories
 {
     public class AlbumRepository : Repository<Album, Guid>, IAlbumRepository
     {
         public AlbumRepository(TabDbContext context)
             : base(context)
         {
+        }
+
+        public override async Task<ICollection<Album>> GetAll()
+        {
+            return await _context
+                .Albums
+                .Include(x => x.Artist)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Artists)
+                .ToListAsync();
         }
 
         public async Task<ICollection<Album>> GetAllAlbumsByName(string name)

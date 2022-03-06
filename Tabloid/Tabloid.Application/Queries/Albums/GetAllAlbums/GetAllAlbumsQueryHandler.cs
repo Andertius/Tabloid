@@ -2,11 +2,9 @@
 
 using MediatR;
 
-using Microsoft.EntityFrameworkCore;
-
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Albums.GetAllAlbums
 {
@@ -27,7 +25,7 @@ namespace Tabloid.Application.Queries.Albums.GetAllAlbums
         {
             var result = await _unitOfWork
                 .GetRepository<IAlbumRepository>()
-                .GetAll(include: src => src.Include(x => x.Artist));
+                .GetAll();
 
             return result
                 .Select(album => _mapper.Map<AlbumDto>(album))

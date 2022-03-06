@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AutoMapper;
+﻿using AutoMapper;
 
 using MediatR;
 
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Songs.GetAllSongsByName
 {

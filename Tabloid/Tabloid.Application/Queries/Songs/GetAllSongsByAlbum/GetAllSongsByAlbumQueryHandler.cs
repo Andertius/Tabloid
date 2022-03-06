@@ -11,7 +11,7 @@ using MediatR;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Songs.GetAllSongsByAlbum
 {

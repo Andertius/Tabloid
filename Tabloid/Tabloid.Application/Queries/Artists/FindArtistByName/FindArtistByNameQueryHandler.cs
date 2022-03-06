@@ -4,7 +4,7 @@ using MediatR;
 
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Interfaces;
-using Tabloid.Infrastructure.Repositories.Interfaces;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Artists.FindArtistByName
 {
@@ -23,7 +23,9 @@ namespace Tabloid.Application.Queries.Artists.FindArtistByName
 
         public async Task<ArtistDto> Handle(FindArtistByNameQuery request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.GetRepository<IArtistRepository>().FindArtistByName(request.Name);
+            var result = await _unitOfWork
+                .GetRepository<IArtistRepository>()
+                .FindArtistByName(request.Name);
 
             return _mapper.Map<ArtistDto>(result);
         }

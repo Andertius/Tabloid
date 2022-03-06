@@ -2,8 +2,8 @@
 using Tabloid.Core.Extensions;
 using Tabloid.Domain.Entities;
 using System.Reflection;
-using Tabloid.Infrastructure.Repositories.Interfaces;
-using Tabloid.Infrastructure.Repositories.Implementations;
+using Tabloid.Infrastructure.Repositories;
+using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Infrastructure
 {
