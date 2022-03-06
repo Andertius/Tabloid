@@ -2,7 +2,7 @@
 
 namespace Tabloid.ServiceConfigurations
 {
-    public static class MapperConfiguration
+    public static class MapperConfigurations
     {
         public static IServiceCollection AddMapper(this IServiceCollection services)
         {

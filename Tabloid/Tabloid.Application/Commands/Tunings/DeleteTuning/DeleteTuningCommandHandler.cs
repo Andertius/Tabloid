@@ -9,7 +9,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Tunings.DeleteTuning
 {
-    public class DeleteTuningCommandHandler : IRequestHandler<DeleteTuningCommand, CommandResponse<GuitarTuningDto>>
+    internal class DeleteTuningCommandHandler : IRequestHandler<DeleteTuningCommand, CommandResponse<GuitarTuningDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

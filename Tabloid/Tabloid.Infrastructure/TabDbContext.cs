@@ -36,6 +36,11 @@ namespace Tabloid.Infrastructure
                 .IsUnique();
 
             modelBuilder
+                .Entity<Artist>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            modelBuilder
                 .Entity<Genre>()
                 .HasMany(x => x.Songs)
                 .WithMany(x => x.Genres);
@@ -46,6 +51,11 @@ namespace Tabloid.Infrastructure
                 .IsUnique();
 
             modelBuilder
+                .Entity<Genre>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            modelBuilder
                 .Entity<GuitarTuning>()
                 .HasIndex(x => x.Name)
                 .IsUnique();
@@ -54,6 +64,11 @@ namespace Tabloid.Infrastructure
                 .Entity<GuitarTuning>()
                 .HasIndex(x => x.Tuning)
                 .IsUnique();
+
+            modelBuilder
+                .Entity<GuitarTuning>()
+                .Property(x => new { x.Name, x.Tuning })
+                .IsRequired();
 
             modelBuilder
                 .Entity<Album>()
@@ -71,8 +86,13 @@ namespace Tabloid.Infrastructure
 
             modelBuilder
                 .Entity<Album>()
-                .HasIndex(p => new { p.Name, p.ArtistId })
+                .HasIndex(x => new { x.Name, x.ArtistId })
                 .IsUnique();
+
+            modelBuilder
+                .Entity<Album>()
+                .Property(x => new { x.Name, x.ArtistId })
+                .IsRequired();
 
             modelBuilder
                 .Entity<Tab>()
@@ -87,6 +107,11 @@ namespace Tabloid.Infrastructure
                 .WithMany(x => x.Tabs)
                 .HasForeignKey(x => x.TuningId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<Song>()
+                .Property(x => x.SongName)
+                .IsRequired();
         }
     }
 }

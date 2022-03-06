@@ -9,7 +9,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Albums.DeleteAlbum
 {
-    public class DeleteAlbumCommandHandler : IRequestHandler<DeleteAlbumCommand, CommandResponse<AlbumDto>>
+    internal class DeleteAlbumCommandHandler : IRequestHandler<DeleteAlbumCommand, CommandResponse<AlbumDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

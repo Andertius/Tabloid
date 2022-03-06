@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Tunings.GetTuningsByStringNumber
 {
-    public class GetTuningsByStringNumberQueryHandler : IRequestHandler<GetTuningsByStringNumberQuery, GuitarTuningDto[]>
+    internal class GetTuningsByStringNumberQueryHandler : IRequestHandler<GetTuningsByStringNumberQuery, GuitarTuningDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

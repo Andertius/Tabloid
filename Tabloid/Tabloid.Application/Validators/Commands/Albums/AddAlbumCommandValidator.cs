@@ -1,0 +1,25 @@
+﻿using FluentValidation;
+
+using Tabloid.Application.Commands.Albums.AddAlbum;
+
+namespace Tabloid.Application.Validators.Commands.Albums
+{
+    public class AddAlbumCommandValidator : AbstractValidator<AddAlbumCommand>
+    {
+        public AddAlbumCommandValidator()
+        {
+            RuleFor(x => x.Album)
+                .NotEmpty();
+
+            RuleFor(x => x.Album.Id)
+                .Empty()
+                .WithMessage("The id value must not be predefined");
+
+            RuleFor(x => x.Album.Name)
+                .NotEmpty();
+
+            RuleFor(x => x.Album.Year)
+                .NotEmpty();
+        }
+    }
+}

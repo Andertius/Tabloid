@@ -12,7 +12,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Tunings.AddTuning
 {
-    public class AddTuningCommandHandler : IRequestHandler<AddTuningCommand, CommandResponse<GuitarTuningDto>>
+    internal class AddTuningCommandHandler : IRequestHandler<AddTuningCommand, CommandResponse<GuitarTuningDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
@@ -30,7 +30,10 @@ namespace Tabloid.Application.Commands.Tunings.AddTuning
             var repository = _unitOfWork.GetRepository<IGuitarTuningRepository>();
             var entity = _mapper.Map<GuitarTuning>(request.Tuning);
 
-            if ((await repository.GetAll()).All(x => x.Name != entity.Name && x.Tuning != entity.Tuning))
+            if (entity.Id == Guid.Empty &&
+                (await repository
+                    .GetAll())
+                    .All(x => x.Name != entity.Name && x.Tuning != entity.Tuning))
             {
                 await repository.Insert(entity);
                 await _unitOfWork.Save();

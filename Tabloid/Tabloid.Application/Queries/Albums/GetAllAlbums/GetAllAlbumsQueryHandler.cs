@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Albums.GetAllAlbums
 {
-    public class GetAllAlbumsQueryHandler : IRequestHandler<GetAllAlbumsQuery, AlbumDto[]>
+    internal class GetAllAlbumsQueryHandler : IRequestHandler<GetAllAlbumsQuery, AlbumDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

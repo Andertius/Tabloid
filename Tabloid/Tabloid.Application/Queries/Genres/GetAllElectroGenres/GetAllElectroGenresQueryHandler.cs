@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Genres.GetAllElectroGenres
 {
-    public class GetAllElectroGenresQueryHandler : IRequestHandler<GetAllElectroGenresQuery, GenreDto[]>
+    internal class GetAllElectroGenresQueryHandler : IRequestHandler<GetAllElectroGenresQuery, GenreDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

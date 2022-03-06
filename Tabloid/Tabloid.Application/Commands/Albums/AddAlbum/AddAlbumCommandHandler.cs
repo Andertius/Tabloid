@@ -10,7 +10,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Albums.AddAlbum
 {
-    public class AddAlbumCommandHandler : IRequestHandler<AddAlbumCommand, CommandResponse<AlbumDto>>
+    internal class AddAlbumCommandHandler : IRequestHandler<AddAlbumCommand, CommandResponse<AlbumDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
@@ -28,9 +28,10 @@ namespace Tabloid.Application.Commands.Albums.AddAlbum
             var repository = _unitOfWork.GetRepository<IAlbumRepository>();
             var entity = _mapper.Map<Album>(request.Album);
 
-            if ((await repository
-                .GetAll())
-                .All(x => x.Name != entity.Name && x.ArtistId != entity.ArtistId))
+            if (request.Album.Id == Guid.Empty &&
+                (await repository
+                    .GetAll())
+                    .All(x => x.Name != entity.Name && x.ArtistId != entity.ArtistId))
             {
                 await repository.Insert(entity);
                 await _unitOfWork.Save();

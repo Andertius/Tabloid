@@ -10,7 +10,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Artists.UpdateArtist
 {
-    public class UpdateArtistCommandHandler : IRequestHandler<UpdateArtistCommand, CommandResponse<ArtistDto>>
+    internal class UpdateArtistCommandHandler : IRequestHandler<UpdateArtistCommand, CommandResponse<ArtistDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

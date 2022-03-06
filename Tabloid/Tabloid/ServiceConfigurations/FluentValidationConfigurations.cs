@@ -3,11 +3,11 @@
 using MediatR;
 
 using Tabloid.Application.Services;
-using Tabloid.Application.Validators.Commands;
+using Tabloid.Application.Validators.Commands.Albums;
 
 namespace Tabloid.ServiceConfigurations
 {
-    public static class FluentValidationConfiguration
+    public static class FluentValidationConfigurations
     {
         public static IServiceCollection AddValidation(this IServiceCollection services)
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Tabloid.Domain.Interfaces.Repositories;
 using Tabloid.Infrastructure.Repositories;
@@ -26,19 +27,21 @@ namespace Tabloid.Tests.UnitOfWork
             var repo5 = unitOfWorkFixture.UnitOfWork.GetRepository<ISongRepository>();
             var repo6 = unitOfWorkFixture.UnitOfWork.GetRepository<ITabRepository>();
 
-            Assert.IsType<AlbumRepository>(repo1);
-            Assert.IsType<GenreRepository>(repo2);
-            Assert.IsType<ArtistRepository>(repo3);
-            Assert.IsType<GuitarTuningRepository>(repo4);
-            Assert.IsType<SongRepository>(repo5);
-            Assert.IsType<TabRepository>(repo6);
+#pragma warning disable IDE0150 // Prefer 'null' check over type check
+            Assert.True(repo1 is IAlbumRepository);
+            Assert.True(repo2 is IGenreRepository);
+            Assert.True(repo3 is IArtistRepository);
+            Assert.True(repo4 is IGuitarTuningRepository);
+            Assert.True(repo5 is ISongRepository);
+            Assert.True(repo6 is ITabRepository);
+#pragma warning restore IDE0150 // Prefer 'null' check over type check
         }
 
         [Fact]
         public void GetRepository_IncorrectParameter_ThrowsNotSupportedException()
         {
             Assert.Throws<NotSupportedException>(unitOfWorkFixture.UnitOfWork.GetRepository<string>);
-            Assert.Throws<NotSupportedException>(unitOfWorkFixture.UnitOfWork.GetRepository<GenreRepository>);
+            Assert.Throws<NotSupportedException>(unitOfWorkFixture.UnitOfWork.GetRepository<List<int>>);
         }
     }
 }

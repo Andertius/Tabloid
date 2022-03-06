@@ -10,7 +10,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Genres.UpdateGenre
 {
-    public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, CommandResponse<GenreDto>>
+    internal class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, CommandResponse<GenreDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

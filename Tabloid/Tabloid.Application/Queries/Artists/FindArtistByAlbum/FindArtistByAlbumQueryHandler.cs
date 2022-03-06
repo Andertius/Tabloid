@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Artists.FindArtistByAlbum
 {
-    public class FindArtistByAlbumQueryHandler : IRequestHandler<FindArtistByAlbumQuery, ArtistDto>
+    internal class FindArtistByAlbumQueryHandler : IRequestHandler<FindArtistByAlbumQuery, ArtistDto>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

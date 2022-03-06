@@ -5,7 +5,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Infrastructure.Repositories
 {
-    public class GuitarTuningRepository : Repository<GuitarTuning, Guid>, IGuitarTuningRepository
+    internal class GuitarTuningRepository : Repository<GuitarTuning, Guid>, IGuitarTuningRepository
     {
         public GuitarTuningRepository(TabDbContext context)
             : base(context)

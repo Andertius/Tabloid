@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Songs.GetAllSongsByName
 {
-    public class GetAllSongsByNameQueryHandler : IRequestHandler<GetAllSongsByNameQuery, SongDto[]>
+    internal class GetAllSongsByNameQueryHandler : IRequestHandler<GetAllSongsByNameQuery, SongDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

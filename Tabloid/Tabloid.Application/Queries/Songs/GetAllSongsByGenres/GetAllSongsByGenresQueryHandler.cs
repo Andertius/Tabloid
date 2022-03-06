@@ -15,7 +15,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Songs.GetAllSongsByGenres
 {
-    public class GetAllSongsByGenresQueryHandler : IRequestHandler<GetAllSongsByGenresQuery, SongDto[]>
+    internal class GetAllSongsByGenresQueryHandler : IRequestHandler<GetAllSongsByGenresQuery, SongDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

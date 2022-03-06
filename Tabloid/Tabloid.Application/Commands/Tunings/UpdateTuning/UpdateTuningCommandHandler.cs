@@ -10,7 +10,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Tunings.UpdateTuning
 {
-    public class UpdateTuningCommandHandler : IRequestHandler<UpdateTuningCommand, CommandResponse<GuitarTuningDto>>
+    internal class UpdateTuningCommandHandler : IRequestHandler<UpdateTuningCommand, CommandResponse<GuitarTuningDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

@@ -8,7 +8,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Artists.GetAllArtists
 {
-    public class GetAllArtistsQueryHandler : IRequestHandler<GetAllArtistsQuery, ArtistDto[]>
+    internal class GetAllArtistsQueryHandler : IRequestHandler<GetAllArtistsQuery, ArtistDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

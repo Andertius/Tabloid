@@ -52,42 +52,42 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllGenres()
         {
             var response = await _mediator.Send(new GetAllGenresQuery());
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("{name}")]
         public async Task<IActionResult> GetGenreByName(string name)
         {
             var response = await _mediator.Send(new GetGenreByNameQuery(name));
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("rock")]
         public async Task<IActionResult> GetAllRockGenres()
         {
             var response = await _mediator.Send(new GetAllRockGenresQuery());
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("metal")]
         public async Task<IActionResult> GetAllMetalGenres()
         {
             var response = await _mediator.Send(new GetAllMetalGenresQuery());
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("electro")]
         public async Task<IActionResult> GetAllElectroGenres()
         {
             var response = await _mediator.Send(new GetAllElectroGenresQuery());
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("every-other")]
         public async Task<IActionResult> GetEveryOtherGenre()
         {
             var response = await _mediator.Send(new GetEveryOtherGenreQuery());
-            return Ok(response);
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
     }
 }

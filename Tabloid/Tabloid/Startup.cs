@@ -20,14 +20,11 @@ namespace Tabloid
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TabDbContext>(opts => 
-                opts.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
-
-            services
-                //.AddValidation()
-                .AddMediatr()
-                .AddUnitOfWork()
-                .AddMapper();
+            services.AddDbContexts(Configuration);
+            services.AddValidation();
+            services.AddMediatr();
+            services.AddUnitOfWork();
+            services.AddMapper();
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>

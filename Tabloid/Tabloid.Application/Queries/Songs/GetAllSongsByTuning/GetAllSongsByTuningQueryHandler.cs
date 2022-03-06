@@ -9,7 +9,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Queries.Songs.GetAllSongsByTuning
 {
-    public class GetAllSongsByTuningQueryHandler : IRequestHandler<GetAllSongsByTuningQuery, SongDto[]>
+    internal class GetAllSongsByTuningQueryHandler : IRequestHandler<GetAllSongsByTuningQuery, SongDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

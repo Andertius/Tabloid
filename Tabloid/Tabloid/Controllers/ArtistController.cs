@@ -49,29 +49,29 @@ namespace Tabloid.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediator.Send(new GetAllArtistsQuery());
-            return Ok(result);
+            var response = await _mediator.Send(new GetAllArtistsQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("{name}")]
         public async Task<IActionResult> FindArtistByName(string name)
         {
-            var result = await _mediator.Send(new FindArtistByNameQuery(name));
-            return Ok(result);
+            var response = await _mediator.Send(new FindArtistByNameQuery(name));
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("album")]
         public async Task<IActionResult> FindArtistByAlbum([FromQuery] ArtistByAlbumRequest request)
         {
-            var result = await _mediator.Send(new FindArtistByAlbumQuery(request.Album));
-            return Ok(result);
+            var response = await _mediator.Send(new FindArtistByAlbumQuery(request.Album));
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
 
         [HttpGet("song")]
         public async Task<IActionResult> FindArtistBySong([FromQuery] ArtistBySongRequest request)
         {
-            var result = await _mediator.Send(new FindArtistBySongQuery(request.Song));
-            return Ok(result);
+            var response = await _mediator.Send(new FindArtistBySongQuery(request.Song));
+            return ReturnResultHelper.ReturnQueryResult(response);
         }
     }
 }

@@ -10,7 +10,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Albums.UpdateAlbum
 {
-    public class UpdateAlbumCommandHandler : IRequestHandler<UpdateAlbumCommand, CommandResponse<AlbumDto>>
+    internal class UpdateAlbumCommandHandler : IRequestHandler<UpdateAlbumCommand, CommandResponse<AlbumDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;

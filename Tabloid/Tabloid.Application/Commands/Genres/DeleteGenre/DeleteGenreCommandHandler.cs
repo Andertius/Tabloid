@@ -9,7 +9,7 @@ using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.Commands.Genres.DeleteGenre
 {
-    public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, CommandResponse<GenreDto>>
+    internal class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, CommandResponse<GenreDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
