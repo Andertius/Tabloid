@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Artists.AddArtist;
+using Tabloid.Application.CQRS.Artists.Commands.AddArtist;
 
 namespace Tabloid.Application.Validators.Commands.Artists
 {

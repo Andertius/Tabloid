@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Artists.DeleteArtist;
+using Tabloid.Application.CQRS.Artists.Commands.DeleteArtist;
 
 namespace Tabloid.Application.Validators.Commands.Artists
 {

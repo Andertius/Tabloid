@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
 
-        public string TabContent { get; set; }
+        public string Link { get; set; }
 
         public double? Difficulty { get; set; }
 

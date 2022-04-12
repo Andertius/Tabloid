@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Albums.DeleteAlbum;
+using Tabloid.Application.CQRS.Albums.Commands.DeleteAlbum;
 
 namespace Tabloid.Application.Validators.Commands.Albums
 {

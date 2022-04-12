@@ -67,7 +67,12 @@ namespace Tabloid.Infrastructure
 
             modelBuilder
                 .Entity<GuitarTuning>()
-                .Property(x => new { x.Name, x.Tuning })
+                .Property(x => x.Name)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<GuitarTuning>()
+                .Property(x => x.Tuning)
                 .IsRequired();
 
             modelBuilder
@@ -91,7 +96,12 @@ namespace Tabloid.Infrastructure
 
             modelBuilder
                 .Entity<Album>()
-                .Property(x => new { x.Name, x.ArtistId })
+                .Property(x => x.Name)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<Album>()
+                .Property(x => x.ArtistId)
                 .IsRequired();
 
             modelBuilder

@@ -17,7 +17,7 @@ namespace Tabloid.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -65,6 +65,7 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Year")
@@ -75,8 +76,7 @@ namespace Tabloid.Infrastructure.Migrations
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("Name", "ArtistId")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Albums");
                 });
@@ -91,13 +91,13 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Artists");
                 });
@@ -109,13 +109,13 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Genres");
                 });
@@ -127,23 +127,23 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("StringNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Tuning")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("Tuning")
-                        .IsUnique()
-                        .HasFilter("[Tuning] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Tunings");
                 });
@@ -158,6 +158,7 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SongName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SongNumberInAlbum")
@@ -182,11 +183,11 @@ namespace Tabloid.Infrastructure.Migrations
                     b.Property<string>("Instrument")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("SongId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TabContent")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TuningId")
                         .HasColumnType("uniqueidentifier");

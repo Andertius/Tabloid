@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Songs.UpdateSong;
+using Tabloid.Application.CQRS.Songs.Commands.UpdateSong;
 
 namespace Tabloid.Application.Validators.Commands.Songs
 {

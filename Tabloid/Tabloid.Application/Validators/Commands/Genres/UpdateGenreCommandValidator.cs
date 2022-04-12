@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Genres.UpdateGenre;
+using Tabloid.Application.CQRS.Genres.Commands.UpdateGenre;
 
 namespace Tabloid.Application.Validators.Commands.Genres
 {

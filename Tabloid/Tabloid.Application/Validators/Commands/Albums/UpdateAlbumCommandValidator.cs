@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Albums.UpdateAlbum;
+using Tabloid.Application.CQRS.Albums.Commands.UpdateAlbum;
 
 namespace Tabloid.Application.Validators.Commands.Albums
 {

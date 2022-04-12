@@ -1,9 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
-using Newtonsoft.Json;
-
-using Tabloid.Infrastructure;
 using Tabloid.Middlewares;
 using Tabloid.ServiceConfigurations;
 
@@ -25,10 +21,7 @@ namespace Tabloid
             services.AddMediatr();
             services.AddUnitOfWork();
             services.AddMapper();
-
-            services.AddControllers()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddCustomControllers();
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
@@ -51,7 +44,7 @@ namespace Tabloid
             }
             else
             {
-                app.UseMiddleware<ExceptionMiddleware>();
+                app.UseMiddleware<ErrorHandlingMiddleware>();
             }
 
             app.UseHttpsRedirection();

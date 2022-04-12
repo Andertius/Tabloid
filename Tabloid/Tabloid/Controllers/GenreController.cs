@@ -2,17 +2,17 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Tabloid.Application.Queries.Genres.GetAllGenres;
-using Tabloid.Application.Queries.Genres.GetAllMetalGenres;
-using Tabloid.Application.Queries.Genres.GetEveryOtherGenre;
-using Tabloid.Application.Queries.Genres.GetAllRockGenres;
-using Tabloid.Application.Queries.Genres.GetGenreByName;
-using Tabloid.Application.Queries.Genres.GetAllElectroGenres;
+using Tabloid.Application.CQRS.Genres.Commands.AddGenre;
+using Tabloid.Application.CQRS.Genres.Commands.DeleteGenre;
+using Tabloid.Application.CQRS.Genres.Commands.UpdateGenre;
+using Tabloid.Application.CQRS.Genres.Queries.GetAllElectroGenres;
+using Tabloid.Application.CQRS.Genres.Queries.GetAllGenres;
+using Tabloid.Application.CQRS.Genres.Queries.GetAllMetalGenres;
+using Tabloid.Application.CQRS.Genres.Queries.GetAllRockGenres;
+using Tabloid.Application.CQRS.Genres.Queries.GetEveryOtherGenre;
+using Tabloid.Application.CQRS.Genres.Queries.GetGenreByName;
+using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Helpers;
-using Tabloid.Requests.GenreRequest;
-using Tabloid.Application.Commands.Genres.AddGenre;
-using Tabloid.Application.Commands.Genres.UpdateGenre;
-using Tabloid.Application.Commands.Genres.DeleteGenre;
 
 namespace Tabloid.Controllers
 {
@@ -27,22 +27,22 @@ namespace Tabloid.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddGenre([FromBody] GenreRequest request)
+        [HttpPost]
+        public async Task<IActionResult> AddGenre([FromBody] GenreDto genre)
         {
-            var response = await _mediator.Send(new AddGenreCommand(request.Genre));
+            var response = await _mediator.Send(new AddGenreCommand(genre));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateGenre([FromBody] GenreRequest request)
+        [HttpPut]
+        public async Task<IActionResult> UpdateGenre([FromBody] GenreDto genre)
         {
-            var response = await _mediator.Send(new UpdateGenreCommand(request.Genre));
+            var response = await _mediator.Send(new UpdateGenreCommand(genre));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteGenre(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGenre([FromRoute] Guid id)
         {
             var response = await _mediator.Send(new DeleteGenreCommand(id));
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -56,7 +56,7 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetGenreByName(string name)
+        public async Task<IActionResult> GetGenreByName([FromRoute] string name)
         {
             var response = await _mediator.Send(new GetGenreByNameQuery(name));
             return ReturnResultHelper.ReturnQueryResult(response);

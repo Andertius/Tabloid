@@ -2,15 +2,15 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Tabloid.Application.Commands.Tunings.AddTuning;
-using Tabloid.Application.Commands.Tunings.DeleteTuning;
-using Tabloid.Application.Commands.Tunings.UpdateTuning;
-using Tabloid.Application.Queries.Tunings.GetAllTunings;
-using Tabloid.Application.Queries.Tunings.GetTuningByName;
-using Tabloid.Application.Queries.Tunings.GetTuningsByStringNumber;
-
+using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning;
+using Tabloid.Application.CQRS.Tunings.Commands.AddTuning;
+using Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning;
+using Tabloid.Application.CQRS.Tunings.Commands.UpdateTuning;
+using Tabloid.Application.CQRS.Tunings.Queries.GetAllTunings;
+using Tabloid.Application.CQRS.Tunings.Queries.GetTuningByName;
+using Tabloid.Application.CQRS.Tunings.Queries.GetTuningsByStringNumber;
+using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Helpers;
-using Tabloid.Requests.TuningRequests;
 
 namespace Tabloid.Controllers
 {
@@ -25,22 +25,22 @@ namespace Tabloid.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddTuning([FromBody] TuningRequest request)
+        [HttpPost]
+        public async Task<IActionResult> AddTuning([FromBody] GuitarTuningDto tuning)
         {
-            var response = await _mediator.Send(new AddTuningCommand(request.Tuning));
+            var response = await _mediator.Send(new AddTuningCommand(tuning));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateTuning([FromBody] TuningRequest request)
+        [HttpPut]
+        public async Task<IActionResult> UpdateTuning([FromBody] GuitarTuningDto tuning)
         {
-            var response = await _mediator.Send(new UpdateTuningCommand(request.Tuning));
+            var response = await _mediator.Send(new UpdateTuningCommand(tuning));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteTuning(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTuning([FromRoute] Guid id)
         {
             var response = await _mediator.Send(new DeleteTuningCommand(id));
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -64,6 +64,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetTuningsByStringNumber([FromRoute] int stringNumber)
         {
             var response = await _mediator.Send(new GetTuningsByStringNumberQuery(stringNumber));
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}/songs")]
+        public async Task<IActionResult> GetAllSongsByTuning([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new GetAllSongsByTuningQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
     }

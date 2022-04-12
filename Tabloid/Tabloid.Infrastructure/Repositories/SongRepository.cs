@@ -74,7 +74,9 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
                 .Include(x => x.Tabs)
-                .Where(x => !difficulty.HasValue || x.Tabs.Any(y => y.Difficulty == difficulty))
+                .Where(x => 
+                    !difficulty.HasValue ||
+                    x.Tabs.Any(y => Math.Abs((double)(y.Difficulty - difficulty)) < 0.00001))
                 .ToListAsync();
         }
 

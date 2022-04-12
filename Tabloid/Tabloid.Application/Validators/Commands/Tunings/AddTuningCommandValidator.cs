@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Tunings.AddTuning;
+using Tabloid.Application.CQRS.Tunings.Commands.AddTuning;
 
 namespace Tabloid.Application.Validators.Commands.Tunings
 {

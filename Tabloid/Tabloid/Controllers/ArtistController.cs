@@ -2,15 +2,14 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Tabloid.Application.Commands.Artists.AddArtist;
-using Tabloid.Application.Commands.Artists.DeleteArtist;
-using Tabloid.Application.Commands.Artists.UpdateArtist;
-using Tabloid.Application.Queries.Artists.FindArtistByAlbum;
-using Tabloid.Application.Queries.Artists.FindArtistByName;
-using Tabloid.Application.Queries.Artists.FindArtistBySong;
-using Tabloid.Application.Queries.Artists.GetAllArtists;
+using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByArtist;
+using Tabloid.Application.CQRS.Artists.Commands.AddArtist;
+using Tabloid.Application.CQRS.Artists.Commands.DeleteArtist;
+using Tabloid.Application.CQRS.Artists.Commands.UpdateArtist;
+using Tabloid.Application.CQRS.Artists.Queries.FindArtistByName;
+using Tabloid.Application.CQRS.Artists.Queries.GetAllArtists;
+using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Helpers;
-using Tabloid.Requests.ArtistRequests;
 
 namespace Tabloid.Controllers
 {
@@ -25,22 +24,22 @@ namespace Tabloid.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddArtist([FromBody] ArtistRequest request)
+        [HttpPost]
+        public async Task<IActionResult> AddArtist([FromBody] ArtistDto artist)
         {
-            var response = await _mediator.Send(new AddArtistCommand(request.Artist));
+            var response = await _mediator.Send(new AddArtistCommand(artist));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateArtist([FromBody] ArtistRequest request)
+        [HttpPut]
+        public async Task<IActionResult> UpdateArtist([FromBody] ArtistDto artist)
         {
-            var response = await _mediator.Send(new UpdateArtistCommand(request.Artist));
+            var response = await _mediator.Send(new UpdateArtistCommand(artist));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteArtist(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteArtist([FromRoute] Guid id)
         {
             var response = await _mediator.Send(new DeleteArtistCommand(id));
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -54,23 +53,16 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> FindArtistByName(string name)
+        public async Task<IActionResult> FindArtistByName([FromRoute] string name)
         {
             var response = await _mediator.Send(new FindArtistByNameQuery(name));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("album")]
-        public async Task<IActionResult> FindArtistByAlbum([FromQuery] ArtistByAlbumRequest request)
+        [HttpGet("{id}/albums")]
+        public async Task<IActionResult> GetAllAlbumsByArtist([FromRoute] Guid id)
         {
-            var response = await _mediator.Send(new FindArtistByAlbumQuery(request.Album));
-            return ReturnResultHelper.ReturnQueryResult(response);
-        }
-
-        [HttpGet("song")]
-        public async Task<IActionResult> FindArtistBySong([FromQuery] ArtistBySongRequest request)
-        {
-            var response = await _mediator.Send(new FindArtistBySongQuery(request.Song));
+            var response = await _mediator.Send(new GetAllAlbumsByArtistQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
     }

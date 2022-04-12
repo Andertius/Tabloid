@@ -2,15 +2,15 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Tabloid.Application.Commands.Albums.AddAlbum;
-using Tabloid.Application.Commands.Albums.DeleteAlbum;
-using Tabloid.Application.Commands.Albums.UpdateAlbum;
-using Tabloid.Application.Queries.Albums.GetAlbumBySong;
-using Tabloid.Application.Queries.Albums.GetAllAlbums;
-using Tabloid.Application.Queries.Albums.GetAllAlbumsByArtist;
-using Tabloid.Application.Queries.Albums.GetAllAlbumsByName;
+using Tabloid.Application.CQRS.Albums.Commands.AddAlbum;
+using Tabloid.Application.CQRS.Albums.Commands.DeleteAlbum;
+using Tabloid.Application.CQRS.Albums.Commands.UpdateAlbum;
+using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbums;
+using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByName;
+using Tabloid.Application.CQRS.Artists.Queries.FindArtistByAlbum;
+using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByAlbum;
+using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Helpers;
-using Tabloid.Requests.AlbumRequests;
 
 namespace Tabloid.Controllers
 {
@@ -25,22 +25,22 @@ namespace Tabloid.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddAlbum([FromBody] AlbumRequest request)
+        [HttpPost]
+        public async Task<IActionResult> AddAlbum([FromBody] AlbumDto ablum)
         {
-            var response = await _mediator.Send(new AddAlbumCommand(request.Album));
+            var response = await _mediator.Send(new AddAlbumCommand(ablum));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateAlbum([FromBody] AlbumRequest request)
+        [HttpPut]
+        public async Task<IActionResult> UpdateAlbum([FromBody] AlbumDto ablum)
         {
-            var response = await _mediator.Send(new UpdateAlbumCommand(request.Album));
+            var response = await _mediator.Send(new UpdateAlbumCommand(ablum));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteAlbum(Guid id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAlbum([FromRoute] Guid id)
         {
             var response = await _mediator.Send(new DeleteAlbumCommand(id));
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -54,23 +54,23 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetAllAlbumsByName(string name)
+        public async Task<IActionResult> GetAllAlbumsByName([FromRoute] string name)
         {
             var response = await _mediator.Send(new GetAllAlbumsByNameQuery(name));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("song")]
-        public async Task<IActionResult> GetAlbumBySong([FromQuery] AlbumBySongRequest request)
+        [HttpGet("{id}/artist")]
+        public async Task<IActionResult> FindArtistByAlbum([FromRoute] Guid id)
         {
-            var response = await _mediator.Send(new GetAlbumBySongQuery(request.Song));
+            var response = await _mediator.Send(new FindArtistByAlbumQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("artist")]
-        public async Task<IActionResult> GetAlbumByArtist([FromQuery] AlbumsByArtistRequest request)
+        [HttpGet("{id}/songs")]
+        public async Task<IActionResult> GetAllSongsByAlbum([FromRoute] Guid id)
         {
-            var response = await _mediator.Send(new GetAllAlbumsByArtistQuery(request.Artist));
+            var response = await _mediator.Send(new GetAllSongsByAlbumQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
     }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using Tabloid.Application.Commands;
+using Tabloid.Application.CQRS;
 using Tabloid.Domain.Enums;
-using Tabloid.Domain.Responses;
 
 namespace Tabloid.Helpers
 {
@@ -12,15 +11,9 @@ namespace Tabloid.Helpers
         {
             return response.Result switch
             {
-                CommandResult.Success => new OkObjectResult(new OkResponse<CommandResponse<T>>(response)),
-                CommandResult.Failure => new BadRequestObjectResult(
-                    new BadRequestResponse<CommandResponse<T>>(
-                        response,
-                        response.ErrorMessage)),
-                CommandResult.NotFound => new NotFoundObjectResult(
-                    new NotFoundResponse<CommandResponse<T>>(
-                        response,
-                        response.ErrorMessage)),
+                CommandResult.Success => new OkObjectResult(response),
+                CommandResult.Failure => new BadRequestObjectResult(response),
+                CommandResult.NotFound => new NotFoundObjectResult(response),
                 _ => throw new NotSupportedException(),
             };
         }
@@ -29,11 +22,8 @@ namespace Tabloid.Helpers
         {
             return response switch
             {
-                null => new NotFoundObjectResult(
-                    new NotFoundResponse<T>(
-                        response,
-                        "Object could not be found")),
-                _ => new OkObjectResult(new OkResponse<T>(response)),
+                null => new NotFoundObjectResult(response),
+                _ => new OkObjectResult(response),
             };
         }
 
@@ -41,11 +31,8 @@ namespace Tabloid.Helpers
         {
             return response.Length switch
             {
-                0 => new NotFoundObjectResult(
-                    new NotFoundResponse<T[]>(
-                        response,
-                        "Objects could not be found")),
-                _ => new OkObjectResult(new OkResponse<T[]>(response)),
+                0 => new NotFoundObjectResult(response),
+                _ => new OkObjectResult(response),
             };
         }
     }

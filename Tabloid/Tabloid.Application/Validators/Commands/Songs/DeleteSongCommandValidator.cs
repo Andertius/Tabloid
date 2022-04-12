@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-using Tabloid.Application.Commands.Songs.DeleteSong;
+using Tabloid.Application.CQRS.Songs.Commands.DeleteSong;
 
 namespace Tabloid.Application.Validators.Commands.Songs
 {
