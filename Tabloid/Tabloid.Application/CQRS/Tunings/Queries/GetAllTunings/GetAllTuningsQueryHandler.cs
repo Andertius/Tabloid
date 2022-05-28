@@ -2,13 +2,13 @@
 
 using MediatR;
 
+using Tabloid.Application.Interfaces;
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
-using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.CQRS.Tunings.Queries.GetAllTunings
 {
-    internal class GetAllTuningsQueryHandler : IRequestHandler<GetAllTuningsQuery, GuitarTuningDto[]>
+    internal class GetAllTuningsQueryHandler : IRequestHandler<GetAllTuningsQuery, TuningDto[]>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,14 +21,14 @@ namespace Tabloid.Application.CQRS.Tunings.Queries.GetAllTunings
             _mapper = mapper;
         }
 
-        public async Task<GuitarTuningDto[]> Handle(GetAllTuningsQuery request, CancellationToken cancellationToken)
+        public async Task<TuningDto[]> Handle(GetAllTuningsQuery request, CancellationToken cancellationToken)
         {
             var tunings = await _unitOfWork
-                .GetRepository<IGuitarTuningRepository>()
+                .GetRepository<ITuningRepository>()
                 .GetAll();
 
             return tunings
-                .Select(x => _mapper.Map<GuitarTuningDto>(x))
+                .Select(x => _mapper.Map<TuningDto>(x))
                 .ToArray();
         }
     }

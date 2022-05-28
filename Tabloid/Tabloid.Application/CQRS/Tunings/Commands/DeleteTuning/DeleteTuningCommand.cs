@@ -4,7 +4,7 @@ using Tabloid.Domain.DataTransferObjects;
 
 namespace Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning
 {
-    public class DeleteTuningCommand : IRequest<CommandResponse<GuitarTuningDto>>
+    public class DeleteTuningCommand : IRequest<CommandResponse<TuningDto>>
     {
         public DeleteTuningCommand(Guid id)
         {

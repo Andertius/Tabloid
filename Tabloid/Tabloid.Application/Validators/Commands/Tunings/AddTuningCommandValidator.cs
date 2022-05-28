@@ -17,8 +17,11 @@ namespace Tabloid.Application.Validators.Commands.Tunings
             RuleFor(x => x.Tuning.Name)
                 .NotEmpty();
 
-            RuleFor(x => x.Tuning.Tuning)
+            RuleFor(x => x.Tuning.Strings)
                 .NotEmpty();
+
+            RuleFor(x => x.Tuning.Instrument)
+                .IsInEnum();
         }
     }
 }

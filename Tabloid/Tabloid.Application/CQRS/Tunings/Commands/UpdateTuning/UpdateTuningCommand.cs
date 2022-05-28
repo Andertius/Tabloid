@@ -4,13 +4,13 @@ using Tabloid.Domain.DataTransferObjects;
 
 namespace Tabloid.Application.CQRS.Tunings.Commands.UpdateTuning
 {
-    public class UpdateTuningCommand : IRequest<CommandResponse<GuitarTuningDto>>
+    public class UpdateTuningCommand : IRequest<CommandResponse<TuningDto>>
     {
-        public UpdateTuningCommand(GuitarTuningDto tuning)
+        public UpdateTuningCommand(TuningDto tuning)
         {
             Tuning = tuning;
         }
 
-        public GuitarTuningDto Tuning { get; set; }
+        public TuningDto Tuning { get; set; }
     }
 }

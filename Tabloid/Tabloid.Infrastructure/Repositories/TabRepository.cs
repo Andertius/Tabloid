@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -11,20 +12,28 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Tab> FindById(Guid id)
+        {
+            return await _context
+                .Set<Tab>()
+                .Include(x => x.Song)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public override async Task<ICollection<Tab>> GetAll()
         {
             return await _context
-                .Tabs
+                .Set<Tab>()
                 .Include(x => x.Song)
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Tab>> GetAllTabsBySong(Song song)
+        public async Task<ICollection<Tab>> GetAllTabsBySong(Guid songId)
         {
             return await _context
-                .Tabs
+                .Set<Tab>()
                 .Include(x => x.Song)
-                .Where(x => x.Song == song)
+                .Where(x => x.SongId == songId)
                 .ToListAsync();
         }
     }

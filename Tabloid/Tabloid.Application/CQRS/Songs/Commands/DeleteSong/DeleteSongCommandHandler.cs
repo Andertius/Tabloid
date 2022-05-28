@@ -2,10 +2,10 @@
 
 using MediatR;
 
+using Tabloid.Application.Interfaces;
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Enums;
-using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.CQRS.Songs.Commands.DeleteSong
 {
@@ -24,7 +24,7 @@ namespace Tabloid.Application.CQRS.Songs.Commands.DeleteSong
 
         public async Task<CommandResponse<SongDto>> Handle(DeleteSongCommand request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.GetRepository<IGuitarTuningRepository>();
+            var repository = _unitOfWork.GetRepository<ITuningRepository>();
             var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))

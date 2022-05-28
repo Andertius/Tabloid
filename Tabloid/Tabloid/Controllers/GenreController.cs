@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tabloid.Application.CQRS.Genres.Commands.AddGenre;
 using Tabloid.Application.CQRS.Genres.Commands.DeleteGenre;
 using Tabloid.Application.CQRS.Genres.Commands.UpdateGenre;
+using Tabloid.Application.CQRS.Genres.Queries.FindGenreById;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllElectroGenres;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllGenres;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllMetalGenres;
@@ -52,6 +53,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllGenres()
         {
             var response = await _mediator.Send(new GetAllGenresQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindGenreById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new FindGenreByIdQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 

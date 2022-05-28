@@ -8,6 +8,10 @@
 
         public int? SongNumberInAlbum { get; set; }
 
+        public bool FullyMastered { get; set; }
+
+        public bool IsFavourite { get; set; }
+
 
         public Guid AlbumId { get; set; }
 

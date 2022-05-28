@@ -14,10 +14,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Tabloid.Core\Tabloid.Core.csproj" />
     <ProjectReference Include="..\Tabloid.Domain\Tabloid.Domain.csproj" />
-    <ProjectReference Include="..\Tabloid.Infrastructure\Tabloid.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Validators\Commands\Tabs\" />
     <Folder Include="Validators\Queries\" />
   </ItemGroup>
 

@@ -2,14 +2,14 @@
 
 using MediatR;
 
+using Tabloid.Application.Interfaces;
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Enums;
-using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning
 {
-    internal class DeleteTuningCommandHandler : IRequestHandler<DeleteTuningCommand, CommandResponse<GuitarTuningDto>>
+    internal class DeleteTuningCommandHandler : IRequestHandler<DeleteTuningCommand, CommandResponse<TuningDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
@@ -22,9 +22,9 @@ namespace Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning
             _mapper = mapper;
         }
 
-        public async Task<CommandResponse<GuitarTuningDto>> Handle(DeleteTuningCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<TuningDto>> Handle(DeleteTuningCommand request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.GetRepository<IGuitarTuningRepository>();
+            var repository = _unitOfWork.GetRepository<ITuningRepository>();
             var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))
@@ -32,11 +32,11 @@ namespace Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning
                 repository.Remove(entity);
                 await _unitOfWork.Save();
                 
-                return new CommandResponse<GuitarTuningDto>(_mapper.Map<GuitarTuningDto>(entity));
+                return new CommandResponse<TuningDto>(_mapper.Map<TuningDto>(entity));
             }
 
-            return new CommandResponse<GuitarTuningDto>(
-                _mapper.Map<GuitarTuningDto>(entity),
+            return new CommandResponse<TuningDto>(
+                _mapper.Map<TuningDto>(entity),
                 CommandResult.NotFound,
                 "The tuning could not be found");
         }

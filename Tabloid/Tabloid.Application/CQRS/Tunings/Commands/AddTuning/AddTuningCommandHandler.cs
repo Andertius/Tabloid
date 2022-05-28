@@ -2,15 +2,15 @@
 
 using MediatR;
 
+using Tabloid.Application.Interfaces;
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 using Tabloid.Domain.Enums;
-using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.CQRS.Tunings.Commands.AddTuning
 {
-    internal class AddTuningCommandHandler : IRequestHandler<AddTuningCommand, CommandResponse<GuitarTuningDto>>
+    internal class AddTuningCommandHandler : IRequestHandler<AddTuningCommand, CommandResponse<TuningDto>>
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
@@ -23,23 +23,23 @@ namespace Tabloid.Application.CQRS.Tunings.Commands.AddTuning
             _mapper = mapper;
         }
 
-        public async Task<CommandResponse<GuitarTuningDto>> Handle(AddTuningCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<TuningDto>> Handle(AddTuningCommand request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.GetRepository<IGuitarTuningRepository>();
-            var entity = _mapper.Map<GuitarTuning>(request.Tuning);
+            var repository = _unitOfWork.GetRepository<ITuningRepository>();
+            var entity = _mapper.Map<Tuning>(request.Tuning);
 
             if (entity.Id == Guid.Empty &&
                 (await repository
                     .GetAll())
-                    .All(x => x.Name != entity.Name && x.Tuning != entity.Tuning))
+                    .All(x => x.Name != entity.Name && x.Strings != entity.Strings))
             {
                 await repository.Insert(entity);
                 await _unitOfWork.Save();
 
-                return new CommandResponse<GuitarTuningDto>(_mapper.Map<GuitarTuningDto>(entity));
+                return new CommandResponse<TuningDto>(_mapper.Map<TuningDto>(entity));
             }
 
-            return new CommandResponse<GuitarTuningDto>(
+            return new CommandResponse<TuningDto>(
                 result: CommandResult.NotFound,
                 errorMessage: "The tuning already exists");
         }

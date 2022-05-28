@@ -8,12 +8,10 @@
 
         public double? Difficulty { get; set; }
 
-        public string Instrument { get; set; }
-
 
         public Guid TuningId { get; set; }
 
-        public GuitarTuning Tuning { get; set; }
+        public Tuning Tuning { get; set; }
 
         public Guid SongId { get; set; }
 

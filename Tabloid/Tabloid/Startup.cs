@@ -16,7 +16,7 @@ namespace Tabloid
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContexts(Configuration);
+            services.AddDataAccess(Configuration);
             services.AddValidation();
             services.AddMediatr();
             services.AddUnitOfWork();

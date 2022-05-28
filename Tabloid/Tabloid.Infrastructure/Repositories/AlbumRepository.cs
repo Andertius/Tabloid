@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -12,10 +13,20 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Album> FindById(Guid id)
+        {
+            return await _context
+                .Set<Album>()
+                .Include(x => x.Artist)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Artists)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public override async Task<ICollection<Album>> GetAll()
         {
             return await _context
-                .Albums
+                .Set<Album>()
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
@@ -25,7 +36,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Album>> GetAllAlbumsByName(string name)
         {
             return await _context
-                .Albums
+                .Set<Album>()
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
@@ -35,7 +46,8 @@ namespace Tabloid.Infrastructure.Repositories
 
         public async Task<Album> FindAlbumBySong(Song song)
         {
-            return await _context.Albums
+            return await _context
+                .Set<Album>()
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
@@ -46,7 +58,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Album>> GetAllAlbumsByArtist(Artist artist)
         {
             return await _context
-                .Albums
+                .Set<Album>()
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)

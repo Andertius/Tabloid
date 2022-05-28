@@ -1,10 +1,8 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -19,7 +17,9 @@ namespace Tabloid.Infrastructure.Repositories
 
         public virtual async Task<TEntity> FindById(TId id)
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+            return await _context
+                .Set<TEntity>()
+                .FindAsync(id);
         }
 
         public virtual async Task<ICollection<TEntity>> GetAll()
@@ -32,17 +32,23 @@ namespace Tabloid.Infrastructure.Repositories
 
         public virtual async Task Insert(TEntity entity)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
+            await _context
+                .Set<TEntity>()
+                .AddAsync(entity);
         }
 
         public virtual void Update(TEntity entity)
         {
-            _context.Set<TEntity>().Update(entity);
+            _context
+                .Set<TEntity>()
+                .Update(entity);
         }
 
         public virtual void Remove(TEntity entity)
         {
-            _context.Set<TEntity>().Remove(entity);
+            _context
+                .Set<TEntity>()
+                .Remove(entity);
         }
 
         public virtual async Task<bool> Contains(TEntity entity)

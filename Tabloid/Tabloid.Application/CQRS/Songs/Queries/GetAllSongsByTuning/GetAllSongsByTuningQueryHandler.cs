@@ -2,9 +2,9 @@
 
 using MediatR;
 
+using Tabloid.Application.Interfaces;
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
-using Tabloid.Domain.Interfaces;
-using Tabloid.Domain.Interfaces.Repositories;
 
 namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning
 {
@@ -24,7 +24,7 @@ namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning
         public async Task<SongDto[]> Handle(GetAllSongsByTuningQuery request, CancellationToken cancellationToken)
         {
             var tuning = await _unitOfWork
-                .GetRepository<IGuitarTuningRepository>()
+                .GetRepository<ITuningRepository>()
                 .FindById(request.Id);
 
             var result = await _unitOfWork

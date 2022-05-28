@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Infrastructure;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid
 {
@@ -14,18 +14,13 @@ namespace Tabloid
         }
 
         public static void Migrate(IServiceProvider serviceProvider)
-        {
-            using var scope = serviceProvider
+            => serviceProvider
                 .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope();
-
-            var dbContext = scope.ServiceProvider.GetRequiredService<TabDbContext>();
-
-            var seed = new DataSeed(dbContext);
-            seed.SeedData();
-
-            dbContext.Database.Migrate();
-        }
+                .CreateScope()
+                .ServiceProvider
+                .GetRequiredService<TabDbContext>()
+                .Database
+                .Migrate();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

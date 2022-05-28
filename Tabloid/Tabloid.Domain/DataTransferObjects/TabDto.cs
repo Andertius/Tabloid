@@ -10,7 +10,7 @@
 
         public string Instrument { get; set; }
 
-        public GuitarTuningDto Tuning { get; set; }
+        public TuningDto Tuning { get; set; }
 
         public SongDto Song { get; set; }
     }

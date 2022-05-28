@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tabloid.Application.CQRS.Albums.Commands.AddAlbum;
 using Tabloid.Application.CQRS.Albums.Commands.DeleteAlbum;
 using Tabloid.Application.CQRS.Albums.Commands.UpdateAlbum;
+using Tabloid.Application.CQRS.Albums.Queries.FindAlbumById;
 using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbums;
 using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByName;
 using Tabloid.Application.CQRS.Artists.Queries.FindArtistByAlbum;
@@ -50,6 +51,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllAlbums()
         {
             var response = await _mediator.Send(new GetAllAlbumsQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindAlbumById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new FindAlbumByIdQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 

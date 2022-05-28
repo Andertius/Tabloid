@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -12,10 +13,19 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Artist> FindById(Guid id)
+        {
+            return await _context
+                .Set<Artist>()
+                .Include(x => x.Albums)
+                .Include(x => x.Songs)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public override async Task<ICollection<Artist>> GetAll()
         {
             return await _context
-                .Artists
+                .Set<Artist>()
                 .Include(x => x.Albums)
                 .Include(x => x.Songs)
                 .ToListAsync();
@@ -24,7 +34,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<Artist> FindArtistByAlbum(Album album)
         {
             return await _context
-                .Artists
+                .Set<Artist>()
                 .Include(x => x.Albums)
                 .Include(x => x.Songs)
                 .Where(x => x.Albums.Contains(album))
@@ -34,7 +44,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<Artist> FindArtistByName(string artistName)
         {
             return await _context
-                .Artists
+                .Set<Artist>()
                 .Include(x => x.Albums)
                 .Include(x => x.Songs)
                 .Where(x => x.Name == artistName)
@@ -44,7 +54,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<Artist> FindArtistBySong(Song song)
         {
             return await _context
-                .Artists
+                .Set<Artist>()
                 .Include(x => x.Albums)
                 .Include(x => x.Songs)
                 .Where(x => x.Songs.Contains(song))

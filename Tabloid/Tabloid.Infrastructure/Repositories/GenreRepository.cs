@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -12,10 +13,18 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Genre> FindById(Guid id)
+        {
+            return await _context
+                .Set<Genre>()
+                .Include(x => x.Songs)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public override async Task<ICollection<Genre>> GetAll()
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Include(x => x.Songs)
                 .ToListAsync();
         }
@@ -23,7 +32,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<Genre> FindGenreByName(string genreName)
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Where(x => x.Name == genreName)
                 .FirstOrDefaultAsync();
         }
@@ -31,7 +40,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Genre>> GetAllGenresBySong(Song song)
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Include(x => x.Songs)
                 .Where(x => x.Songs.Contains(song))
                 .OrderBy(x => x.Name)
@@ -41,7 +50,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Genre>> GetAllRockGenres()
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Where(x => x.Name.Contains("Rock"))
                 .OrderBy(x => x.Name)
                 .ToListAsync();
@@ -50,7 +59,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Genre>> GetAllMetalGenres()
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Where(x => x.Name.Contains("Metal") || AllMetalGenresWithoutMetalInTheirName.Contains(x.Name))
                 .OrderBy(x => x.Name)
                 .ToListAsync();
@@ -59,7 +68,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Genre>> GetAllElectroGenres()
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Where(x => AllElectroGenres.Contains(x.Name))
                 .OrderBy(x => x.Name)
                 .ToListAsync();
@@ -68,7 +77,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Genre>> GetEveryOtherGenre()
         {
             return await _context
-                .Genres
+                .Set<Genre>()
                 .Where(x => !x.Name.Contains("Rock"))
                 .Where(x => !x.Name.Contains("Metal") && !AllMetalGenresWithoutMetalInTheirName.Contains(x.Name))
                 .Where(x => !AllElectroGenres.Contains(x.Name))

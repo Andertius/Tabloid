@@ -6,6 +6,7 @@ using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByArtist;
 using Tabloid.Application.CQRS.Artists.Commands.AddArtist;
 using Tabloid.Application.CQRS.Artists.Commands.DeleteArtist;
 using Tabloid.Application.CQRS.Artists.Commands.UpdateArtist;
+using Tabloid.Application.CQRS.Artists.Queries.FindArtistById;
 using Tabloid.Application.CQRS.Artists.Queries.FindArtistByName;
 using Tabloid.Application.CQRS.Artists.Queries.GetAllArtists;
 using Tabloid.Domain.DataTransferObjects;
@@ -49,6 +50,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new GetAllArtistsQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindArtistById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new FindArtistByIdQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 

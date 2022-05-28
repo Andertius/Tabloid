@@ -9,8 +9,8 @@ namespace Tabloid.Application.MapProfiles
     {
         public TuningProfile()
         {
-            CreateMap<GuitarTuning, GuitarTuningDto>();
-            CreateMap<GuitarTuningDto, GuitarTuning>();
+            CreateMap<Tuning, TuningDto>();
+            CreateMap<TuningDto, Tuning>();
         }
     }
 }

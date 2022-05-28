@@ -6,6 +6,7 @@ using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning;
 using Tabloid.Application.CQRS.Tunings.Commands.AddTuning;
 using Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning;
 using Tabloid.Application.CQRS.Tunings.Commands.UpdateTuning;
+using Tabloid.Application.CQRS.Tunings.Queries.FindTuningById;
 using Tabloid.Application.CQRS.Tunings.Queries.GetAllTunings;
 using Tabloid.Application.CQRS.Tunings.Queries.GetTuningByName;
 using Tabloid.Application.CQRS.Tunings.Queries.GetTuningsByStringNumber;
@@ -26,14 +27,14 @@ namespace Tabloid.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTuning([FromBody] GuitarTuningDto tuning)
+        public async Task<IActionResult> AddTuning([FromBody] TuningDto tuning)
         {
             var response = await _mediator.Send(new AddTuningCommand(tuning));
             return ReturnResultHelper.ReturnCommandResult(response);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateTuning([FromBody] GuitarTuningDto tuning)
+        public async Task<IActionResult> UpdateTuning([FromBody] TuningDto tuning)
         {
             var response = await _mediator.Send(new UpdateTuningCommand(tuning));
             return ReturnResultHelper.ReturnCommandResult(response);
@@ -50,6 +51,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllTunings()
         {
             var response = await _mediator.Send(new GetAllTuningsQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindTuningById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new FindTuningByIdQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 

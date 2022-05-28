@@ -2,8 +2,9 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Tabloid.Domain.Interfaces.Repositories;
-using Tabloid.Infrastructure;
+using Tabloid.Application.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
+using Tabloid.Infrastructure.DbContextInitializers;
 using Tabloid.Infrastructure.Repositories;
 
 namespace Tabloid.Tests.UnitOfWork
@@ -18,7 +19,9 @@ namespace Tabloid.Tests.UnitOfWork
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
-            _context = new TabDbContext(opts);
+            var initializer = new DefaultDbContextInitializer();
+            _context = new TabDbContext(opts, initializer);
+
             UnitOfWork = new UnitOfWork<Guid>(_context);
             UnitOfWork.RegisterRepositories(typeof(IRepository<,>).Assembly, typeof(Repository<,>).Assembly);
         }

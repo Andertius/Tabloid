@@ -6,11 +6,13 @@ using Tabloid.Application.CQRS.Artists.Queries.FindArtistBySong;
 using Tabloid.Application.CQRS.Songs.Commands.AddSong;
 using Tabloid.Application.CQRS.Songs.Commands.DeleteSong;
 using Tabloid.Application.CQRS.Songs.Commands.UpdateSong;
+using Tabloid.Application.CQRS.Songs.Queries.FindSongById;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongs;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByArtists;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByGenres;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByName;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTabDifficulty;
+using Tabloid.Application.CQRS.Tabs.Queries.GetAllTabsBySong;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Helpers;
 
@@ -55,6 +57,13 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindSongById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new FindSongByIdQuery(id));
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
         [HttpGet("{id}/artist")]
         public async Task<IActionResult> FindArtistBySong(Guid id)
         {
@@ -87,6 +96,13 @@ namespace Tabloid.Controllers
         public async Task<IActionResult> GetAllSongsByTabDifficulty(double? difficulty)
         {
             var response = await _mediator.Send(new GetAllSongsByTabDifficultyQuery(difficulty));
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("{id}/tabs")]
+        public async Task<IActionResult> GetAllTabs([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new GetAllTabsBySongQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
         }
     }

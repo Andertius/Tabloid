@@ -4,7 +4,7 @@ using Tabloid.Domain.DataTransferObjects;
 
 namespace Tabloid.Application.CQRS.Tunings.Queries.GetTuningsByStringNumber
 {
-    public class GetTuningsByStringNumberQuery : IRequest<GuitarTuningDto[]>
+    public class GetTuningsByStringNumberQuery : IRequest<TuningDto[]>
     {
         public GetTuningsByStringNumberQuery(int stringNumber)
         {

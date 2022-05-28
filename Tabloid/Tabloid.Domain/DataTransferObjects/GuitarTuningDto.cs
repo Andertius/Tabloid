@@ -1,6 +1,8 @@
-﻿namespace Tabloid.Domain.DataTransferObjects
+﻿using Tabloid.Domain.Enums;
+
+namespace Tabloid.Domain.DataTransferObjects
 {
-    public class GuitarTuningDto : IDto<Guid>
+    public class TuningDto : IDto<Guid>
     {
         public Guid Id { get; set; }
 
@@ -8,6 +10,8 @@
 
         public string Name { get; set; }
 
-        public string Tuning { get; set; }
+        public Instrument Instrument { get; set; }
+
+        public string Strings { get; set; }
     }
 }

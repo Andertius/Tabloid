@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
-using Tabloid.Domain.Interfaces.Repositories;
+using Tabloid.Infrastructure.Context;
 
 namespace Tabloid.Infrastructure.Repositories
 {
@@ -12,10 +13,20 @@ namespace Tabloid.Infrastructure.Repositories
         {
         }
 
+        public override async Task<Song> FindById(Guid id)
+        {
+            return await _context
+                .Set<Song>()
+                .Include(x => x.Genres)
+                .Include(x => x.Artists)
+                .Include(x => x.Album)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public override async Task<ICollection<Song>> GetAll()
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -25,7 +36,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Song>> GetAllSongsByAlbum(Album album)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -36,7 +47,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Song>> GetAllSongsByArtists(IEnumerable<Artist> artists)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -47,7 +58,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Song>> GetAllSongsByGenres(IEnumerable<Genre> genres)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -58,7 +69,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Song>> GetAllSongsByName(string name)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -69,7 +80,7 @@ namespace Tabloid.Infrastructure.Repositories
         public async Task<ICollection<Song>> GetAllSongsByTabDifficulty(double? difficulty)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
@@ -80,10 +91,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Song>> GetAllSongsByTuning(GuitarTuning tuning)
+        public async Task<ICollection<Song>> GetAllSongsByTuning(Tuning tuning)
         {
             return await _context
-                .Songs
+                .Set<Song>()
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
