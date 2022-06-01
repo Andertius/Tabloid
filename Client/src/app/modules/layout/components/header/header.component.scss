@@ -1,0 +1,22 @@
+@import "../../../../../styles.scss";
+
+.header {
+    top: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    background: $header-footer-color;
+    vertical-align: middle;
+    color: white;
+    padding: 0 30px;
+}
+
+.title, .title:hover, .title:focus, .title:active {
+    display: flex;
+    align-items: center;
+}
