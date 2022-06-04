@@ -27,6 +27,7 @@ namespace Tabloid.Application.CQRS.Albums.Commands.AddAlbum
         {
             var repository = _unitOfWork.GetRepository<IAlbumRepository>();
             var entity = _mapper.Map<Album>(request.Album);
+            entity.ArtistId = request.Album.Artist.Id;
 
             if (request.Album.Id == Guid.Empty &&
                 (await repository

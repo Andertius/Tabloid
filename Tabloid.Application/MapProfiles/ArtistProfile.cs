@@ -10,7 +10,6 @@ namespace Tabloid.Application.MapProfiles
         public ArtistProfile()
         {
             CreateMap<Artist, ArtistDto>();
-
             CreateMap<ArtistDto, Artist>();
         }
     }

@@ -1,0 +1,8 @@
+<mat-card class="container">
+    <button (click)="goToAlbum()" type="button">
+        <img [src]="getImageSource()">
+    </button>
+
+    <p><a class="album-link" [routerLink]="['/album', album.id]">{{ album.name }}</a></p>
+    <small>{{ album.year }} • <a class="artist-link" [routerLink]="['/artist', album.artist.id]">{{ album.artist.name }}</a></small>
+</mat-card>

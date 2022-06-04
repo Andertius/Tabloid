@@ -10,7 +10,10 @@ namespace Tabloid.Application.MapProfiles
         public SongProfile()
         {
             CreateMap<Song, SongDto>();
-            CreateMap<SongDto, Song>();
+
+            CreateMap<SongDto, Song>()
+                .ForMember(x => x.Album, opt => opt.Ignore())
+                .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album.Id));
         }
     }
 }

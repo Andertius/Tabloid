@@ -1,4 +1,6 @@
-﻿namespace Tabloid.Domain.Entities
+﻿using Tabloid.Domain.Enums;
+
+namespace Tabloid.Domain.Entities
 {
     public class Album : IEntity<Guid>
     {
@@ -9,6 +11,8 @@
         public string Cover { get; set; }
 
         public int Year { get; set; }
+
+        public AlbumType AlbumType { get; set; }
 
 
         public Guid ArtistId { get; set; }

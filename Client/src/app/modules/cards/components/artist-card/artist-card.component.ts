@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ArtistDto } from 'src/app/models/dtos/artist.dto';
 import { ArtistService } from 'src/app/shared/services/artist.service';
 import { StringService } from 'src/app/shared/services/string.service';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-artist-card',
@@ -31,8 +31,6 @@ export class ArtistCardComponent implements OnInit {
 
     return `${environment.baseUrl}/artist-avatars/${this.artist.image}`;
   }
-
-  
 
   goToArtist() {
     console.log(this.artist.id);

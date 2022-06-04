@@ -10,6 +10,7 @@ namespace Tabloid.Application.MapProfiles
         public GenreProfile()
         {
             CreateMap<Genre, GenreDto>();
+
             CreateMap<GenreDto, Genre>();
         }
     }
