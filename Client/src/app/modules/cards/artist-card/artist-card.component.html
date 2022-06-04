@@ -1,0 +1,7 @@
+<div class="container">
+    <button (click)="goToArtist()" type="button">
+        <img [src]="getImageSource()">
+    </button>
+
+    <p><a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a></p>
+</div>

@@ -1,0 +1,16 @@
+@import "../../../../../styles.scss";
+
+a {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 15px;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: $sidenav-color;
+}
+
+.icon {
+    margin: 0 5px 0 0;
+}

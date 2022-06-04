@@ -1,5 +1,17 @@
 <nav class="header">
     <div class="title">
-        <h4><a>Main page</a></h4>
+        <a [routerLink]="['home']">Main page</a>
     </div>
+
+    <form (ngSubmit)="search()" class="search">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Search</mat-label>
+
+            <input matInput [formControl]="formControl">
+
+            <button matSuffix mat-icon-button>
+                <mat-icon class="icon">search</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
 </nav>

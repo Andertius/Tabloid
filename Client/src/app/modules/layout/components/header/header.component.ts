@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ArtistDto } from 'src/app/models/dtos/artist.dto';
+import { ArtistService } from 'src/app/shared/services/artist.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  artistDtos: ArtistDto[] = [];
+
+  formControl!: FormControl;
+
+  constructor(private readonly artistService: ArtistService) { }
 
   ngOnInit(): void {
-    console.log();
+    this.formControl = new FormControl('');
+  }
+
+  search() {
+    this.artistService.fetchArtists().subscribe(response => { this.artistDtos = response; })
   }
 
 }
