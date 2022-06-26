@@ -24,3 +24,24 @@ img {
 p {
     color: gray;
 }
+
+.discography {
+    margin-top: 15px;
+}
+
+.divider {
+    margin-left: -100px;
+    margin-right: -100px;
+}
+
+::ng-deep .mat-tab-header {
+    border-bottom: none;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.tab-content {
+    margin-top: 20px;
+}

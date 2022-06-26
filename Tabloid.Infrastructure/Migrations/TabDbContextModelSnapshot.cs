@@ -564,7 +564,9 @@ namespace Tabloid.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlbumId");
+                    b.HasIndex("AlbumId", "SongNumberInAlbum")
+                        .IsUnique()
+                        .HasFilter("[SongNumberInAlbum] IS NOT NULL");
 
                     b.ToTable("Songs");
                 });
@@ -579,6 +581,9 @@ namespace Tabloid.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("SongId")
@@ -618,10 +623,7 @@ namespace Tabloid.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("Strings")
+                    b.HasIndex("Name", "Strings")
                         .IsUnique();
 
                     b.ToTable("Tunings");
@@ -629,7 +631,7 @@ namespace Tabloid.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8fee284a-3905-4f55-b843-3be557f7c851"),
+                            Id = new Guid("14187d55-d884-4d57-a9ad-0964b214dc05"),
                             Instrument = 0,
                             Name = "Standard",
                             StringNumber = 6,
@@ -637,7 +639,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("39898b2a-f333-4fd8-9550-03270956f7fb"),
+                            Id = new Guid("182603d3-0d82-4d14-815b-49bad0e4691e"),
                             Instrument = 0,
                             Name = "Drop D",
                             StringNumber = 6,
@@ -645,7 +647,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("affa5fc1-713d-42dc-9d2d-cf9f7b6921c8"),
+                            Id = new Guid("19a4fe53-0739-4324-a3f5-6164b4603b69"),
                             Instrument = 0,
                             Name = "D# Standard",
                             StringNumber = 6,
@@ -653,7 +655,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa6ff7b8-d99a-482a-9b80-65920121e785"),
+                            Id = new Guid("2247d32f-6903-468c-9f3a-fd31baa3f194"),
                             Instrument = 0,
                             Name = "D Standard",
                             StringNumber = 6,
@@ -661,7 +663,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0ba09310-442c-4524-abb3-4811ba72f714"),
+                            Id = new Guid("251d6db3-8014-4ab8-a12c-27740dc99b41"),
                             Instrument = 0,
                             Name = "G G C F A d",
                             StringNumber = 6,
@@ -669,7 +671,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("998aadf3-156e-4f74-a9c4-33500c92ed8c"),
+                            Id = new Guid("37bffc99-476b-40b9-b1cd-187b302b3852"),
                             Instrument = 0,
                             Name = "C# Standard",
                             StringNumber = 6,
@@ -677,7 +679,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e66029d3-9b00-4464-8f13-ee04620d7236"),
+                            Id = new Guid("38be4d1b-ceec-4f21-9183-e87327e3dd3a"),
                             Instrument = 0,
                             Name = "Drop C",
                             StringNumber = 6,
@@ -685,7 +687,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8ff8977d-da1a-4c2a-95a3-379bc5970cd7"),
+                            Id = new Guid("39dd5a87-ed95-467b-ba8b-2f72013aa028"),
                             Instrument = 0,
                             Name = "Drop C#",
                             StringNumber = 6,
@@ -693,7 +695,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7026301b-d652-4867-9e99-c047c322d16c"),
+                            Id = new Guid("3a83823c-b1b1-4b8b-b5d2-48a8aa8dc4ee"),
                             Instrument = 0,
                             Name = "C Standard",
                             StringNumber = 6,
@@ -701,7 +703,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e3f5c0bf-d862-428c-bf17-b0ee31df3b3d"),
+                            Id = new Guid("4dde6b18-553d-42e8-ade2-d084385e4e37"),
                             Instrument = 0,
                             Name = "Drop B",
                             StringNumber = 6,
@@ -709,7 +711,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7aa19684-f679-4615-9668-28df51edd592"),
+                            Id = new Guid("50f230ac-dae4-4d8d-863d-535f24c8d4d8"),
                             Instrument = 0,
                             Name = "B Standard",
                             StringNumber = 6,
@@ -717,7 +719,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("90a281b7-d342-4996-8914-ce56a9b02676"),
+                            Id = new Guid("59bae8a1-6c22-4f43-b0a7-a8a58e98d501"),
                             Instrument = 0,
                             Name = "Drop A",
                             StringNumber = 6,
@@ -725,7 +727,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e6af363-5960-4ebe-b450-b8f8a3b58283"),
+                            Id = new Guid("5c873434-d0f1-494f-8533-6352fffbdd99"),
                             Instrument = 0,
                             Name = "Drop A#",
                             StringNumber = 6,
@@ -733,7 +735,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22ecccca-d37a-42af-835b-dfc6f62fbce3"),
+                            Id = new Guid("5e582416-47b7-488d-8958-251d84c77220"),
                             Instrument = 0,
                             Name = "A Standard",
                             StringNumber = 6,
@@ -741,7 +743,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9021d44e-66e5-429b-b625-12b838d53989"),
+                            Id = new Guid("65fb8820-670f-4cba-9cfd-8cb93b734428"),
                             Instrument = 0,
                             Name = "A# Standard",
                             StringNumber = 6,
@@ -749,7 +751,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25c9b4d6-1dce-4c8f-94fc-51061616cc4a"),
+                            Id = new Guid("66eb5696-a633-45d2-a9d4-c52ac8748b0c"),
                             Instrument = 0,
                             Name = "Standard (7-string)",
                             StringNumber = 7,
@@ -757,7 +759,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6bb5d04c-09bc-4d2a-9abe-e15b24c5579c"),
+                            Id = new Guid("68133730-6b9a-4729-9139-f87af0b79464"),
                             Instrument = 0,
                             Name = "A# Standard (7-string)",
                             StringNumber = 7,
@@ -765,7 +767,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4b0105e7-9f56-436f-9a85-eaf639428745"),
+                            Id = new Guid("8bc047a7-1004-4449-9f3a-20bc9f11991a"),
                             Instrument = 0,
                             Name = "Drop A (7-string)",
                             StringNumber = 7,
@@ -773,7 +775,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ca8f7730-604a-4165-ac11-d9e9940b972f"),
+                            Id = new Guid("948bf3ce-ddf3-4a10-95e8-109826be9040"),
                             Instrument = 0,
                             Name = "A Standard (7-string)",
                             StringNumber = 7,
@@ -781,7 +783,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7e9fa4c-255d-4b19-ba88-11736938455a"),
+                            Id = new Guid("97647eaf-8cd0-409f-a67a-d7ce18343ec8"),
                             Instrument = 0,
                             Name = "Drop G (7-string)",
                             StringNumber = 7,
@@ -789,7 +791,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("72572f30-aa65-4616-b4ae-ab4eabd2c954"),
+                            Id = new Guid("988cfe9e-f917-485c-bb79-7171267434ad"),
                             Instrument = 0,
                             Name = "G Standard (7-string)",
                             StringNumber = 7,
@@ -797,7 +799,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44a05b30-b653-4ccf-83c4-d0c812004165"),
+                            Id = new Guid("99ad2f63-d8b9-4d25-af6b-aea917cf9dc0"),
                             Instrument = 0,
                             Name = "Open C (7-string)",
                             StringNumber = 7,
@@ -805,7 +807,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3e31999d-18d1-4725-9308-19bc7d04e00d"),
+                            Id = new Guid("a78e83f3-ca52-468d-97e2-eea510662e92"),
                             Instrument = 0,
                             Name = "G C G C F A D (7-string)",
                             StringNumber = 7,
@@ -813,7 +815,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("665583d5-4545-41a8-acf4-658f1bf0ad50"),
+                            Id = new Guid("a80671d2-d9a5-41f5-9fff-c12103229964"),
                             Instrument = 0,
                             Name = "Drop E (7-string)",
                             StringNumber = 7,
@@ -821,7 +823,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9c5584c2-ae0b-4225-87f0-1f97e6918448"),
+                            Id = new Guid("ab10dac0-2d86-4133-8885-8848a714d3bf"),
                             Instrument = 0,
                             Name = "Standard (8-string)",
                             StringNumber = 8,
@@ -829,7 +831,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5a3ad1bc-7a59-4096-be4e-ede49ea91452"),
+                            Id = new Guid("ac81e787-10d3-4239-b508-b80f99465d53"),
                             Instrument = 0,
                             Name = "F Standard (8-string)",
                             StringNumber = 8,
@@ -837,7 +839,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5a1d1f5e-474e-4055-aecb-3a3becc25a43"),
+                            Id = new Guid("b710fd85-0b82-4d49-a0a0-89d7b07cb63b"),
                             Instrument = 0,
                             Name = "E Standard (8-string)",
                             StringNumber = 8,
@@ -845,7 +847,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5a5761e5-4bcc-469a-99c3-d3bb1a987b87"),
+                            Id = new Guid("c2f0cc51-bec7-4410-8c35-5dbcf8c105c3"),
                             Instrument = 0,
                             Name = "D# Standard (8-string)",
                             StringNumber = 8,
@@ -853,7 +855,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("afaa336e-062a-4e5d-b5d6-2ea9234cbe3f"),
+                            Id = new Guid("cb838df9-4526-4a80-80dc-7daf1e60483a"),
                             Instrument = 0,
                             Name = "A Standard (8-string)",
                             StringNumber = 8,
@@ -861,7 +863,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d088bb8b-fb61-4c57-86e8-5658a85b92a9"),
+                            Id = new Guid("ce42be43-bc04-4cdd-8909-0eafaef42172"),
                             Instrument = 0,
                             Name = "Drop E (8-string)",
                             StringNumber = 8,
@@ -869,7 +871,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("04eb8781-32c3-4e62-9ee5-e47b7694522c"),
+                            Id = new Guid("d0291a4d-dee4-4ae9-8507-ebb0141be85b"),
                             Instrument = 0,
                             Name = "Drop D# (8-string)",
                             StringNumber = 8,
@@ -877,7 +879,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82a3a6f8-fe42-478e-9d0a-28f4238c9127"),
+                            Id = new Guid("e156fbbd-ca8b-4f45-b239-1cf011df0d93"),
                             Instrument = 0,
                             Name = "Drop D (8-string)",
                             StringNumber = 8,
@@ -885,7 +887,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b10042ac-de9e-43d5-a5a8-67b00161347f"),
+                            Id = new Guid("e2fb00a8-3cec-48f4-964d-d4760fb672b4"),
                             Instrument = 1,
                             Name = "Bass Standard",
                             StringNumber = 4,
@@ -893,7 +895,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("64b6521b-43d5-4416-975d-225a2ff5a331"),
+                            Id = new Guid("eb15e7fb-a632-43cf-9abc-27770ea0b3b3"),
                             Instrument = 1,
                             Name = "Bass Drop D",
                             StringNumber = 4,
@@ -901,7 +903,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d0c6e81e-d93f-43a9-9363-f3f7b52e124b"),
+                            Id = new Guid("ebe01503-1d1b-4116-a8c7-3cd1625507fa"),
                             Instrument = 1,
                             Name = "Bass D Standard",
                             StringNumber = 4,
@@ -909,7 +911,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b39d08a0-5275-4b37-98a1-8f56a46a2b3c"),
+                            Id = new Guid("ee8fd1a2-b5e4-43a6-abf4-66ccc963989f"),
                             Instrument = 1,
                             Name = "Bass Drop C",
                             StringNumber = 4,
@@ -917,7 +919,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("67e1eca1-a632-4a97-8240-d371604ba125"),
+                            Id = new Guid("f8fd50f6-815a-48db-a4d1-eb07c9f86ce2"),
                             Instrument = 1,
                             Name = "Bass C tuned to thirds",
                             StringNumber = 4,
@@ -925,7 +927,7 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f87b751-b8e1-4488-8a51-ec60a1204d9a"),
+                            Id = new Guid("fb3d4d5b-9d2b-4656-b3f1-2d024899e1ad"),
                             Instrument = 1,
                             Name = "5-string Bass Standard",
                             StringNumber = 5,
@@ -933,10 +935,10 @@ namespace Tabloid.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1bcf9da2-725c-4698-9d39-359b4a45fa7d"),
+                            Id = new Guid("007820a3-4221-4509-b414-81f2f8fa3705"),
                             Instrument = 1,
                             Name = "6-string Bass Standard",
-                            StringNumber = 5,
+                            StringNumber = 6,
                             Strings = "B E A D G C"
                         });
                 });
@@ -998,7 +1000,7 @@ namespace Tabloid.Infrastructure.Migrations
                     b.HasOne("Tabloid.Domain.Entities.Song", "Song")
                         .WithMany("Tabs")
                         .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Tabloid.Domain.Entities.Tuning", "Tuning")

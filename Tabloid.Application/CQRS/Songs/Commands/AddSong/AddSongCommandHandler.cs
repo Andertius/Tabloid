@@ -26,6 +26,13 @@ namespace Tabloid.Application.CQRS.Songs.Commands.AddSong
             var repository = _unitOfWork.GetRepository<ISongRepository>();
             var entity = _mapper.Map<Song>(request.Song);
 
+            if (entity.AlbumId != Guid.Empty && (!entity.Artists?.Any() ?? false))
+            {
+                var album = await _unitOfWork.GetRepository<IAlbumRepository>().FindById(entity.AlbumId);
+                var artist = await _unitOfWork.GetRepository<IArtistRepository>().FindById(album.ArtistId);
+                entity.Artists = new[] { artist };
+            }
+
             if (entity.Id == Guid.Empty)
             {
                 await repository.Insert(entity);

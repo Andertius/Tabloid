@@ -1,0 +1,37 @@
+.container {
+    padding: 60px 80px;
+}
+
+.top-part {
+    display: flex;
+    height: 275px;
+}
+
+.info {
+    margin: 0 0 0 32px;
+}
+
+h2 {
+    font-size: 48px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+img {
+    max-height: 100%;
+    width: auto;
+    border-radius: 10px;
+}
+
+p {
+    color: gray;
+}
+
+.track-list {
+    margin: 20px 0 0 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}

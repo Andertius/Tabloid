@@ -71,8 +71,8 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetAllAlbumsByName([FromRoute] string name)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetAllAlbumsByName([FromQuery] string name)
         {
             var response = await _mediator.Send(new GetAllAlbumsByNameQuery(name));
             return ReturnResultHelper.ReturnQueryResult(response);
@@ -119,8 +119,8 @@ namespace Tabloid.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{albumId}/avatar")]
-        public async Task<IActionResult> DeleteAvatar(Guid albumId)
+        [HttpDelete("{albumId}/cover")]
+        public async Task<IActionResult> DeleteAlbumCover(Guid albumId)
         {
             var response = await _mediator.Send(new DeleteImageCommand(albumId, typeof(Album)));
 

@@ -1,0 +1,7 @@
+<div>
+    <mat-grid-list cols="6" rowHeight="4:5">
+        <mat-grid-tile *ngFor="let artist of artists">
+            <app-artist-card [artist]="artist"></app-artist-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

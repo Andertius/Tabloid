@@ -5,10 +5,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tabloid.Infrastructure.Migrations
 {
-    public partial class AddDataSeed : Migration
+    public partial class AddDataSeedAndSomeOtherStuff : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tabs_Songs_SongId",
+                table: "Tabs");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Tunings_Name",
+                table: "Tunings");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Tunings_Strings",
+                table: "Tunings");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Songs_AlbumId",
+                table: "Songs");
+
+            migrationBuilder.AddColumn<int>(
+                name: "AlbumType",
+                table: "Albums",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.InsertData(
                 table: "Genres",
                 columns: new[] { "Id", "Name" },
@@ -109,56 +132,89 @@ namespace Tabloid.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Tunings",
                 columns: new[] { "Id", "Instrument", "Name", "StringNumber", "Strings" },
-                values: new object[] { new Guid("02cd609b-3a68-42fc-9f0f-bbc37b9a0e9f"), 0, "E Standard (8-string)", 8, "E A D G C F A D" });
+                values: new object[] { new Guid("007820a3-4221-4509-b414-81f2f8fa3705"), 1, "6-string Bass Standard", 6, "B E A D G C" });
 
             migrationBuilder.InsertData(
                 table: "Tunings",
                 columns: new[] { "Id", "Instrument", "Name", "StringNumber", "Strings" },
                 values: new object[,]
                 {
-                    { new Guid("03938ad0-3aad-4021-838d-a14cc974275e"), 0, "Open C (7-string)", 7, "G C G C G C E" },
-                    { new Guid("0642aa55-dcce-49b5-b9e7-6d7b2793d0b3"), 0, "Drop A#", 6, "A# F A# D# G c" },
-                    { new Guid("092af51d-c7da-4ec7-8782-527112093600"), 0, "Drop B", 6, "B F# B E G# C#" },
-                    { new Guid("1949a3e3-c8a1-42c5-92b3-018cda2879b0"), 0, "Drop C", 6, "C G C F A D" },
-                    { new Guid("198e52a8-addb-455e-b1c9-abe2dbd5ff80"), 0, "Standard (8-string)", 8, "F# B E A D G B e" },
-                    { new Guid("1b9e3380-5905-413f-9ee9-03fdba8ec50d"), 0, "Standard (7-string)", 7, "B E A D G B e" },
-                    { new Guid("1c05a351-92b5-46ab-972a-64f41b1eb69b"), 1, "5-string Bass Standard", 5, "B E A D G" },
-                    { new Guid("35e41458-e204-4946-82b8-65dd51b6724b"), 0, "Drop D# (8-string)", 8, "D# A# D# G# C# F# A# d#" },
-                    { new Guid("3d1be9c7-81f5-4b88-bd05-29485a8a8136"), 0, "A Standard (8-string)", 8, "A D G C F A D G" },
-                    { new Guid("402a9c32-1c43-41c8-8801-18b1b4a9a936"), 0, "Drop A", 6, "A E A D F# b" },
-                    { new Guid("443b7aa5-7ce7-4820-bced-07f571fa9de6"), 0, "D Standard", 6, "D G C F A d" },
-                    { new Guid("44e2cf1f-df33-45b8-852d-1277eae522a8"), 1, "Bass Drop D", 4, "D A D G" },
-                    { new Guid("4b210eef-9933-4eb7-b4b5-c0aeab64ba27"), 1, "Bass Standard", 4, "E A D G" },
-                    { new Guid("55e470f3-1717-488d-ac0c-fd28dd0fc7d1"), 0, "F Standard (8-string)", 8, " F A# G# C# F# A# d#" },
-                    { new Guid("56e5a0c5-9ba0-4d21-b94c-818808a6222b"), 0, "Standard", 6, "E A D G B e" },
-                    { new Guid("6fa80499-4a60-48ac-879f-af3e1b04971e"), 0, "G C G C F A D (7-string)", 7, "G C G C F A D" },
-                    { new Guid("75ecf4ff-66f1-42e3-bdf2-e97da11e99aa"), 0, "Drop D", 6, "D A D G B E" },
-                    { new Guid("7ca1b4ae-106d-4469-83c3-670ad778abbe"), 0, "Drop C#", 6, "C# G# C# F# A# D#" },
-                    { new Guid("835bed98-6e3c-4d6c-8d76-dfd7bc5444af"), 0, "B Standard", 6, "B E A D F# b" },
-                    { new Guid("8a5a6783-40df-467f-957b-bb2ae731ed4d"), 1, "6-string Bass Standard", 5, "B E A D G C" },
-                    { new Guid("916abb59-5385-403a-bcfe-193c0d35ec8b"), 0, "A# Standard (7-string)", 7, "A# G# C# F# A# d#" },
-                    { new Guid("9dc963f4-f08b-404b-9314-010ded3aaabd"), 0, "Drop E (7-string)", 7, "E B E A D G B" },
-                    { new Guid("a8630e44-8bfc-4dbf-bd7c-01d13763d504"), 0, "G Standard (7-string)", 7, "G C F A# D# G C" },
-                    { new Guid("aa2d36cf-17c9-41c9-8ff6-01f4525b700b"), 0, "Drop A (7-string)", 7, "A E A D G B e" },
-                    { new Guid("afc48f1a-c68d-4984-970d-037cd9b61ac3"), 1, "Bass D Standard", 4, "D G C F" },
-                    { new Guid("c18bfdd6-11e2-4ccc-bb8b-0e621e4c1a91"), 0, "A Standard", 6, "A D G C E a" },
-                    { new Guid("cc08baf9-0920-4b2a-90ae-c03b8a744490"), 0, "A Standard (7-string)", 7, "A D G C F A D" },
-                    { new Guid("d1b7cf50-e07f-46b5-88cc-2bce96169579"), 1, "Bass C tuned to thirds", 4, "C F C G" },
-                    { new Guid("d94c8f44-be87-4e82-8e56-4006eb090bf2"), 0, "D# Standard (8-string)", 8, "D# G# C# F# B E G# d" },
-                    { new Guid("db70492e-b7cc-4b18-893b-754ac6aa11f9"), 0, "A# Standard", 6, "A# D# G# C# F a#" },
-                    { new Guid("df9bc326-2e5f-4547-9937-4a2a12b010f6"), 0, "C# Standard", 6, "C# F# B E G# c#" },
-                    { new Guid("e4c7369e-e2df-4659-ad50-c01813395227"), 0, "G G C F A d", 6, "G G C F A d" },
-                    { new Guid("ef43cb7e-518b-499d-a3f0-598921463bea"), 0, "Drop G (7-string)", 7, "G D G C F A d" },
-                    { new Guid("f05291cd-aa6f-4201-9649-81c6fb10e603"), 0, "Drop D (8-string)", 8, "D A D G C F A d" },
-                    { new Guid("f3d8ddd3-59a6-4c4f-924e-124261a04852"), 0, "C Standard", 6, "C F A# D# G c" },
-                    { new Guid("f7fee790-bae6-4f10-8247-b840afbe9e69"), 0, "Drop E (8-string)", 8, "E B E A D G B e" },
-                    { new Guid("fbc8747e-bf8f-471b-81a4-148fb629717e"), 1, "Bass Drop C", 4, "C G C F" },
-                    { new Guid("fefd4bdb-1b6c-41e2-9e96-9c5eb85b2063"), 0, "D# Standard", 6, "D# G# C# F# A# d#" }
+                    { new Guid("14187d55-d884-4d57-a9ad-0964b214dc05"), 0, "Standard", 6, "E A D G B e" },
+                    { new Guid("182603d3-0d82-4d14-815b-49bad0e4691e"), 0, "Drop D", 6, "D A D G B E" },
+                    { new Guid("19a4fe53-0739-4324-a3f5-6164b4603b69"), 0, "D# Standard", 6, "D# G# C# F# A# d#" },
+                    { new Guid("2247d32f-6903-468c-9f3a-fd31baa3f194"), 0, "D Standard", 6, "D G C F A d" },
+                    { new Guid("251d6db3-8014-4ab8-a12c-27740dc99b41"), 0, "G G C F A d", 6, "G G C F A d" },
+                    { new Guid("37bffc99-476b-40b9-b1cd-187b302b3852"), 0, "C# Standard", 6, "C# F# B E G# c#" },
+                    { new Guid("38be4d1b-ceec-4f21-9183-e87327e3dd3a"), 0, "Drop C", 6, "C G C F A D" },
+                    { new Guid("39dd5a87-ed95-467b-ba8b-2f72013aa028"), 0, "Drop C#", 6, "C# G# C# F# A# D#" },
+                    { new Guid("3a83823c-b1b1-4b8b-b5d2-48a8aa8dc4ee"), 0, "C Standard", 6, "C F A# D# G c" },
+                    { new Guid("4dde6b18-553d-42e8-ade2-d084385e4e37"), 0, "Drop B", 6, "B F# B E G# C#" },
+                    { new Guid("50f230ac-dae4-4d8d-863d-535f24c8d4d8"), 0, "B Standard", 6, "B E A D F# b" },
+                    { new Guid("59bae8a1-6c22-4f43-b0a7-a8a58e98d501"), 0, "Drop A", 6, "A E A D F# b" },
+                    { new Guid("5c873434-d0f1-494f-8533-6352fffbdd99"), 0, "Drop A#", 6, "A# F A# D# G c" },
+                    { new Guid("5e582416-47b7-488d-8958-251d84c77220"), 0, "A Standard", 6, "A D G C E a" },
+                    { new Guid("65fb8820-670f-4cba-9cfd-8cb93b734428"), 0, "A# Standard", 6, "A# D# G# C# F a#" },
+                    { new Guid("66eb5696-a633-45d2-a9d4-c52ac8748b0c"), 0, "Standard (7-string)", 7, "B E A D G B e" },
+                    { new Guid("68133730-6b9a-4729-9139-f87af0b79464"), 0, "A# Standard (7-string)", 7, "A# G# C# F# A# d#" },
+                    { new Guid("8bc047a7-1004-4449-9f3a-20bc9f11991a"), 0, "Drop A (7-string)", 7, "A E A D G B e" },
+                    { new Guid("948bf3ce-ddf3-4a10-95e8-109826be9040"), 0, "A Standard (7-string)", 7, "A D G C F A D" },
+                    { new Guid("97647eaf-8cd0-409f-a67a-d7ce18343ec8"), 0, "Drop G (7-string)", 7, "G D G C F A d" },
+                    { new Guid("988cfe9e-f917-485c-bb79-7171267434ad"), 0, "G Standard (7-string)", 7, "G C F A# D# G C" },
+                    { new Guid("99ad2f63-d8b9-4d25-af6b-aea917cf9dc0"), 0, "Open C (7-string)", 7, "G C G C G C E" },
+                    { new Guid("a78e83f3-ca52-468d-97e2-eea510662e92"), 0, "G C G C F A D (7-string)", 7, "G C G C F A D" },
+                    { new Guid("a80671d2-d9a5-41f5-9fff-c12103229964"), 0, "Drop E (7-string)", 7, "E B E A D G B" },
+                    { new Guid("ab10dac0-2d86-4133-8885-8848a714d3bf"), 0, "Standard (8-string)", 8, "F# B E A D G B e" },
+                    { new Guid("ac81e787-10d3-4239-b508-b80f99465d53"), 0, "F Standard (8-string)", 8, " F A# G# C# F# A# d#" },
+                    { new Guid("b710fd85-0b82-4d49-a0a0-89d7b07cb63b"), 0, "E Standard (8-string)", 8, "E A D G C F A D" },
+                    { new Guid("c2f0cc51-bec7-4410-8c35-5dbcf8c105c3"), 0, "D# Standard (8-string)", 8, "D# G# C# F# B E G# d" },
+                    { new Guid("cb838df9-4526-4a80-80dc-7daf1e60483a"), 0, "A Standard (8-string)", 8, "A D G C F A D G" },
+                    { new Guid("ce42be43-bc04-4cdd-8909-0eafaef42172"), 0, "Drop E (8-string)", 8, "E B E A D G B e" },
+                    { new Guid("d0291a4d-dee4-4ae9-8507-ebb0141be85b"), 0, "Drop D# (8-string)", 8, "D# A# D# G# C# F# A# d#" },
+                    { new Guid("e156fbbd-ca8b-4f45-b239-1cf011df0d93"), 0, "Drop D (8-string)", 8, "D A D G C F A d" },
+                    { new Guid("e2fb00a8-3cec-48f4-964d-d4760fb672b4"), 1, "Bass Standard", 4, "E A D G" },
+                    { new Guid("eb15e7fb-a632-43cf-9abc-27770ea0b3b3"), 1, "Bass Drop D", 4, "D A D G" },
+                    { new Guid("ebe01503-1d1b-4116-a8c7-3cd1625507fa"), 1, "Bass D Standard", 4, "D G C F" },
+                    { new Guid("ee8fd1a2-b5e4-43a6-abf4-66ccc963989f"), 1, "Bass Drop C", 4, "C G C F" },
+                    { new Guid("f8fd50f6-815a-48db-a4d1-eb07c9f86ce2"), 1, "Bass C tuned to thirds", 4, "C F C G" },
+                    { new Guid("fb3d4d5b-9d2b-4656-b3f1-2d024899e1ad"), 1, "5-string Bass Standard", 5, "B E A D G" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tunings_Name_Strings",
+                table: "Tunings",
+                columns: new[] { "Name", "Strings" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Songs_AlbumId_SongNumberInAlbum",
+                table: "Songs",
+                columns: new[] { "AlbumId", "SongNumberInAlbum" },
+                unique: true,
+                filter: "[SongNumberInAlbum] IS NOT NULL");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Tabs_Songs_SongId",
+                table: "Tabs",
+                column: "SongId",
+                principalTable: "Songs",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tabs_Songs_SongId",
+                table: "Tabs");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Tunings_Name_Strings",
+                table: "Tunings");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Songs_AlbumId_SongNumberInAlbum",
+                table: "Songs");
+
             migrationBuilder.DeleteData(
                 table: "Genres",
                 keyColumn: "Id",
@@ -577,197 +633,225 @@ namespace Tabloid.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("02cd609b-3a68-42fc-9f0f-bbc37b9a0e9f"));
+                keyValue: new Guid("007820a3-4221-4509-b414-81f2f8fa3705"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("03938ad0-3aad-4021-838d-a14cc974275e"));
+                keyValue: new Guid("14187d55-d884-4d57-a9ad-0964b214dc05"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("0642aa55-dcce-49b5-b9e7-6d7b2793d0b3"));
+                keyValue: new Guid("182603d3-0d82-4d14-815b-49bad0e4691e"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("092af51d-c7da-4ec7-8782-527112093600"));
+                keyValue: new Guid("19a4fe53-0739-4324-a3f5-6164b4603b69"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("1949a3e3-c8a1-42c5-92b3-018cda2879b0"));
+                keyValue: new Guid("2247d32f-6903-468c-9f3a-fd31baa3f194"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("198e52a8-addb-455e-b1c9-abe2dbd5ff80"));
+                keyValue: new Guid("251d6db3-8014-4ab8-a12c-27740dc99b41"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("1b9e3380-5905-413f-9ee9-03fdba8ec50d"));
+                keyValue: new Guid("37bffc99-476b-40b9-b1cd-187b302b3852"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("1c05a351-92b5-46ab-972a-64f41b1eb69b"));
+                keyValue: new Guid("38be4d1b-ceec-4f21-9183-e87327e3dd3a"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("35e41458-e204-4946-82b8-65dd51b6724b"));
+                keyValue: new Guid("39dd5a87-ed95-467b-ba8b-2f72013aa028"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("3d1be9c7-81f5-4b88-bd05-29485a8a8136"));
+                keyValue: new Guid("3a83823c-b1b1-4b8b-b5d2-48a8aa8dc4ee"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("402a9c32-1c43-41c8-8801-18b1b4a9a936"));
+                keyValue: new Guid("4dde6b18-553d-42e8-ade2-d084385e4e37"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("443b7aa5-7ce7-4820-bced-07f571fa9de6"));
+                keyValue: new Guid("50f230ac-dae4-4d8d-863d-535f24c8d4d8"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("44e2cf1f-df33-45b8-852d-1277eae522a8"));
+                keyValue: new Guid("59bae8a1-6c22-4f43-b0a7-a8a58e98d501"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("4b210eef-9933-4eb7-b4b5-c0aeab64ba27"));
+                keyValue: new Guid("5c873434-d0f1-494f-8533-6352fffbdd99"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("55e470f3-1717-488d-ac0c-fd28dd0fc7d1"));
+                keyValue: new Guid("5e582416-47b7-488d-8958-251d84c77220"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("56e5a0c5-9ba0-4d21-b94c-818808a6222b"));
+                keyValue: new Guid("65fb8820-670f-4cba-9cfd-8cb93b734428"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("6fa80499-4a60-48ac-879f-af3e1b04971e"));
+                keyValue: new Guid("66eb5696-a633-45d2-a9d4-c52ac8748b0c"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("75ecf4ff-66f1-42e3-bdf2-e97da11e99aa"));
+                keyValue: new Guid("68133730-6b9a-4729-9139-f87af0b79464"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("7ca1b4ae-106d-4469-83c3-670ad778abbe"));
+                keyValue: new Guid("8bc047a7-1004-4449-9f3a-20bc9f11991a"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("835bed98-6e3c-4d6c-8d76-dfd7bc5444af"));
+                keyValue: new Guid("948bf3ce-ddf3-4a10-95e8-109826be9040"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("8a5a6783-40df-467f-957b-bb2ae731ed4d"));
+                keyValue: new Guid("97647eaf-8cd0-409f-a67a-d7ce18343ec8"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("916abb59-5385-403a-bcfe-193c0d35ec8b"));
+                keyValue: new Guid("988cfe9e-f917-485c-bb79-7171267434ad"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("9dc963f4-f08b-404b-9314-010ded3aaabd"));
+                keyValue: new Guid("99ad2f63-d8b9-4d25-af6b-aea917cf9dc0"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("a8630e44-8bfc-4dbf-bd7c-01d13763d504"));
+                keyValue: new Guid("a78e83f3-ca52-468d-97e2-eea510662e92"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("aa2d36cf-17c9-41c9-8ff6-01f4525b700b"));
+                keyValue: new Guid("a80671d2-d9a5-41f5-9fff-c12103229964"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("afc48f1a-c68d-4984-970d-037cd9b61ac3"));
+                keyValue: new Guid("ab10dac0-2d86-4133-8885-8848a714d3bf"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("c18bfdd6-11e2-4ccc-bb8b-0e621e4c1a91"));
+                keyValue: new Guid("ac81e787-10d3-4239-b508-b80f99465d53"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("cc08baf9-0920-4b2a-90ae-c03b8a744490"));
+                keyValue: new Guid("b710fd85-0b82-4d49-a0a0-89d7b07cb63b"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("d1b7cf50-e07f-46b5-88cc-2bce96169579"));
+                keyValue: new Guid("c2f0cc51-bec7-4410-8c35-5dbcf8c105c3"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("d94c8f44-be87-4e82-8e56-4006eb090bf2"));
+                keyValue: new Guid("cb838df9-4526-4a80-80dc-7daf1e60483a"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("db70492e-b7cc-4b18-893b-754ac6aa11f9"));
+                keyValue: new Guid("ce42be43-bc04-4cdd-8909-0eafaef42172"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("df9bc326-2e5f-4547-9937-4a2a12b010f6"));
+                keyValue: new Guid("d0291a4d-dee4-4ae9-8507-ebb0141be85b"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("e4c7369e-e2df-4659-ad50-c01813395227"));
+                keyValue: new Guid("e156fbbd-ca8b-4f45-b239-1cf011df0d93"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("ef43cb7e-518b-499d-a3f0-598921463bea"));
+                keyValue: new Guid("e2fb00a8-3cec-48f4-964d-d4760fb672b4"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("f05291cd-aa6f-4201-9649-81c6fb10e603"));
+                keyValue: new Guid("eb15e7fb-a632-43cf-9abc-27770ea0b3b3"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("f3d8ddd3-59a6-4c4f-924e-124261a04852"));
+                keyValue: new Guid("ebe01503-1d1b-4116-a8c7-3cd1625507fa"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("f7fee790-bae6-4f10-8247-b840afbe9e69"));
+                keyValue: new Guid("ee8fd1a2-b5e4-43a6-abf4-66ccc963989f"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("fbc8747e-bf8f-471b-81a4-148fb629717e"));
+                keyValue: new Guid("f8fd50f6-815a-48db-a4d1-eb07c9f86ce2"));
 
             migrationBuilder.DeleteData(
                 table: "Tunings",
                 keyColumn: "Id",
-                keyValue: new Guid("fefd4bdb-1b6c-41e2-9e96-9c5eb85b2063"));
+                keyValue: new Guid("fb3d4d5b-9d2b-4656-b3f1-2d024899e1ad"));
+
+            migrationBuilder.DropColumn(
+                name: "AlbumType",
+                table: "Albums");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tunings_Name",
+                table: "Tunings",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tunings_Strings",
+                table: "Tunings",
+                column: "Strings",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Songs_AlbumId",
+                table: "Songs",
+                column: "AlbumId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Tabs_Songs_SongId",
+                table: "Tabs",
+                column: "SongId",
+                principalTable: "Songs",
+                principalColumn: "Id");
         }
     }
 }

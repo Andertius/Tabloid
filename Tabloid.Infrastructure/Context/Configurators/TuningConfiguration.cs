@@ -10,11 +10,7 @@ namespace Tabloid.Infrastructure.Context.Configurators
         public void Configure(EntityTypeBuilder<Tuning> builder)
         {
             builder
-                .HasIndex(x => x.Name)
-                .IsUnique();
-
-            builder
-                .HasIndex(x => x.Strings)
+                .HasIndex(x => new { x.Name, x.Strings })
                 .IsUnique();
 
             builder

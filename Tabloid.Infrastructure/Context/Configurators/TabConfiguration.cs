@@ -12,8 +12,7 @@ namespace Tabloid.Infrastructure.Context.Configurators
             builder
                 .HasOne(x => x.Song)
                 .WithMany(x => x.Tabs)
-                .HasForeignKey(x => x.SongId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.SongId);
 
             builder
                 .HasOne(x => x.Tuning)

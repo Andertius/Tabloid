@@ -1,36 +1,45 @@
 <mat-list role="list">
     <mat-list-item role="listitem">
-        <a [routerLink]="['']">
+        <a [routerLink]="['/artists']">
             <mat-icon class="icon">person</mat-icon>
             Artists
         </a>
     </mat-list-item>
 
     <mat-list-item role="listitem">
-        <a [routerLink]="['']">
+        <a [routerLink]="['/albums']">
             <mat-icon class="icon">album</mat-icon>
             Albums
         </a>
     </mat-list-item>
 
     <mat-list-item role="listitem">
-        <a [routerLink]="['']">
+        <a [routerLink]="['/songs']">
             <mat-icon class="icon">audiotrack</mat-icon>
             Songs
         </a>
     </mat-list-item>
 
     <mat-list-item role="listitem">
-        <a [routerLink]="['']">
-            <mat-icon class="icon">audiotrack</mat-icon>
+        <a [routerLink]="['/genres']">
+            <mat-icon class="icon">mic_external_on</mat-icon>
             Genres
         </a>
     </mat-list-item>
 
     <mat-list-item role="listitem">
-        <a [routerLink]="['']">
+        <a [routerLink]="['/tunings']">
             <mat-icon class="icon">tune</mat-icon>
             Tunings
+        </a>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item role="listitem">
+        <a [routerLink]="['/favourites']">
+            <mat-icon class="icon">favorite_border</mat-icon>
+            Favourites
         </a>
     </mat-list-item>
 </mat-list>

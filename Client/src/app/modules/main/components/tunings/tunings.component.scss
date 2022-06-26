@@ -1,0 +1,42 @@
+@import "../../../../../styles.scss";
+
+.container {
+    padding: 25px 75px 50px 75px;
+    box-sizing: border-box;
+}
+
+.filters {
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search {
+    width: 35%;
+}
+
+.tuning-card {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.new-tuning {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed $card-background-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: x-large;
+    transition: 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-tuning:hover {
+    background-color: $card-background-color;
+}

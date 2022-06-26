@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="filters">
+        <mat-form-field appearance="outline" class="search">
+            <mat-label>Search</mat-label>    
+            <input matInput [formControl]="formControl">
+        </mat-form-field>
+
+        <mat-checkbox color="primary" (change)="onCheckboxChange($event)">Show all</mat-checkbox>
+    </div>
+
+    <mat-grid-list cols="6" rowHeight="2:1" [gutterSize]="'15px'">
+        <mat-grid-tile *ngFor="let genre of genres">
+            <app-genre-card [genre]="genre" class="genre-card" (rerender)="rerenderGenres($event)"></app-genre-card>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+            <div class="new-genre" (click)="addGenre()">
+                +
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

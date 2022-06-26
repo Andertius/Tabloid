@@ -1,0 +1,38 @@
+.song {
+    width: 100%;
+    padding: 5px 5px 5px 10px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song:hover {
+    background-color: rgb(41, 41, 41);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.deacticated {
+    pointer-events: none
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.featured-artists {
+    width: 35%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.w-40 {
+    width: 40%;
+}

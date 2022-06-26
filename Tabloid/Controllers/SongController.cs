@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Tabloid.Application.CQRS.Artists.Queries.FindArtistBySong;
 using Tabloid.Application.CQRS.Songs.Commands.AddSong;
 using Tabloid.Application.CQRS.Songs.Commands.DeleteSong;
+using Tabloid.Application.CQRS.Songs.Commands.SetFavourite;
+using Tabloid.Application.CQRS.Songs.Commands.SetMastered;
 using Tabloid.Application.CQRS.Songs.Commands.UpdateSong;
 using Tabloid.Application.CQRS.Songs.Queries.FindSongById;
 using Tabloid.Application.CQRS.Songs.Queries.GetAllSongs;
@@ -71,8 +73,8 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetAllSongsByName([FromRoute] string name)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetAllSongsByName([FromQuery] string name)
         {
             var response = await _mediator.Send(new GetAllSongsByNameQuery(name));
             return ReturnResultHelper.ReturnQueryResult(response);
@@ -104,6 +106,20 @@ namespace Tabloid.Controllers
         {
             var response = await _mediator.Send(new GetAllTabsBySongQuery(id));
             return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpPatch("{id}/is-favourite/{isFavourite}")]
+        public async Task<IActionResult> SetIsFavourite([FromRoute] Guid id, [FromRoute] bool isFavourite)
+        {
+            var response = await _mediator.Send(new SetFavouriteCommand(id, isFavourite));
+            return ReturnResultHelper.ReturnCommandResult(response);
+        }
+
+        [HttpPatch("{id}/is-mastered/{isMastered}")]
+        public async Task<IActionResult> SetIsMastered([FromRoute] Guid id, [FromRoute] bool isMastered)
+        {
+            var response = await _mediator.Send(new SetMasteredCommand(id, isMastered));
+            return ReturnResultHelper.ReturnCommandResult(response);
         }
     }
 }

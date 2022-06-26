@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Add tab</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Tab name</mat-label>
+            <input matInput formControlName="name" type="text" >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Link</mat-label>
+            <input matInput formControlName="link" type="text" >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Tuning</mat-label>
+            <mat-select formControlName="tuning">
+                <mat-option *ngFor="let tuning of tunings" [value]="tuning">
+                    {{ tuning.name }} <small>{{ tuning.strings }}</small>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>String number</mat-label>
+            <input matInput formControlName="stringNumber" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Difficulty</mat-label>
+            <input matInput formControlName="difficulty" type="number">
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>Confirm</button>
+</div>

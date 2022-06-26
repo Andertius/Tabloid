@@ -20,6 +20,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Genres)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Tabs)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -30,6 +34,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Genres)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Tabs)
                 .ToListAsync();
         }
 
@@ -40,6 +48,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Genres)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Tabs)
                 .Where(x => x.Name == name)
                 .ToListAsync();
         }
@@ -51,6 +63,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Genres)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Tabs)
                 .Where(x => x.Songs.Contains(song))
                 .FirstOrDefaultAsync();
         }
@@ -62,6 +78,10 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
                     .ThenInclude(x => x.Artists)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Genres)
+                .Include(x => x.Songs)
+                    .ThenInclude(x => x.Tabs)
                 .Where(x => x.Artist.Id == artist.Id)
                 .ToListAsync();
         }

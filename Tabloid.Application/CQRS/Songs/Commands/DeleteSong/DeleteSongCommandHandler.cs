@@ -24,7 +24,7 @@ namespace Tabloid.Application.CQRS.Songs.Commands.DeleteSong
 
         public async Task<CommandResponse<SongDto>> Handle(DeleteSongCommand request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.GetRepository<ITuningRepository>();
+            var repository = _unitOfWork.GetRepository<ISongRepository>();
             var entity = await repository.FindById(request.Id);
 
             if (await repository.Contains(entity))

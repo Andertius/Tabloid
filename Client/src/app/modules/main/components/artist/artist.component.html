@@ -3,15 +3,81 @@
         <img [src]="getImageSource()">
 
         <div class="info">
-            <h2>{{ artist.name }}</h2>
+            <h2>{{ artist?.name }}</h2>
 
-            <p>{{ artist.albums.length }} albums</p>
+            <p>{{ artist?.albums?.length }} album<span *ngIf="artist?.albums?.length !== 1">s</span></p>
 
-            <p>{{ artist.songs.length }} songs</p>
+            <p>{{ artist?.songs?.length }} song<span *ngIf="artist?.songs?.length !== 1">s</span></p>
         </div>
     </div>
 
     <div class="discography">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="icon">album</mat-icon>
+                    Discography
+                </ng-template>
 
+                <div class="tab-content">
+                    <mat-grid-list cols="6" rowHeight="4:5">
+                        <mat-grid-tile *ngFor="let album of artist?.albums">
+                            <app-album-card-artist [album]="album"></app-album-card-artist>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="icon">audiotrack</mat-icon>
+                    All tracks
+                </ng-template>
+
+                <div class="tab-content">
+                    <app-track-list-item-artist
+                        *ngFor="let song of artist?.songs"
+                        [song]="song"
+                        [album]="song.album"
+                        (whenFavourite)="whenFavourite($event)"
+                        (whenMastered)="whenMastered($event)">
+                    </app-track-list-item-artist>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="icon">local_fire_department</mat-icon>
+                    Mastered
+                </ng-template>
+
+                <div class="tab-content">
+                    <app-track-list-item-artist
+                        *ngFor="let song of mastered"
+                        [song]="song"
+                        [album]="song.album"
+                        (whenFavourite)="whenFavourite($event)"
+                        (whenMastered)="whenMastered($event)">
+                    </app-track-list-item-artist>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="icon">favorite_border</mat-icon>
+                    Favourites
+                </ng-template>
+
+                <div class="tab-content">
+                    <app-track-list-item-artist
+                        *ngFor="let song of favourites"
+                        [song]="song"
+                        [album]="song.album"
+                        (whenFavourite)="whenFavourite($event)"
+                        (whenMastered)="whenMastered($event)">
+                    </app-track-list-item-artist>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

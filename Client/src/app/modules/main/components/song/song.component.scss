@@ -1,0 +1,59 @@
+@import "../../../../../styles.scss";
+
+.container {
+    padding: 75px 100px;
+}
+
+.main-info {
+    display: flex;
+    gap: 25px;
+
+    height: 200px;
+}
+
+.info {
+    width: 25%;
+}
+
+.title-and-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.gray-text {
+    color: darkgray;
+}
+
+img {
+    max-height: 100%;
+    width: auto;
+    border-radius: 10px;
+}
+
+.tabs {
+    margin: 25px 0 0 0;
+    width: 50%;
+}
+
+.new-tab {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed $card-background-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: larger;
+    transition: 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-tab:hover {
+    background-color: $card-background-color;
+}

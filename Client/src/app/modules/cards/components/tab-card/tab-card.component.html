@@ -1,0 +1,19 @@
+<mat-card class="tab" (mouseenter)="mouseOn = true" (mouseleave)="mouseOn = false">
+    <div>
+        <a [href]="tab.link" class="tab-link" target="_blank">{{ tab.name }}</a>
+
+        <small>{{ tab.tuning.instrument | instrument }} • {{ tab.tuning.name }}</small>
+
+        <small>Difficulty: {{ tab.difficulty }} / 5</small>
+    </div>
+
+    <div [ngClass]="mouseOn ? '' : 'not-visible'">
+        <button mat-icon-button color="accent" (click)="editTab()">
+            <mat-icon >edit</mat-icon>
+        </button>
+          
+        <button mat-icon-button color="warn" (click)="deleteTab()">
+            <mat-icon >delete</mat-icon>
+        </button>
+    </div>
+</mat-card>

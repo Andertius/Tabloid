@@ -4,11 +4,17 @@
     {
         public Guid Id { get; set; }
 
-        public string SongName { get; set; }
+        public string Name { get; set; }
 
         public int? SongNumberInAlbum { get; set; }
 
+        public bool FullyMastered { get; set; }
+
+        public bool IsFavourite { get; set; }
+
+
         public AlbumDto Album { get; set; }
+
 
         public ICollection<TabDto> Tabs { get; set; }
 

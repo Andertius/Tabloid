@@ -9,11 +9,13 @@ namespace Tabloid.Application.MapProfiles
     {
         public SongProfile()
         {
-            CreateMap<Song, SongDto>();
+            CreateMap<Song, SongDto>()
+                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.SongName));
 
             CreateMap<SongDto, Song>()
                 .ForMember(x => x.Album, opt => opt.Ignore())
-                .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album.Id));
+                .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album.Id))
+                .ForMember(x => x.SongName, opt => opt.MapFrom(x => x.Name));
         }
     }
 }

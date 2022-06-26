@@ -1,0 +1,42 @@
+@import "../../../../../styles.scss";
+
+.container {
+    width: 200px;
+    height: 275px;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.album-link {
+    font-size: large;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.album-link:hover {
+    color: $hovered-text-color;
+}
+
+small {
+    color: lightgray;
+}
+
+button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.artist-link:hover {
+    text-decoration: underline;
+}

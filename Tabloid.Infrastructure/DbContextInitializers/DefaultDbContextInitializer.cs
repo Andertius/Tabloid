@@ -63,19 +63,12 @@ namespace Tabloid.Infrastructure.DbContextInitializers
 
                 new Tuning { Id = new Guid("f8fd50f6-815a-48db-a4d1-eb07c9f86ce2"), Instrument = Instrument.Bass, StringNumber = 4, Name = "Bass C tuned to thirds", Strings = "C F C G" },
                 new Tuning { Id = new Guid("fb3d4d5b-9d2b-4656-b3f1-2d024899e1ad"), Instrument = Instrument.Bass, StringNumber = 5, Name = "5-string Bass Standard", Strings = "B E A D G" },
-                new Tuning { Id = new Guid("007820a3-4221-4509-b414-81f2f8fa3705"), Instrument = Instrument.Bass, StringNumber = 5, Name = "6-string Bass Standard", Strings = "B E A D G C" },
+                new Tuning { Id = new Guid("007820a3-4221-4509-b414-81f2f8fa3705"), Instrument = Instrument.Bass, StringNumber = 6, Name = "6-string Bass Standard", Strings = "B E A D G C" },
             };
 
             _modelBuilder
                 .Entity<Tuning>()
-                .HasData(tunings.Select(x => new Tuning
-                {
-                    Id = Guid.NewGuid(),
-                    Instrument = x.Instrument,
-                    Strings = x.Strings,
-                    StringNumber = x.StringNumber,
-                    Name = x.Name,
-                }));
+                .HasData(tunings);
         }
         #endregion
 

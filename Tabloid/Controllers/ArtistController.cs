@@ -84,8 +84,8 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPatch("{artistId}/cover")]
-        public async Task<IActionResult> UploadAlbumCover(Guid artistId)
+        [HttpPatch("{artistId}/avatar")]
+        public async Task<IActionResult> UploadArtistAvatar(Guid artistId)
         {
             var file = Request.Form.Files[0];
 
@@ -93,7 +93,7 @@ namespace Tabloid.Controllers
             {
                 string extention = Path.GetExtension(ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"'));
                 string fileName = Guid.NewGuid().ToString() + extention;
-                string fullPath = Path.Combine(_host.WebRootPath, "album-covers", fileName);
+                string fullPath = Path.Combine(_host.WebRootPath, "artist-avatars", fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {

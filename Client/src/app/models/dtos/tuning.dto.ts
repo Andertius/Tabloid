@@ -6,6 +6,6 @@ export interface TuningDto {
     stringNumber: number,
     name: string,
     strings: string,
-    intrument: Instrument,
+    instrument: Instrument,
     tabs: TabDto[],
 }

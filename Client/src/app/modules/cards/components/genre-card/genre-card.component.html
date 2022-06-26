@@ -1,0 +1,21 @@
+<mat-card class="genre-card" (mouseenter)="mouseOn = true" (mouseleave)="mouseOn = false">
+    <div>
+        <div>
+            <a>{{ genre.name }}</a>
+        </div>
+
+        <div>
+            <small>{{ genre.songs.length }} total track<span *ngIf="genre.songs.length !== 1">s</span></small>
+        </div>
+    </div>
+
+    <div [ngClass]="mouseOn ? '' : 'not-visible'">
+        <button mat-icon-button color="accent" (click)="editGenre()">
+            <mat-icon >edit</mat-icon>
+        </button>
+          
+        <button mat-icon-button color="warn" (click)="deleteGenre()">
+            <mat-icon >delete</mat-icon>
+        </button>
+    </div>
+</mat-card>

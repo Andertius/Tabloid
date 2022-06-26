@@ -12,6 +12,14 @@ namespace Tabloid.Infrastructure.Context.Configurators
             builder
                 .Property(x => x.SongName)
                 .IsRequired();
+
+            builder
+                .Property(x => x.AlbumId)
+                .IsRequired();
+
+            builder
+                .HasIndex(x => new { x.AlbumId, x.SongNumberInAlbum })
+                .IsUnique();
         }
     }
 }

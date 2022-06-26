@@ -3,16 +3,22 @@
         <img [src]="getImageSource()">
 
         <div class="info">
+            <mat-chip-list aria-label="Album type">
+                <mat-chip color="accent">{{ album.albumType | albumType }}</mat-chip>
+            </mat-chip-list>
+
             <h2>{{ album.name }}</h2>
 
-            <p>{{ album.songs.length }} tracks</p>
+            <a [routerLink]="['/artist', album.artist.id]">{{ album.artist.name }}</a>
+
+            <p>{{ album.songs.length }} track<span *ngIf="album.songs.length !== 1">s</span></p>
 
             <p>{{ album.year }}</p>
         </div>
     </div>
 
-    <div class="discography">
-
+    <div class="track-list">
+        <mat-divider></mat-divider>
+        <app-track-list-item-album *ngFor="let song of album.songs" [song]="song" [album]="album"></app-track-list-item-album>
     </div>
 </div>
-

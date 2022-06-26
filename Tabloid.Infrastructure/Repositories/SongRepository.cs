@@ -20,6 +20,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -30,6 +32,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .ToListAsync();
         }
 
@@ -40,6 +44,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => x.Album == album)
                 .ToListAsync();
         }
@@ -51,6 +57,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => x.Artists.All(a => artists.Contains(a)))
                 .ToListAsync();
         }
@@ -62,6 +70,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => x.Genres.All(g => genres.Contains(g)))
                 .ToListAsync();
         }
@@ -73,6 +83,8 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Genres)
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
+                .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => x.SongName == name)
                 .ToListAsync();
         }
@@ -85,6 +97,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
                 .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => 
                     !difficulty.HasValue ||
                     x.Tabs.Any(y => Math.Abs((double)(y.Difficulty - difficulty)) < 0.00001))
@@ -99,6 +112,7 @@ namespace Tabloid.Infrastructure.Repositories
                 .Include(x => x.Artists)
                 .Include(x => x.Album)
                 .Include(x => x.Tabs)
+                    .ThenInclude(x => x.Tuning)
                 .Where(x => x.Tabs.Any(x => x.Tuning == tuning))
                 .ToListAsync();
         }

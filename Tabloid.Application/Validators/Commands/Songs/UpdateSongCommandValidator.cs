@@ -14,7 +14,7 @@ namespace Tabloid.Application.Validators.Commands.Songs
             RuleFor(x => x.Song.Id)
                 .NotEmpty();
 
-            RuleFor(x => x.Song.SongName)
+            RuleFor(x => x.Song.Name)
                 .NotEmpty();
         }
     }

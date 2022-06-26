@@ -13,5 +13,8 @@ namespace Tabloid.Domain.DataTransferObjects
         public Instrument Instrument { get; set; }
 
         public string Strings { get; set; }
+
+
+        public ICollection<TabDto> Tabs { get; set; }
     }
 }

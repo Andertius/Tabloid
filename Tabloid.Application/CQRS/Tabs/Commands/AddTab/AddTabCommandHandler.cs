@@ -31,7 +31,10 @@ namespace Tabloid.Application.CQRS.Tabs.Commands.AddTab
                 await repository.Insert(entity);
                 await _unitOfWork.Save();
 
-                return new CommandResponse<TabDto>(_mapper.Map<TabDto>(entity));
+                var result = _mapper.Map<TabDto>(entity);
+                result.Tuning = request.Tab.Tuning;
+
+                return new CommandResponse<TabDto>(result);
             }
 
             return new CommandResponse<TabDto>(

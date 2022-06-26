@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="main-info">
+        <img [src]="getImageSource()">
+
+        <div class="info">
+            <div class="title-and-buttons">
+                <h3>{{ song.name }}</h3>
+
+                <div>
+                    <button mat-icon-button color="accent" *ngIf="!song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip1="matTooltip" (mouseleave)="tooltip1.hide()">
+                        <mat-icon>local_fire_department</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button color="warn" *ngIf="song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip2="matTooltip" (mouseleave)="tooltip2.hide()">
+                        <mat-icon>local_fire_department</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button color="accent" *ngIf="!song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip3="matTooltip" (mouseleave)="tooltip3.hide()">
+                        <mat-icon>favorite_border</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button color="warn" *ngIf="song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip4="matTooltip" (mouseleave)="tooltip4.hide()">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <a class="gray-text" [routerLink]="['/album', song.album.id]">{{ song.album.name }}</a>
+
+            <p>
+                <span *ngFor="let artist of song.artists" class="gray-text">
+                    <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a><span *ngIf="song.artists.indexOf(artist) !== song.artists.length - 1">, </span>
+                </span>
+            </p>
+
+            <p>
+                <span *ngFor="let genre of song.genres" class="gray-text">
+                    {{ genre.name }}<span *ngIf="song.genres.indexOf(genre) !== song.genres.length - 1">, </span>
+                </span>
+            </p>
+
+            <p class="gray-text">{{ song.tabs.length }} tab<span *ngIf="song.tabs.length !== 1">s</span></p>
+        </div>
+    </div>
+
+    <div class="tabs">
+       <app-tab-card *ngFor="let tab of song.tabs" [tab]="tab"></app-tab-card>
+
+        <div class="new-tab" (click)="addTab()">
+            +
+        </div>
+    </div>
+</div>

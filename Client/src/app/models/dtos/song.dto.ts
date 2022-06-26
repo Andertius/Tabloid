@@ -5,7 +5,7 @@ import { TabDto } from "./tab.dto";
 
 export interface SongDto {
     id: string,
-    songName: string,
+    name: string,
     songNumberInAlbum: number,
     fullyMastered: number,
     isFavourite: boolean,

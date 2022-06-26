@@ -4,5 +4,5 @@ export enum ApiPaths {
     Genres = 'genres',
     Songs = 'songs',
     Tabs = 'tabs',
-    Tuning = 'tuning',
+    Tunings = 'tunings',
 }

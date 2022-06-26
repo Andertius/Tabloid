@@ -26,10 +26,12 @@ namespace Tabloid.Application.CQRS.Genres.Commands.UpdateGenre
         public async Task<CommandResponse<GenreDto>> Handle(UpdateGenreCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<IGenreRepository>();
-            var entity = _mapper.Map<Genre>(request.Genre);
+            var entity = await repository.FindById(request.Genre.Id);
 
             if (await repository.Contains(entity))
             {
+                entity.Name = request.Genre.Name;
+
                 repository.Update(entity);
                 await _unitOfWork.Save();
 

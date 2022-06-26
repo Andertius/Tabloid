@@ -1,0 +1,32 @@
+@import "../../../../../styles.scss";
+
+.tab {
+    margin: 0 0 10px 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab a {
+    display: block;
+    margin: 0 0 7px 0;
+    transition: 0.3s;
+}
+
+.tab small {
+    color: darkgray;
+    display: block;
+}
+
+.tab-link {
+    font-size: large;
+    font-weight: bold;
+}
+
+.not-visible {
+    display: none;
+}
+
+a:hover {
+    color: $hovered-text-color;
+}
