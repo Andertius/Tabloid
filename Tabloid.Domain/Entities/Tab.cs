@@ -1,4 +1,6 @@
-﻿namespace Tabloid.Domain.Entities
+﻿using System;
+
+namespace Tabloid.Domain.Entities
 {
     public class Tab : IEntity<Guid>
     {
@@ -11,7 +13,7 @@
         public double? Difficulty { get; set; }
 
 
-        public Guid TuningId { get; set; }
+        public Guid? TuningId { get; set; }
 
         public Tuning Tuning { get; set; }
 

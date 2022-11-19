@@ -16,6 +16,10 @@ namespace Tabloid.Application.MapProfiles
                 .ForMember(x => x.Album, opt => opt.Ignore())
                 .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album.Id))
                 .ForMember(x => x.SongName, opt => opt.MapFrom(x => x.Name));
+
+            CreateMap<Song, JustNameDto>();
+
+            CreateMap<SongDto, JustNameDto>();
         }
     }
 }

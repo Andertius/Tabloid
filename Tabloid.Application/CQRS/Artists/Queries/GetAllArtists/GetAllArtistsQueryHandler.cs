@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -17,7 +22,7 @@ namespace Tabloid.Application.CQRS.Artists.Queries.GetAllArtists
             IUnitOfWork<Guid> unitOfWork,
             IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
             _mapper = mapper;
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+
+using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Domain.Entities;
 using Tabloid.Domain.Enums;

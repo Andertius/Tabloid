@@ -11,38 +11,42 @@ import { ApiPaths } from '../enums/api-paths.enum';
 export class SongService {
   constructor(private readonly http: HttpClient) {}
 
-  public fetchSongs() {
+  public fetchSongs = () => {
     return this.http.get<SongDto[]>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}`
     );
   }
 
-  public fetchSong(id: string) {
+  public fetchSong = (id: string) => {
     return this.http.get<SongDto>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}/${id}`
     );
   }
 
-  public setFavourite(id: string, isFavourite: boolean) {
+  public setFavourite = (id: string, isFavourite: boolean) => {
     return this.http.patch<CommandResponse<SongDto>>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}/${id}/is-favourite/${isFavourite}`, {}
     );
   }
 
-  public setMastered(id: string, isMastered: boolean) {
+  public setMastered = (id: string, isMastered: boolean) => {
     return this.http.patch<CommandResponse<SongDto>>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}/${id}/is-mastered/${isMastered}`, {}
     );
   }
 
-  public editSong(song: SongDto) {
+  public addSong = (song: SongDto) => {
+    return this.http.post<CommandResponse<SongDto>>(`${environment.baseUrl}/api/${ApiPaths.Songs}`, song);
+  }
+
+  public editSong = (song: SongDto) => {
     return this.http.put<CommandResponse<SongDto>>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}`,
       song
     )
   }
 
-  public deleteSong(id: string) {
+  public deleteSong = (id: string) => {
     return this.http.delete<CommandResponse<SongDto>>(
       `${environment.baseUrl}/api/${ApiPaths.Songs}/${id}`
     )

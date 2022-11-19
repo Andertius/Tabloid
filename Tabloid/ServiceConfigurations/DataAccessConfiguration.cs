@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 using Tabloid.Infrastructure.Context;
 using Tabloid.Infrastructure.DbContextInitializers;

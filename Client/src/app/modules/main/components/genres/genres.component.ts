@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreDto } from 'src/app/models/dtos/genre.dto';
 import { AddGenreDialogComponent } from 'src/app/modules/dialog/components/genres/add-genre-dialog/add-genre-dialog.component';
 import { GenreService } from 'src/app/shared/services/genre.service';
@@ -22,14 +23,15 @@ export class GenresComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly genreService: GenreService,
-    private readonly stringService: StringService) {
+    private readonly stringService: StringService,
+    private readonly snackBar: MatSnackBar) {
       this.formControl = new FormControl('');
     }
 
   ngOnInit(): void {
     this.genreService.fetchGenres()
       .subscribe(response => {
-        this.allGenres = response.sort(this.stringService.compareNames);
+        this.allGenres = response.sort(this.stringService.compareNamesRemoveArticles);
         this.genresWithTracks = this.allGenres.filter(x => x.songs.length > 0);
 
         this.genres = JSON.parse(JSON.stringify(this.genresWithTracks));
@@ -53,11 +55,8 @@ export class GenresComponent implements OnInit {
         if (result !== undefined) {
           this.genreService.addGenre({name: result.controls["name"].value, songs: [], id: '00000000-0000-0000-0000-000000000000'})
             .subscribe(response => {
-              this.genres.push(response.object);
-              this.genres.sort(this.stringService.compareNames);
-              
-              this.allGenres.push(JSON.parse(JSON.stringify(response.object)));
-              this.allGenres.sort(this.stringService.compareNames);
+              this.rerenderGenresAfterAdd(response.object)
+              this.snackBar.open('Genre added', 'Close', { duration: 2500 });
             })
         }
       })
@@ -73,22 +72,36 @@ export class GenresComponent implements OnInit {
     this.checkboxChecked = event.checked;
   }
 
-  rerenderGenres(event: any) {
-    const allGenresIndex = this.allGenres.indexOf(this.allGenres.filter(x => x.id === event.genre.id)[0]);
-    const allGenresWithTabs = this.genresWithTracks.indexOf(this.genresWithTracks.filter(x => x.id === event.genre.id)[0]);
-    const allGenres = this.genres.indexOf(this.genres.filter(x => x.id === event.genre.id)[0]);
+  rerenderGenresAfterEdit(genre: GenreDto) {
+    const allGenresIndex = this.allGenres.indexOf(this.allGenres.filter(x => x.id === genre.id)[0]);
+    const allGenresWithTabs = this.genresWithTracks.indexOf(this.genresWithTracks.filter(x => x.id === genre.id)[0]);
+    const allGenres = this.genres.indexOf(this.genres.filter(x => x.id === genre.id)[0]);
 
-    this.allGenres[allGenresIndex] = event.genre;
-    this.genresWithTracks[allGenresWithTabs] = event.genre;
-    this.genres[allGenres] = event.genre;
+    this.allGenres[allGenresIndex] = genre;
+    this.genresWithTracks[allGenresWithTabs] = genre;
+    this.genres[allGenres] = genre;
 
-    this.allGenres = this.allGenres.sort(this.stringService.compareNames);
-    this.genresWithTracks = this.genresWithTracks.sort(this.stringService.compareNames);
-    this.genres = this.genres.sort(this.stringService.compareNames);
+    this.allGenres = this.allGenres.sort(this.stringService.compareNamesRemoveArticles);
+    this.genresWithTracks = this.genresWithTracks.sort(this.stringService.compareNamesRemoveArticles);
+    this.genres = this.genres.sort(this.stringService.compareNamesRemoveArticles);
+  }
 
-    this.allGenres = this.allGenres.filter(x => x.id !== event.id).sort(this.stringService.compareNames);
-    this.genresWithTracks = this.genresWithTracks.filter(x => x.id !== event.id).sort(this.stringService.compareNames);
-    this.genres = this.genres.filter(x => x.id !== event.id).sort(this.stringService.compareNames);
+  rerenderGenresAfterDelete(id: string) {
+    this.allGenres = this.allGenres.filter(x => x.id !== id);
+    this.genresWithTracks = this.genresWithTracks.filter(x => x.id !== id);
+    this.genres = this.genres.filter(x => x.id !== id);
+
+    this.allGenres = this.allGenres.sort(this.stringService.compareNamesRemoveArticles);
+    this.genresWithTracks = this.genresWithTracks.sort(this.stringService.compareNamesRemoveArticles);
+    this.genres = this.genres.sort(this.stringService.compareNamesRemoveArticles);
+  }
+
+  rerenderGenresAfterAdd(genre: GenreDto) {
+    this.genres.push(genre);
+    this.genres.sort(this.stringService.compareNamesRemoveArticles);
+    
+    this.allGenres.push(JSON.parse(JSON.stringify(genre)));
+    this.allGenres.sort(this.stringService.compareNamesRemoveArticles);
   }
 
 }

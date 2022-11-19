@@ -17,7 +17,6 @@ export class AddTabDialogComponent implements OnInit {
   formGroup = new FormGroup({
     name: new FormControl(''),
     link: new FormControl(''),
-    stringNumber: new FormControl(''),
     difficulty: new FormControl(''),
     tuning: new FormControl(''),
   });
@@ -28,8 +27,12 @@ export class AddTabDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddTabDialogComponent>) { }
 
   ngOnInit(): void {
-    this.tuningService.fetchTunings()
-      .subscribe(response => this.tunings = response.sort(this.stringService.compareNames))
+    this.tuningService.fetchJustTunings()
+      .subscribe(response => {
+        this.tunings = response.sort(this.stringService.compareNames);
+        const standard = this.tunings.filter(x => x.strings.toLowerCase().replace(/\s/g,'') === "eadgbe")[0];
+        this.formGroup.controls["tuning"].setValue(standard);
+      })
   }
 
   cancel() {

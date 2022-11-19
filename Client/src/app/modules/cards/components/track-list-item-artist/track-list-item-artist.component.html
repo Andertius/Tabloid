@@ -8,13 +8,31 @@
     </div>
 
     <div class="right-side">
+        <div class="buttons">
+            <button mat-icon-button color="accent" *ngIf="!song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip4="matTooltip" (mouseleave)="tooltip4.hide()">
+                <mat-icon>local_fire_department</mat-icon>
+            </button>
+    
+            <button mat-icon-button color="warn" *ngIf="song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip5="matTooltip" (mouseleave)="tooltip5.hide()">
+                <mat-icon>local_fire_department</mat-icon>
+            </button>
+    
+            <button mat-icon-button color="accent" *ngIf="!song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip6="matTooltip" (mouseleave)="tooltip6.hide()">
+                <mat-icon>favorite_border</mat-icon>
+            </button>
+    
+            <button mat-icon-button color="warn" *ngIf="song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip7="matTooltip" (mouseleave)="tooltip7.hide()">
+                <mat-icon>favorite</mat-icon>
+            </button>
+        </div>
+
         <div class="album">
             <a [routerLink]="['/album', album.id]">
                 {{ album.name }}
             </a>
         </div>
 
-        <div class="buttons">
+        <div>
             <button mat-icon-button color="accent" [routerLink]="['/song', song.id]" matTooltip="Visit song page" #tooltip1="matTooltip" (mouseleave)="tooltip1.hide()">
                 <mat-icon>read_more</mat-icon>
             </button>
@@ -25,22 +43,6 @@
 
             <button mat-icon-button color="warn" (click)="deleteSong()" matTooltip="Delete the song" #tooltip3="matTooltip" (mouseleave)="tooltip3.hide()">
                 <mat-icon>delete_outline</mat-icon>
-            </button>
-
-            <button mat-icon-button color="accent" *ngIf="!song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip4="matTooltip" (mouseleave)="tooltip4.hide()">
-                <mat-icon>local_fire_department</mat-icon>
-            </button>
-
-            <button mat-icon-button color="warn" *ngIf="song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip5="matTooltip" (mouseleave)="tooltip5.hide()">
-                <mat-icon>local_fire_department</mat-icon>
-            </button>
-
-            <button mat-icon-button color="accent" *ngIf="!song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip6="matTooltip" (mouseleave)="tooltip6.hide()">
-                <mat-icon>favorite_border</mat-icon>
-            </button>
-
-            <button mat-icon-button color="warn" *ngIf="song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip7="matTooltip" (mouseleave)="tooltip7.hide()">
-                <mat-icon>favorite</mat-icon>
             </button>
         </div>
     </div>

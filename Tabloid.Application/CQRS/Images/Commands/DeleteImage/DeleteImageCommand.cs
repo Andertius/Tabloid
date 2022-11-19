@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System;
+
+using MediatR;
 
 namespace Tabloid.Application.CQRS.Images.Commands.DeleteImage
 {

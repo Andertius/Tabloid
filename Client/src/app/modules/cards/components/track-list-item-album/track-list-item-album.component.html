@@ -10,17 +10,13 @@
             </span>
         </div>
 
-        <div class="buttons">
+        <div>
             <button mat-icon-button color="accent" [routerLink]="['/song', song.id]" matTooltip="Visit song page" #tooltip1="matTooltip" (mouseleave)="tooltip1.hide()">
                 <mat-icon>read_more</mat-icon>
             </button>
 
             <button mat-icon-button color="accent" (click)="editSong()" matTooltip="Edit the song" #tooltip2="matTooltip" (mouseleave)="tooltip2.hide()">
                 <mat-icon>edit</mat-icon>
-            </button>
-
-            <button mat-icon-button color="warn" (click)="deleteSong()" matTooltip="Delete the song" #tooltip3="matTooltip" (mouseleave)="tooltip3.hide()">
-                <mat-icon>delete_outline</mat-icon>
             </button>
 
             <button mat-icon-button color="accent" *ngIf="!song.fullyMastered" (click)="setMastered()" matTooltip="Fully Mastered" #tooltip4="matTooltip" (mouseleave)="tooltip4.hide()">
@@ -37,6 +33,10 @@
 
             <button mat-icon-button color="warn" *ngIf="song.isFavourite" (click)="setFavourite()" matTooltip="Favourite" #tooltip7="matTooltip" (mouseleave)="tooltip7.hide()">
                 <mat-icon>favorite</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" (click)="deleteSong()" matTooltip="Delete the song" #tooltip3="matTooltip" (mouseleave)="tooltip3.hide()">
+                <mat-icon>delete_outline</mat-icon>
             </button>
         </div>
     </div>

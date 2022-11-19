@@ -13,6 +13,7 @@ import { GenresComponent } from './components/genres/genres.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuningsComponent } from './components/tunings/tunings.component';
 import { SongComponent } from './components/song/song.component';
+import { SongsComponent } from './components/songs/songs.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SongComponent } from './components/song/song.component';
     GenresComponent,
     TuningsComponent,
     SongComponent,
+    SongsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { SongComponent } from './components/song/song.component';
     AlbumsComponent,
     GenresComponent,
     SongComponent,
+    SongsComponent,
   ]
 })
 export class MainModule { }

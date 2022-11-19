@@ -2,6 +2,8 @@
 
 using MediatR;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Tabloid.Application.Services;
 using Tabloid.Application.Validators.Commands.Albums;
 

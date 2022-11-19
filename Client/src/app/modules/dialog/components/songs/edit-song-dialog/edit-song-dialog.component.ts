@@ -40,14 +40,14 @@ export class EditSongDialogComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.genreService.fetchGenres()
+    this.genreService.fetchJustNames()
       .subscribe(response => {
-        this.genres = response.sort(this.stringService.compareNames);
+        this.genres = response.sort(this.stringService.compareNamesRemoveArticles);
       });
 
-    this.artistService.fetchArtists()
+    this.artistService.fetchJustNames()
       .subscribe(response => {
-        this.artists = response.sort(this.stringService.compareNames);
+        this.artists = response.sort(this.stringService.compareNamesRemoveArticles);
       });
   }
 

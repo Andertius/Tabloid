@@ -37,7 +37,7 @@ export class SongComponent implements OnInit {
     }
 
     this.songService.fetchSong(id)
-      .subscribe(resposne => this.song = resposne);
+      .subscribe(response => this.song = response);
   }
 
   setFavourite() {
@@ -60,7 +60,7 @@ export class SongComponent implements OnInit {
 
   addTab() {
     const dialogRef = this.dialog.open(AddTabDialogComponent, {
-      width: '300px',
+      width: '400px',
     });
 
     dialogRef
@@ -79,10 +79,24 @@ export class SongComponent implements OnInit {
           this.tabService.addTab(tab)
             .subscribe(response => {
               this.song.tabs.push(response.object);
-              this.song.tabs.sort(this.stringService.compareNames);
+              this.song.tabs.sort(this.stringService.compareNamesRemoveArticles);
             })
         }
       })
+  }
+
+  rerenderTabsAfterDelete(event: any) {
+    this.song.tabs = this.song.tabs.filter(x => x.id !== event.id)
+    
+    this.song.tabs = this.song.tabs.sort(this.stringService.compareNamesRemoveArticles);
+  }
+
+  rerenderTabsAfterEdit(event: any) {
+    const allGenresIndex = this.song.tabs.indexOf(this.song.tabs.filter(x => x.id === event.tab.id)[0]);
+
+    this.song.tabs[allGenresIndex] = event.tab;
+    
+    this.song.tabs = this.song.tabs.sort(this.stringService.compareNamesRemoveArticles);
   }
 
 }

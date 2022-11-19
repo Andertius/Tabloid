@@ -1,11 +1,15 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
 using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
-using Tabloid.Domain.Entities;
 using Tabloid.Domain.Enums;
 
 namespace Tabloid.Application.CQRS.Songs.Commands.UpdateSong
@@ -26,7 +30,17 @@ namespace Tabloid.Application.CQRS.Songs.Commands.UpdateSong
         public async Task<CommandResponse<SongDto>> Handle(UpdateSongCommand request, CancellationToken cancellationToken)
         {
             var repository = _unitOfWork.GetRepository<ISongRepository>();
-            var entity = _mapper.Map<Song>(request.Song);
+            var entity = await repository.FindById(request.Song.Id);
+
+            entity.SongName = request.Song.Name;
+            entity.SongNumberInAlbum = request.Song.SongNumberInAlbum;
+            entity.FullyMastered = request.Song.FullyMastered;
+            entity.IsFavourite = request.Song.IsFavourite;
+
+            entity.AlbumId = request.Song.Album.Id;
+            entity.Album = await _unitOfWork
+                .GetRepository<IAlbumRepository>()
+                .FindById(request.Song.Album.Id);
 
             entity.Tabs = (await _unitOfWork
                 .GetRepository<ITabRepository>()

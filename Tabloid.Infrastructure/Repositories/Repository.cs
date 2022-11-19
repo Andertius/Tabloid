@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
@@ -37,6 +40,13 @@ namespace Tabloid.Infrastructure.Repositories
                 .AddAsync(entity);
         }
 
+        public virtual async Task InsertRange(IEnumerable<TEntity> entity)
+        {
+            await _context
+                .Set<TEntity>()
+                .AddRangeAsync(entity);
+        }
+
         public virtual void Update(TEntity entity)
         {
             _context
@@ -56,6 +66,13 @@ namespace Tabloid.Infrastructure.Repositories
             return await _context
                 .Set<TEntity>()
                 .ContainsAsync(entity);
+        }
+
+        public virtual async Task<bool> HasKey(TId key)
+        {
+            return (await _context
+                .Set<TEntity>()
+                .FindAsync(key)) is not null;
         }
     }
 }

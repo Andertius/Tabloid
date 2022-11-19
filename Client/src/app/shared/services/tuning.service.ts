@@ -18,6 +18,14 @@ export class TuningService {
     return this.http.get<TuningDto[]>(`${this.baseUrl}/api/${ApiPaths.Tunings}`);
   }
 
+  public fetchJustNames = () => {
+    return this.http.get<TuningDto[]>(`${this.baseUrl}/api/${ApiPaths.Tunings}/just-names`);
+  }
+
+  public fetchJustTunings = () => {
+    return this.http.get<TuningDto[]>(`${this.baseUrl}/api/${ApiPaths.Tunings}/just-tunings`);
+  }
+
   public addTuning = (genre: TuningDto) => {
     return this.http.post<CommandResponse<TuningDto>>(`${this.baseUrl}/api/${ApiPaths.Tunings}`, genre);
   }

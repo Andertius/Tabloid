@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -29,10 +34,10 @@ namespace Tabloid.Application.CQRS.Albums.Commands.AddAlbum
             var entity = _mapper.Map<Album>(request.Album);
             entity.ArtistId = request.Album.Artist.Id;
 
-            if (request.Album.Id == Guid.Empty &&
+            if (!await repository.HasKey(request.Album.Id) &&
                 (await repository
                     .GetAll())
-                    .All(x => x.Name != entity.Name && x.ArtistId != entity.ArtistId))
+                    .All(x => x.Name != entity.Name || x.ArtistId != entity.ArtistId))
             {
                 await repository.Insert(entity);
                 await _unitOfWork.Save();

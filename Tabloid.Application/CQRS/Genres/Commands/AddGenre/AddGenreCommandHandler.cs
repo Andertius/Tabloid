@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -28,7 +33,8 @@ namespace Tabloid.Application.CQRS.Genres.Commands.AddGenre
             var repository = _unitOfWork.GetRepository<IGenreRepository>();
             var entity = _mapper.Map<Genre>(request.Genre);
 
-            if ((await repository
+            if (!await repository.HasKey(request.Genre.Id) &&
+                (await repository
                 .GetAll())
                 .All(x => x.Name != entity.Name))
             {

@@ -1,4 +1,7 @@
-﻿namespace Tabloid.Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tabloid.Domain.Entities
 {
     public class Genre : IEntity<Guid>
     {

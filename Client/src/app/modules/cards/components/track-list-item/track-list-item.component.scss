@@ -24,7 +24,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 40%;
+    width: 50%;
 }
 
 .album {
@@ -47,4 +47,8 @@ a:hover {
 .flex {
     display: flex;
     align-items: center;
+}
+
+.buttons {
+    margin-right: 25px;
 }

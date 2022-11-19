@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -27,7 +32,7 @@ namespace Tabloid.Application.CQRS.Genres.Queries.GetAllMetalGenres
                 .GetRepository<IGenreRepository>()
                 .GetAllMetalGenres();
 
-            return result.Select(genre => _mapper.Map<GenreDto>(genre)).ToArray();
+            return result.Select(_mapper.Map<GenreDto>).ToArray();
         }
     }
 }

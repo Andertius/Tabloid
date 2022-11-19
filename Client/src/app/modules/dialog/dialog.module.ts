@@ -9,6 +9,12 @@ import { EditGenreDialogComponent } from './components/genres/edit-genre-dialog/
 import { AddTuningDialogComponent } from './components/tunings/add-tuning-dialog/add-tuning-dialog.component';
 import { EditTuningDialogComponent } from './components/tunings/edit-tuning-dialog/edit-tuning-dialog.component';
 import { AddTabDialogComponent } from './components/tabs/add-tab-dialog/add-tab-dialog.component';
+import { EditTabDialogComponent } from './components/tabs/edit-tab-dialog/edit-tab-dialog.component';
+import { AddArtistDialogComponent } from './components/artists/add-artist-dialog/add-artist-dialog.component';
+import { AddAlbumDialogComponent } from './components/albums/add-album-dialog/add-album-dialog.component';
+import { AddSongDialogComponent } from './components/songs/add-song-dialog/add-song-dialog.component';
+import { EditAlbumDialogComponent } from './components/albums/edit-album-dialog/edit-album-dialog.component';
+import { EditArtistDialogComponent } from './components/artists/edit-artist-dialog/edit-artist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +25,12 @@ import { AddTabDialogComponent } from './components/tabs/add-tab-dialog/add-tab-
     AddTuningDialogComponent,
     EditTuningDialogComponent,
     AddTabDialogComponent,
+    EditTabDialogComponent,
+    AddArtistDialogComponent,
+    AddAlbumDialogComponent,
+    AddSongDialogComponent,
+    EditAlbumDialogComponent,
+    EditArtistDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -31,8 +43,12 @@ import { AddTabDialogComponent } from './components/tabs/add-tab-dialog/add-tab-
     AddGenreDialogComponent,
     EditGenreDialogComponent,
     AddTuningDialogComponent,
-    AddTuningDialogComponent,
     EditTuningDialogComponent,
+    AddTabDialogComponent,
+    EditTabDialogComponent,
+    AddArtistDialogComponent,
+    AddAlbumDialogComponent,
+    EditAlbumDialogComponent,
   ]
 })
 export class DialogModule { }

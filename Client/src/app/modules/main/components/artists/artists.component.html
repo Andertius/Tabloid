@@ -1,5 +1,15 @@
 <div>
     <mat-grid-list cols="6" rowHeight="4:5">
+        <mat-grid-tile>
+            <div class="new-artist">
+                <div class="new-artist-circle" (click)="addArtist()">
+                    +
+                </div>
+    
+                <p>New Artist</p>
+            </div>
+        </mat-grid-tile>
+        
         <mat-grid-tile *ngFor="let artist of artists">
             <app-artist-card [artist]="artist"></app-artist-card>
         </mat-grid-tile>

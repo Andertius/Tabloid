@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using Newtonsoft.Json;
 
 namespace Tabloid.ServiceConfigurations
 {
@@ -8,7 +10,10 @@ namespace Tabloid.ServiceConfigurations
         {
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.MaxDepth = null;
+                });
         }
     }
 }

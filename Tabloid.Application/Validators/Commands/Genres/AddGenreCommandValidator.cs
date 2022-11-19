@@ -11,9 +11,6 @@ namespace Tabloid.Application.Validators.Commands.Genres
             RuleFor(x => x.Genre)
                 .NotEmpty();
 
-            RuleFor(x => x.Genre.Id)
-                .Empty();
-
             RuleFor(x => x.Genre.Name)
                 .NotEmpty();
         }

@@ -7,6 +7,7 @@ import { ArtistsComponent } from './modules/main/components/artists/artists.comp
 import { GenresComponent } from './modules/main/components/genres/genres.component';
 import { HomeComponent } from './modules/main/components/home/home.component';
 import { SongComponent } from './modules/main/components/song/song.component';
+import { SongsComponent } from './modules/main/components/songs/songs.component';
 import { TuningsComponent } from './modules/main/components/tunings/tunings.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'artists', component: ArtistsComponent },
   { path: 'albums', component: AlbumsComponent },
   { path: 'genres', component: GenresComponent },
+  { path: 'songs', component: SongsComponent },
   { path: 'tunings', component: TuningsComponent },
   { path: 'artist/:id', component: ArtistComponent },
   { path: 'album/:id', component: AlbumComponent },

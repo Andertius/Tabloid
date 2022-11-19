@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -26,7 +30,7 @@ namespace Tabloid.Application.CQRS.Tabs.Commands.AddTab
             var repository = _unitOfWork.GetRepository<ITabRepository>();
             var entity = _mapper.Map<Tab>(request.Tab);
 
-            if (entity.Id == Guid.Empty)
+            if (!await repository.HasKey(request.Tab.Id))
             {
                 await repository.Insert(entity);
                 await _unitOfWork.Save();

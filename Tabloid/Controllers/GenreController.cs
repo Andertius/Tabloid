@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using System;
+using System.Threading.Tasks;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +11,7 @@ using Tabloid.Application.CQRS.Genres.Commands.UpdateGenre;
 using Tabloid.Application.CQRS.Genres.Queries.FindGenreById;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllElectroGenres;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllGenres;
+using Tabloid.Application.CQRS.Genres.Queries.GetAllJustNames;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllMetalGenres;
 using Tabloid.Application.CQRS.Genres.Queries.GetAllRockGenres;
 using Tabloid.Application.CQRS.Genres.Queries.GetEveryOtherGenre;
@@ -63,10 +67,17 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetGenreByName([FromRoute] string name)
+        [HttpGet("name")]
+        public async Task<IActionResult> GetGenreByName([FromQuery] string name)
         {
             var response = await _mediator.Send(new GetGenreByNameQuery(name));
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpGet("just-names")]
+        public async Task<IActionResult> GetAllJustNames()
+        {
+            var response = await _mediator.Send(new GetAllJustNamesQuery());
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 

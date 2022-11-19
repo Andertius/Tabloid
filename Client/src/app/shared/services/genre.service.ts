@@ -18,6 +18,10 @@ export class GenreService {
     return this.http.get<GenreDto[]>(`${this.baseUrl}/api/${ApiPaths.Genres}`);
   }
 
+  public fetchJustNames = () => {
+    return this.http.get<GenreDto[]>(`${this.baseUrl}/api/${ApiPaths.Genres}/just-names`);
+  }
+
   public addGenre = (genre: GenreDto) => {
     return this.http.post<CommandResponse<GenreDto>>(`${this.baseUrl}/api/${ApiPaths.Genres}`, genre);
   }

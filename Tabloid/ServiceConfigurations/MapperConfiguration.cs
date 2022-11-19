@@ -1,4 +1,6 @@
-﻿using Tabloid.Application.MapProfiles;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using Tabloid.Application.MapProfiles;
 
 namespace Tabloid.ServiceConfigurations
 {

@@ -9,14 +9,19 @@
     </div>
 
     <mat-grid-list cols="6" rowHeight="5:3" [gutterSize]="'15px'">
-        <mat-grid-tile *ngFor="let tuning of tunings">
-            <app-tuning-card [tuning]="tuning" class="tuning-card" (rerender)="rerenderTunings($event)"></app-tuning-card>
-        </mat-grid-tile>
-        
         <mat-grid-tile>
             <div class="new-tuning" (click)="addTuning()">
                 +
             </div>
+        </mat-grid-tile>
+        
+        <mat-grid-tile *ngFor="let tuning of tunings">
+            <app-tuning-card
+                [tuning]="tuning"
+                class="tuning-card"
+                (rerenderAfterEdit)="rerenderTuningsAfterEdit($event)"
+                (rerenderAfterDelete)="rerenderTuningsAfterDelete($event)"
+                (rerenderAfterAdd)="rerenderTuningsAfterAdd($event)"></app-tuning-card>
         </mat-grid-tile>
     </mat-grid-list>
 </div>

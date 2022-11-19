@@ -2,7 +2,7 @@
     <div>
         <a [href]="tab.link" class="tab-link" target="_blank">{{ tab.name }}</a>
 
-        <small>{{ tab.tuning.instrument | instrument }} • {{ tab.tuning.name }}</small>
+        <small *ngIf="tab.tuning !== null">{{ tab.tuning.instrument | instrument }} • {{ tab.tuning.name }}</small>
 
         <small>Difficulty: {{ tab.difficulty }} / 5</small>
     </div>

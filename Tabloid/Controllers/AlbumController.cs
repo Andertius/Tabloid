@@ -1,7 +1,11 @@
-﻿using System.Net.Http.Headers;
+﻿using System;
+using System.IO;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 using Tabloid.Application.CQRS.Albums.Commands.AddAlbum;
@@ -10,6 +14,7 @@ using Tabloid.Application.CQRS.Albums.Commands.UpdateAlbum;
 using Tabloid.Application.CQRS.Albums.Queries.FindAlbumById;
 using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbums;
 using Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByName;
+using Tabloid.Application.CQRS.Albums.Queries.GetAllJustNames;
 using Tabloid.Application.CQRS.Artists.Queries.FindArtistByAlbum;
 using Tabloid.Application.CQRS.Images.Commands.AddImage;
 using Tabloid.Application.CQRS.Images.Commands.DeleteImage;
@@ -92,7 +97,14 @@ namespace Tabloid.Controllers
             return ReturnResultHelper.ReturnQueryResult(response);
         }
 
-        [HttpPatch("{albumId}/cover")]
+        [HttpGet("just-names")]
+        public async Task<IActionResult> GetAllJustNames()
+        {
+            var response = await _mediator.Send(new GetAllJustNamesQuery());
+            return ReturnResultHelper.ReturnQueryResult(response);
+        }
+
+        [HttpPatch("{albumId}/cover"), DisableRequestSizeLimit]
         public async Task<IActionResult> UploadAlbumCover(Guid albumId)
         {
             var file = Request.Form.Files[0];
@@ -103,6 +115,10 @@ namespace Tabloid.Controllers
                 string fileName = Guid.NewGuid().ToString() + extention;
                 string fullPath = Path.Combine(_host.WebRootPath, "album-covers", fileName);
 
+                var album = await _mediator.Send(new FindAlbumByIdQuery(albumId));
+
+                System.IO.File.Delete(Path.Combine(_host.WebRootPath, "album-covers", album.Cover));
+
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -112,7 +128,7 @@ namespace Tabloid.Controllers
 
                 if (result.Result == CommandResult.Success)
                 {
-                    return Ok(result.Object);
+                    return Ok(new { FileName = result.Object });
                 }
             }
 
@@ -127,7 +143,6 @@ namespace Tabloid.Controllers
             if (response.Result == CommandResult.Success)
             {
                 string fullPath = Path.Combine(_host.WebRootPath, "album-covers", response.Object);
-
                 System.IO.File.Delete(fullPath);
 
                 return NoContent();

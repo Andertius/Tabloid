@@ -2,6 +2,8 @@
 
 using MediatR;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Tabloid.ServiceConfigurations
 {
     public static class MediatrConfiguration

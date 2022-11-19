@@ -11,10 +11,6 @@ namespace Tabloid.Application.Validators.Commands.Albums
             RuleFor(x => x.Album)
                 .NotEmpty();
 
-            RuleFor(x => x.Album.Id)
-                .Empty()
-                .WithMessage("The id value must not be predefined");
-
             RuleFor(x => x.Album.Name)
                 .NotEmpty();
 

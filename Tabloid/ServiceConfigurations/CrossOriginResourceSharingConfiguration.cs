@@ -1,4 +1,6 @@
-﻿namespace Tabloid.ServiceConfigurations
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Tabloid.ServiceConfigurations
 {
     public static class CrossOriginResourceSharingConfiguration
     {

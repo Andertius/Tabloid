@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TuningDto } from 'src/app/models/dtos/tuning.dto';
 import { AddTuningDialogComponent } from 'src/app/modules/dialog/components/tunings/add-tuning-dialog/add-tuning-dialog.component';
 import { StringService } from 'src/app/shared/services/string.service';
@@ -22,7 +23,8 @@ export class TuningsComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly tuningService: TuningService,
-    private readonly stringService: StringService) {
+    private readonly stringService: StringService,
+    private readonly snackBar: MatSnackBar) {
       this.formControl = new FormControl('');
     }
 
@@ -57,14 +59,11 @@ export class TuningsComponent implements OnInit {
             id: '00000000-0000-0000-0000-000000000000',
             stringNumber: result.controls["stringNumber"].value,
             strings: result.controls["strings"].value,
-            instrument: result.controls["strings"].value,
+            instrument: result.controls["instrument"].value,
           })
             .subscribe(response => {
-              this.tunings.push(response.object);
-              this.tunings.sort(this.stringService.compareNames);
-              
-              this.allTunings.push(JSON.parse(JSON.stringify(response.object)));
-              this.allTunings.sort(this.stringService.compareNames);
+              this.rerenderTuningsAfterAdd(response.object);
+              this.snackBar.open('Tuning added', 'Close', { duration: 2500 });
             })
         }
       })
@@ -80,18 +79,36 @@ export class TuningsComponent implements OnInit {
     this.checkboxChecked = event.checked;
   }
 
-  rerenderTunings(event: any) {
-    const allTuningsIndex = this.allTunings.indexOf(this.allTunings.filter(x => x.id === event.tuning.id)[0]);
-    const allTuningsWithTabs = this.tuningsWithTabs.indexOf(this.tuningsWithTabs.filter(x => x.id === event.tuning.id)[0]);
-    const allTunings = this.tunings.indexOf(this.tunings.filter(x => x.id === event.tuning.id)[0]);
+  rerenderTuningsAfterEdit(tuning: TuningDto) {
+    const allTuningsIndex = this.allTunings.indexOf(this.allTunings.filter(x => x.id === tuning.id)[0]);
+    const allTuningsWithTabs = this.tuningsWithTabs.indexOf(this.tuningsWithTabs.filter(x => x.id === tuning.id)[0]);
+    const allTunings = this.tunings.indexOf(this.tunings.filter(x => x.id === tuning.id)[0]);
 
-    this.allTunings[allTuningsIndex] = event.tuning;
-    this.tuningsWithTabs[allTuningsWithTabs] = event.tuning;
-    this.tunings[allTunings] = event.tuning;
+    this.allTunings[allTuningsIndex] = tuning;
+    this.tuningsWithTabs[allTuningsWithTabs] = tuning;
+    this.tunings[allTunings] = tuning;
 
     this.allTunings = this.allTunings.sort(this.stringService.compareNames);
     this.tuningsWithTabs = this.tuningsWithTabs.sort(this.stringService.compareNames);
     this.tunings = this.tunings.sort(this.stringService.compareNames);
+  }
+  
+  rerenderTuningsAfterDelete(id: string) {
+    this.allTunings = this.allTunings.filter(x => x.id !== id)
+    this.tuningsWithTabs = this.tuningsWithTabs.filter(x => x.id !== id)
+    this.tunings = this.tunings.filter(x => x.id !== id)
+
+    this.allTunings = this.allTunings.sort(this.stringService.compareNames);
+    this.tuningsWithTabs = this.tuningsWithTabs.sort(this.stringService.compareNames);
+    this.tunings = this.tunings.sort(this.stringService.compareNames);
+  }
+  
+  rerenderTuningsAfterAdd(tuning: TuningDto) {
+    this.tunings.push(tuning);
+    this.tunings.sort(this.stringService.compareNames);
+    
+    this.allTunings.push(JSON.parse(JSON.stringify(tuning)));
+    this.allTunings.sort(this.stringService.compareNames);
   }
 
 }

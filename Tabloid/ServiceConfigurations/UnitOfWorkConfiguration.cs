@@ -1,4 +1,8 @@
-﻿using Tabloid.Application.Interfaces;
+﻿using System;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Infrastructure.Context;
 using Tabloid.Infrastructure.Repositories;

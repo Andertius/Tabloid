@@ -16,14 +16,9 @@
             <mat-label>Tuning</mat-label>
             <mat-select formControlName="tuning">
                 <mat-option *ngFor="let tuning of tunings" [value]="tuning">
-                    {{ tuning.name }} <small>{{ tuning.strings }}</small>
+                    {{ tuning.name }} <small>({{ tuning.strings }})</small>
                 </mat-option>
             </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>String number</mat-label>
-            <input matInput formControlName="stringNumber" type="number">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">

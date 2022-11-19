@@ -589,7 +589,7 @@ namespace Tabloid.Infrastructure.Migrations
                     b.Property<Guid>("SongId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TuningId")
+                    b.Property<Guid?>("TuningId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -1006,8 +1006,7 @@ namespace Tabloid.Infrastructure.Migrations
                     b.HasOne("Tabloid.Domain.Entities.Tuning", "Tuning")
                         .WithMany("Tabs")
                         .HasForeignKey("TuningId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Song");
 

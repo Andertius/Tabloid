@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -28,7 +33,8 @@ namespace Tabloid.Application.CQRS.Artists.Commands.AddArtist
             var repository = _unitOfWork.GetRepository<IArtistRepository>();
             var entity = _mapper.Map<Artist>(request.Artist);
 
-            if ((await repository
+            if (!await repository.HasKey(request.Artist.Id) &&
+                (await repository
                 .GetAll())
                 .All(x => x.Name != entity.Name))
             {

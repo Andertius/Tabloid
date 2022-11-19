@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using MediatR;
 
@@ -28,7 +33,7 @@ namespace Tabloid.Application.CQRS.Tunings.Commands.AddTuning
             var repository = _unitOfWork.GetRepository<ITuningRepository>();
             var entity = _mapper.Map<Tuning>(request.Tuning);
 
-            if (entity.Id == Guid.Empty &&
+            if (!await repository.HasKey(request.Tuning.Id) &&
                 (await repository
                     .GetAll())
                     .All(x => x.Name != entity.Name && x.Strings != entity.Strings))

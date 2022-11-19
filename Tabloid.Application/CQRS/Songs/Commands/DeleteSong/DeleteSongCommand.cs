@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System;
+
+using MediatR;
 
 using Tabloid.Domain.DataTransferObjects;
 

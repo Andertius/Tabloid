@@ -1,4 +1,7 @@
-﻿using Tabloid.Domain.Enums;
+﻿using System;
+using System.Collections.Generic;
+
+using Tabloid.Domain.Enums;
 
 namespace Tabloid.Domain.DataTransferObjects
 {

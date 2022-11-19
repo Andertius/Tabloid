@@ -1,4 +1,7 @@
-﻿using Tabloid.Domain.Entities;
+﻿using System;
+using System.Threading.Tasks;
+
+using Tabloid.Domain.Entities;
 
 namespace Tabloid.Application.Interfaces.Repositories
 {

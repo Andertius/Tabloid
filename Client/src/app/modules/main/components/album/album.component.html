@@ -1,11 +1,18 @@
 <div class="container">
     <div class="top-part">
-        <img [src]="getImageSource()">
+        <input type="file" #file (change)="uploadAvatar(file.files)" class="d-none">
+        <img [src]="getImageSource()" (click)="file.click()">
 
         <div class="info">
-            <mat-chip-list aria-label="Album type">
-                <mat-chip color="accent">{{ album.albumType | albumType }}</mat-chip>
-            </mat-chip-list>
+            <div class="second-top-part">
+                <mat-chip-list aria-label="Album type">
+                    <mat-chip color="accent">{{ album.albumType | albumType }}</mat-chip>
+                </mat-chip-list>
+
+                <button mat-icon-button (click)="editAlbum()">
+                    <mat-icon color="accent">edit</mat-icon>
+                </button>
+            </div>
 
             <h2>{{ album.name }}</h2>
 
@@ -14,6 +21,8 @@
             <p>{{ album.songs.length }} track<span *ngIf="album.songs.length !== 1">s</span></p>
 
             <p>{{ album.year }}</p>
+
+            <button mat-stroked-button (click)="addSong()">Add song</button>
         </div>
     </div>
 

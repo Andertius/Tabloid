@@ -1,4 +1,7 @@
-﻿namespace Tabloid.Domain.DataTransferObjects
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tabloid.Domain.DataTransferObjects
 {
     public class GenreDto : IDto<Guid>
     {
@@ -6,6 +9,6 @@
 
         public string Name { get; set; }
 
-        public ICollection<SongDto> Songs { get; set; }
+        public ICollection<JustNameDto> Songs { get; set; }
     }
 }

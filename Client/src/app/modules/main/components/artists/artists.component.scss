@@ -1,0 +1,31 @@
+@import "../../../../../styles.scss";
+
+.new-artist-circle {
+    width: 200px;
+    height: 200px;
+
+    border: 2px dashed $card-background-color;
+    border-radius: 50%;
+    box-sizing: border-box;
+    font-size: larger;
+    transition: 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-artist-circle:hover {
+    background-color: $card-background-color;
+}
+
+.new-artist {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+}
+
+p {
+    text-align: center;
+    font-size: larger;
+}

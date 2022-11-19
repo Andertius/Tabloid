@@ -24,7 +24,7 @@ export class ImageService {
 
   getAlbumImageSource(album: AlbumDto) {
     if (album === undefined || this.stringService.isNullOrEmpty(album.cover)) {
-      return "../../../../assets/album-default.png";
+      return "../../../../assets/album-default.jpg";
     }
 
     return `${environment.baseUrl}/album-covers/${album.cover}`;

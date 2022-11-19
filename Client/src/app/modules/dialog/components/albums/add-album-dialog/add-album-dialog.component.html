@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Add album</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" type="text" >
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Artist</mat-label>
+
+            <mat-select formControlName="artist">
+                <mat-option *ngFor="let artist of artists" [value]="artist">{{ artist.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Album Type</mat-label>
+
+            <mat-select formControlName="albumType">
+                <mat-option [value]="albumType.Album">Album</mat-option>
+                <mat-option [value]="albumType.EP">EP</mat-option>
+                <mat-option [value]="albumType.Single">Single</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Year</mat-label>
+            <input matInput formControlName="year" type="number" >
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>Confirm</button>
+</div>

@@ -1,4 +1,7 @@
-﻿namespace Tabloid.Domain.DataTransferObjects
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tabloid.Domain.DataTransferObjects
 {
     public class ArtistDto : IDto<Guid>
     {

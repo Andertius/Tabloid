@@ -10,7 +10,12 @@ namespace Tabloid.Application.MapProfiles
         public TuningProfile()
         {
             CreateMap<Tuning, TuningDto>();
+
             CreateMap<TuningDto, Tuning>();
+
+            CreateMap<Tuning, JustNameDto>();
+
+            CreateMap<TuningDto, JustNameDto>();
         }
     }
 }

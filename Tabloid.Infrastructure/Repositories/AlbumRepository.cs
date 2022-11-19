@@ -1,4 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
 
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.Entities;
@@ -33,11 +38,6 @@ namespace Tabloid.Infrastructure.Repositories
                 .Set<Album>()
                 .Include(x => x.Artist)
                 .Include(x => x.Songs)
-                    .ThenInclude(x => x.Artists)
-                .Include(x => x.Songs)
-                    .ThenInclude(x => x.Genres)
-                .Include(x => x.Songs)
-                    .ThenInclude(x => x.Tabs)
                 .ToListAsync();
         }
 

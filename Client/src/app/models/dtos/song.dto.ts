@@ -7,7 +7,7 @@ export interface SongDto {
     id: string,
     name: string,
     songNumberInAlbum: number,
-    fullyMastered: number,
+    fullyMastered: boolean,
     isFavourite: boolean,
     album: AlbumDto,
     tabs: TabDto[],

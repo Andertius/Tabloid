@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="search">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Search</mat-label>
+
+            <input matInput [formControl]="formControl" (input)="searchChanged()">
+
+            <button matSuffix mat-icon-button>
+                <mat-icon class="icon">search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="filters">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Filters
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <p>asdasd asdasd</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <app-track-list-item *ngFor="let song of filteredSongs" [song]="song" [album]="song.album"></app-track-list-item>
+</div>

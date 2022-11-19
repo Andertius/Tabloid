@@ -11,9 +11,6 @@ namespace Tabloid.Application.Validators.Commands.Tunings
             RuleFor(x => x.Tuning)
                 .NotEmpty();
 
-            RuleFor(x => x.Tuning.Id)
-                .Empty();
-
             RuleFor(x => x.Tuning.Name)
                 .NotEmpty();
 

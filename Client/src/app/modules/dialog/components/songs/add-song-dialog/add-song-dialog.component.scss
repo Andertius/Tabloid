@@ -1,0 +1,19 @@
+@import "../../../../../../styles.scss";
+
+.form-field {
+    width: 100%;
+}
+
+.name {
+    color: $hovered-text-color;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

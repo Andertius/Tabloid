@@ -1,4 +1,12 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 using Tabloid.Middlewares;
 using Tabloid.ServiceConfigurations;
@@ -23,6 +31,13 @@ namespace Tabloid
             services.AddMapper();
             services.AddCustomControllers();
 
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = Int32.MaxValue;
+                o.MultipartBodyLengthLimit = Int32.MaxValue;
+                o.MemoryBufferThreshold = Int32.MaxValue;
+            });
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
@@ -42,10 +57,8 @@ namespace Tabloid
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tabloid v1"));
             }
-            else
-            {
-                app.UseMiddleware<ErrorHandlingMiddleware>();
-            }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 

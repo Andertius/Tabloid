@@ -1,4 +1,7 @@
-﻿using Tabloid.Domain.Enums;
+﻿using System;
+using System.Collections.Generic;
+
+using Tabloid.Domain.Enums;
 
 namespace Tabloid.Domain.DataTransferObjects
 {
@@ -15,6 +18,6 @@ namespace Tabloid.Domain.DataTransferObjects
         public string Strings { get; set; }
 
 
-        public ICollection<TabDto> Tabs { get; set; }
+        public ICollection<JustNameDto> Tabs { get; set; }
     }
 }

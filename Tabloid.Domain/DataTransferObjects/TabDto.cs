@@ -1,4 +1,6 @@
-﻿namespace Tabloid.Domain.DataTransferObjects
+﻿using System;
+
+namespace Tabloid.Domain.DataTransferObjects
 {
     public class TabDto : IDto<Guid>
     {

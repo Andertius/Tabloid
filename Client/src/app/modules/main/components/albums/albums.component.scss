@@ -1,0 +1,19 @@
+@import "../../../../../styles.scss";
+
+.new-album {
+    width: 232px;
+    height: 307px;
+    border: 2px dashed $card-background-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: x-large;
+    transition: 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-album:hover {
+    background-color: $card-background-color;
+}

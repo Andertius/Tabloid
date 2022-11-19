@@ -44,7 +44,9 @@
     </div>
 
     <div class="tabs">
-       <app-tab-card *ngFor="let tab of song.tabs" [tab]="tab"></app-tab-card>
+        <h3>Tabs</h3>
+
+        <app-tab-card *ngFor="let tab of song.tabs" [tab]="tab" (rerenderAfterEdit)="rerenderTabsAfterEdit($event)" (rerenderAfterDelete)="rerenderTabsAfterDelete($event)"></app-tab-card>
 
         <div class="new-tab" (click)="addTab()">
             +
