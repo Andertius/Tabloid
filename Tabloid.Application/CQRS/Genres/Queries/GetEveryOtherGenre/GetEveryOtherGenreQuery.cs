@@ -2,9 +2,8 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Genres.Queries.GetEveryOtherGenre
+namespace Tabloid.Application.CQRS.Genres.Queries.GetEveryOtherGenre;
+
+public class GetEveryOtherGenreQuery : IRequest<GenreDto[]>
 {
-    public class GetEveryOtherGenreQuery : IRequest<GenreDto[]>
-    {
-    }
 }

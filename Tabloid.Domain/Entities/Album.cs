@@ -3,26 +3,25 @@ using System.Collections.Generic;
 
 using Tabloid.Domain.Enums;
 
-namespace Tabloid.Domain.Entities
+namespace Tabloid.Domain.Entities;
+
+public class Album : IEntity<Guid>
 {
-    public class Album : IEntity<Guid>
-    {
-        public Guid Id { get; set; }
+    public Guid Id { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-        public string Cover { get; set; }
+    public string? Cover { get; set; }
 
-        public int Year { get; set; }
+    public int Year { get; set; }
 
-        public AlbumType AlbumType { get; set; }
+    public AlbumType AlbumType { get; set; }
 
 
-        public Guid ArtistId { get; set; }
+    public Guid ArtistId { get; set; }
 
-        public Artist Artist { get; set; }
+    public Artist? Artist { get; set; }
 
 
-        public ICollection<Song> Songs { get; set; }
-    }
+    public ICollection<Song>? Songs { get; set; }
 }

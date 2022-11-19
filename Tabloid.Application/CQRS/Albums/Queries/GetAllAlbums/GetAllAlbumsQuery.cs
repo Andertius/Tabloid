@@ -2,9 +2,8 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Albums.Queries.GetAllAlbums
+namespace Tabloid.Application.CQRS.Albums.Queries.GetAllAlbums;
+
+public class GetAllAlbumsQuery : IRequest<AlbumDto[]>
 {
-    public class GetAllAlbumsQuery : IRequest<AlbumDto[]>
-    {
-    }
 }

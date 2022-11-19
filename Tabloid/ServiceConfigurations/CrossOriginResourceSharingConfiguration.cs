@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Tabloid.ServiceConfigurations
+namespace Tabloid.ServiceConfigurations;
+
+public static class CrossOriginResourceSharingConfiguration
 {
-    public static class CrossOriginResourceSharingConfiguration
+    public static IApplicationBuilder UseCrossOriginResourceSharing(this IApplicationBuilder app)
     {
-        public static IApplicationBuilder UseCrossOriginResourceSharing(this IApplicationBuilder app)
-        {
-            return app.UseCors(x => x
-                .AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyMethod());
-        }
+        return app.UseCors(x => x
+            .AllowAnyHeader()
+            .AllowAnyOrigin()
+            .AllowAnyMethod());
     }
 }

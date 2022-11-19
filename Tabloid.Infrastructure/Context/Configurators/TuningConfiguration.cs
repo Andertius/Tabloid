@@ -3,23 +3,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Infrastructure.Context.Configurators
+namespace Tabloid.Infrastructure.Context.Configurators;
+
+internal sealed class TuningConfiguration : IEntityTypeConfiguration<Tuning>
 {
-    internal sealed class TuningConfiguration : IEntityTypeConfiguration<Tuning>
+    public void Configure(EntityTypeBuilder<Tuning> builder)
     {
-        public void Configure(EntityTypeBuilder<Tuning> builder)
-        {
-            builder
-                .HasIndex(x => new { x.Name, x.Strings })
-                .IsUnique();
+        builder
+            .HasIndex(x => new { x.Name, x.Strings })
+            .IsUnique();
 
-            builder
-                .Property(x => x.Name)
-                .IsRequired();
+        builder
+            .Property(x => x.Name)
+            .IsRequired();
 
-            builder
-                .Property(x => x.Strings)
-                .IsRequired();
-        }
+        builder
+            .Property(x => x.Strings)
+            .IsRequired();
     }
 }

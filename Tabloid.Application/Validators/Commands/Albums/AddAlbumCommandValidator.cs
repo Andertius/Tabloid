@@ -2,20 +2,19 @@
 
 using Tabloid.Application.CQRS.Albums.Commands.AddAlbum;
 
-namespace Tabloid.Application.Validators.Commands.Albums
+namespace Tabloid.Application.Validators.Commands.Albums;
+
+public class AddAlbumCommandValidator : AbstractValidator<AddAlbumCommand>
 {
-    public class AddAlbumCommandValidator : AbstractValidator<AddAlbumCommand>
+    public AddAlbumCommandValidator()
     {
-        public AddAlbumCommandValidator()
-        {
-            RuleFor(x => x.Album)
-                .NotEmpty();
+        RuleFor(x => x.Album)
+            .NotEmpty();
 
-            RuleFor(x => x.Album.Name)
-                .NotEmpty();
+        RuleFor(x => x.Album.Name)
+            .NotEmpty();
 
-            RuleFor(x => x.Album.Year)
-                .NotEmpty();
-        }
+        RuleFor(x => x.Album.Year)
+            .NotEmpty();
     }
 }

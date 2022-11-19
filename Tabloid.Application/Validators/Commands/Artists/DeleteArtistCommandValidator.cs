@@ -2,14 +2,13 @@
 
 using Tabloid.Application.CQRS.Artists.Commands.DeleteArtist;
 
-namespace Tabloid.Application.Validators.Commands.Artists
+namespace Tabloid.Application.Validators.Commands.Artists;
+
+public class DeleteArtistCommandValidator : AbstractValidator<DeleteArtistCommand>
 {
-    public class DeleteArtistCommandValidator : AbstractValidator<DeleteArtistCommand>
+    public DeleteArtistCommandValidator()
     {
-        public DeleteArtistCommandValidator()
-        {
-            RuleFor(x => x.Id)
-                .NotEmpty();
-        }
+        RuleFor(x => x.Id)
+            .NotEmpty();
     }
 }

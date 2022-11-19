@@ -3,21 +3,20 @@
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.MapProfiles
+namespace Tabloid.Application.MapProfiles;
+
+public class AlbumProfile : Profile
 {
-    public class AlbumProfile : Profile
+    public AlbumProfile()
     {
-        public AlbumProfile()
-        {
-            CreateMap<Album, AlbumDto>();
+        CreateMap<Album, AlbumDto>();
 
-            CreateMap<AlbumDto, Album>()
-                .ForMember(x => x.Artist, opt => opt.Ignore())
-                .ForMember(x => x.ArtistId, opt => opt.MapFrom(x => x.Artist.Id));
+        CreateMap<AlbumDto, Album>()
+            .ForMember(x => x.Artist, opt => opt.Ignore())
+            .ForMember(x => x.ArtistId, opt => opt.MapFrom(x => x.Artist!.Id));
 
-            CreateMap<Album, JustNameDto>();
+        CreateMap<Album, JustNameDto>();
 
-            CreateMap<AlbumDto, JustNameDto>();
-        }
+        CreateMap<AlbumDto, JustNameDto>();
     }
 }

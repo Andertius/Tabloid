@@ -3,14 +3,13 @@ using System.Threading.Tasks;
 
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.Interfaces.Repositories
+namespace Tabloid.Application.Interfaces.Repositories;
+
+public interface IArtistRepository : IRepository<Artist, Guid>
 {
-    public interface IArtistRepository : IRepository<Artist, Guid>
-    {
-        public Task<Artist> FindArtistByName(string artistName);
+    public Task<Artist?> FindArtistByName(string artistName);
 
-        public Task<Artist> FindArtistBySong(Song song);
+    public Task<Artist?> FindArtistBySong(Song song);
 
-        public Task<Artist> FindArtistByAlbum(Album album);
-    }
+    public Task<Artist?> FindArtistByAlbum(Album album);
 }

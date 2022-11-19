@@ -2,15 +2,14 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Songs.Commands.AddSong
-{
-    public class AddSongCommand : IRequest<CommandResponse<SongDto>>
-    {
-        public AddSongCommand(SongDto song)
-        {
-            Song = song;
-        }
+namespace Tabloid.Application.CQRS.Songs.Commands.AddSong;
 
-        public SongDto Song { get; set; }
+public class AddSongCommand : IRequest<CommandResponse<SongDto>>
+{
+    public AddSongCommand(SongDto song)
+    {
+        Song = song;
     }
+
+    public SongDto Song { get; set; }
 }

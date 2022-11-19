@@ -1,7 +1,6 @@
-﻿namespace Tabloid.Domain.Entities
+﻿namespace Tabloid.Domain.Entities;
+
+public interface IEntity<T>
 {
-    public interface IEntity<T>
-    {
-        T Id { get; set; }
-    }
+    T Id { get; set; }
 }

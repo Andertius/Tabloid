@@ -2,14 +2,13 @@
 
 using Tabloid.Application.CQRS.Tunings.Commands.DeleteTuning;
 
-namespace Tabloid.Application.Validators.Commands.Tunings
+namespace Tabloid.Application.Validators.Commands.Tunings;
+
+public class DeleteTuningCommandValidator : AbstractValidator<DeleteTuningCommand>
 {
-    public class DeleteTuningCommandValidator : AbstractValidator<DeleteTuningCommand>
+    public DeleteTuningCommandValidator()
     {
-        public DeleteTuningCommandValidator()
-        {
-            RuleFor(x => x.Id)
-                .NotEmpty();
-        }
+        RuleFor(x => x.Id)
+            .NotEmpty();
     }
 }

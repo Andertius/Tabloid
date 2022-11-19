@@ -3,19 +3,18 @@
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.MapProfiles
+namespace Tabloid.Application.MapProfiles;
+
+public class GenreProfile : Profile
 {
-    public class GenreProfile : Profile
+    public GenreProfile()
     {
-        public GenreProfile()
-        {
-            CreateMap<Genre, GenreDto>();
+        CreateMap<Genre, GenreDto>();
 
-            CreateMap<GenreDto, Genre>();
+        CreateMap<GenreDto, Genre>();
 
-            CreateMap<Genre, JustNameDto>();
+        CreateMap<Genre, JustNameDto>();
 
-            CreateMap<GenreDto, JustNameDto>();
-        }
+        CreateMap<GenreDto, JustNameDto>();
     }
 }

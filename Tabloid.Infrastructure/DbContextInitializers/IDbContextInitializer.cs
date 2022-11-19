@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Tabloid.Infrastructure.DbContextInitializers
+namespace Tabloid.Infrastructure.DbContextInitializers;
+
+public interface IDbContextInitializer
 {
-    public interface IDbContextInitializer
-    {
-        void Seed(ModelBuilder modelBuilder);
-    }
+    void Seed(ModelBuilder modelBuilder);
 }

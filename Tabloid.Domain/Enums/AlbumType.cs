@@ -1,9 +1,8 @@
-﻿namespace Tabloid.Domain.Enums
+﻿namespace Tabloid.Domain.Enums;
+
+public enum AlbumType
 {
-    public enum AlbumType
-    {
-        Album = 0,
-        EP = 1,
-        Single = 2,
-    }
+    Album = 0,
+    EP = 1,
+    Single = 2,
 }

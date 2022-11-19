@@ -10,28 +10,27 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Songs.Queries.FindSongById
+namespace Tabloid.Application.CQRS.Songs.Queries.FindSongById;
+
+internal class FindSongByIdQueryHandler : IRequestHandler<FindSongByIdQuery, SongDto?>
 {
-    internal class FindSongByIdQueryHandler : IRequestHandler<FindSongByIdQuery, SongDto>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public FindSongByIdQueryHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public FindSongByIdQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<SongDto?> Handle(FindSongByIdQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _unitOfWork
+            .GetRepository<ISongRepository>()
+            .FindById(request.Id);
 
-        public async Task<SongDto> Handle(FindSongByIdQuery request, CancellationToken cancellationToken)
-        {
-            var result = await _unitOfWork
-                .GetRepository<ISongRepository>()
-                .FindById(request.Id);
-
-            return _mapper.Map<SongDto>(result);
-        }
+        return _mapper.Map<SongDto?>(result);
     }
 }

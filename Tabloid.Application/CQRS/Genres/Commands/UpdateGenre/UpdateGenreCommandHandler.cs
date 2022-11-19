@@ -12,40 +12,39 @@ using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 using Tabloid.Domain.Enums;
 
-namespace Tabloid.Application.CQRS.Genres.Commands.UpdateGenre
+namespace Tabloid.Application.CQRS.Genres.Commands.UpdateGenre;
+
+internal class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, CommandResponse<GenreDto>>
 {
-    internal class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, CommandResponse<GenreDto>>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateGenreCommandHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public UpdateGenreCommandHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<GenreDto>> Handle(UpdateGenreCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<IGenreRepository>();
+        var entity = await repository.FindById(request.Genre.Id);
+
+        if (entity is not null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            entity.Name = request.Genre.Name;
+
+            repository.Update(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<GenreDto>(_mapper.Map<GenreDto>(entity));
         }
 
-        public async Task<CommandResponse<GenreDto>> Handle(UpdateGenreCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<IGenreRepository>();
-            var entity = await repository.FindById(request.Genre.Id);
-
-            if (await repository.Contains(entity))
-            {
-                entity.Name = request.Genre.Name;
-
-                repository.Update(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<GenreDto>(_mapper.Map<GenreDto>(entity));
-            }
-
-            return new CommandResponse<GenreDto>(
-                _mapper.Map<GenreDto>(entity),
-                CommandResult.NotFound,
-                "The genre could not be found");
-        }
+        return new CommandResponse<GenreDto>(
+            _mapper.Map<GenreDto>(entity),
+            CommandResult.NotFound,
+            "The genre could not be found");
     }
 }

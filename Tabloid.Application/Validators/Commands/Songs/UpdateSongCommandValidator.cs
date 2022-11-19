@@ -2,20 +2,19 @@
 
 using Tabloid.Application.CQRS.Songs.Commands.UpdateSong;
 
-namespace Tabloid.Application.Validators.Commands.Songs
+namespace Tabloid.Application.Validators.Commands.Songs;
+
+public class UpdateSongCommandValidator : AbstractValidator<UpdateSongCommand>
 {
-    public class UpdateSongCommandValidator : AbstractValidator<UpdateSongCommand>
+    public UpdateSongCommandValidator()
     {
-        public UpdateSongCommandValidator()
-        {
-            RuleFor(x => x.Song)
-                .NotEmpty();
+        RuleFor(x => x.Song)
+            .NotEmpty();
 
-            RuleFor(x => x.Song.Id)
-                .NotEmpty();
+        RuleFor(x => x.Song.Id)
+            .NotEmpty();
 
-            RuleFor(x => x.Song.Name)
-                .NotEmpty();
-        }
+        RuleFor(x => x.Song.Name)
+            .NotEmpty();
     }
 }

@@ -11,38 +11,37 @@ using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Enums;
 
-namespace Tabloid.Application.CQRS.Songs.Commands.DeleteSong
+namespace Tabloid.Application.CQRS.Songs.Commands.DeleteSong;
+
+internal class DeleteSongCommandHandler : IRequestHandler<DeleteSongCommand, CommandResponse<SongDto>>
 {
-    internal class DeleteSongCommandHandler : IRequestHandler<DeleteSongCommand, CommandResponse<SongDto>>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public DeleteSongCommandHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public DeleteSongCommandHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
+    public async Task<CommandResponse<SongDto>> Handle(DeleteSongCommand request, CancellationToken cancellationToken)
+    {
+        var repository = _unitOfWork.GetRepository<ISongRepository>();
+        var entity = await repository.FindById(request.Id);
+
+        if (await repository.Contains(entity))
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            repository.Remove(entity);
+            await _unitOfWork.Save();
+
+            return new CommandResponse<SongDto>(_mapper.Map<SongDto>(entity));
         }
 
-        public async Task<CommandResponse<SongDto>> Handle(DeleteSongCommand request, CancellationToken cancellationToken)
-        {
-            var repository = _unitOfWork.GetRepository<ISongRepository>();
-            var entity = await repository.FindById(request.Id);
-
-            if (await repository.Contains(entity))
-            {
-                repository.Remove(entity);
-                await _unitOfWork.Save();
-
-                return new CommandResponse<SongDto>(_mapper.Map<SongDto>(entity));
-            }
-
-            return new CommandResponse<SongDto>(
-                _mapper.Map<SongDto>(entity),
-                CommandResult.NotFound,
-                "The song could not be found");
-        }
+        return new CommandResponse<SongDto>(
+            _mapper.Map<SongDto>(entity),
+            CommandResult.NotFound,
+            "The song could not be found");
     }
 }

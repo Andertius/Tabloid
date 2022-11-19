@@ -3,23 +3,22 @@
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.MapProfiles
+namespace Tabloid.Application.MapProfiles;
+
+public  class SongProfile : Profile
 {
-    public  class SongProfile : Profile
+    public SongProfile()
     {
-        public SongProfile()
-        {
-            CreateMap<Song, SongDto>()
-                .ForMember(x => x.Name, opt => opt.MapFrom(x => x.SongName));
+        CreateMap<Song, SongDto>()
+            .ForMember(x => x.Name, opt => opt.MapFrom(x => x.SongName));
 
-            CreateMap<SongDto, Song>()
-                .ForMember(x => x.Album, opt => opt.Ignore())
-                .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album.Id))
-                .ForMember(x => x.SongName, opt => opt.MapFrom(x => x.Name));
+        CreateMap<SongDto, Song>()
+            .ForMember(x => x.Album, opt => opt.Ignore())
+            .ForMember(x => x.AlbumId, opt => opt.MapFrom(x => x.Album!.Id))
+            .ForMember(x => x.SongName, opt => opt.MapFrom(x => x.Name));
 
-            CreateMap<Song, JustNameDto>();
+        CreateMap<Song, JustNameDto>();
 
-            CreateMap<SongDto, JustNameDto>();
-        }
+        CreateMap<SongDto, JustNameDto>();
     }
 }

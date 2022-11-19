@@ -11,34 +11,38 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByArtist
+namespace Tabloid.Application.CQRS.Albums.Queries.GetAllAlbumsByArtist;
+
+internal class GetAllAlbumsByArtistQueryHandler : IRequestHandler<GetAllAlbumsByArtistQuery, AlbumDto[]>
 {
-    internal class GetAllAlbumsByArtistQueryHandler : IRequestHandler<GetAllAlbumsByArtistQuery, AlbumDto[]>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllAlbumsByArtistQueryHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetAllAlbumsByArtistQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
+    public async Task<AlbumDto[]> Handle(GetAllAlbumsByArtistQuery request, CancellationToken cancellationToken)
+    {
+        var artist = await _unitOfWork
+            .GetRepository<IArtistRepository>()
+            .FindById(request.Id);
+
+        if (artist is null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return Array.Empty<AlbumDto>();
         }
 
-        public async Task<AlbumDto[]> Handle(GetAllAlbumsByArtistQuery request, CancellationToken cancellationToken)
-        {
-            var artist = await _unitOfWork
-                .GetRepository<IArtistRepository>()
-                .FindById(request.Id);
+        var result = await _unitOfWork
+            .GetRepository<IAlbumRepository>()
+            .GetAllAlbumsByArtist(artist);
 
-            var result = await _unitOfWork
-                .GetRepository<IAlbumRepository>()
-                .GetAllAlbumsByArtist(artist);
-
-            return result
-                .Select(album => _mapper.Map<AlbumDto>(album))
-                .ToArray();
-        }
+        return result
+            .Select(album => _mapper.Map<AlbumDto>(album))
+            .ToArray();
     }
 }

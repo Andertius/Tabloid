@@ -1,7 +1,6 @@
-﻿namespace Tabloid.Domain.DataTransferObjects
+﻿namespace Tabloid.Domain.DataTransferObjects;
+
+public interface IDto<T>
 {
-    public interface IDto<T>
-    {
-        T Id { get; set; }
-    }
+    T Id { get; set; }
 }

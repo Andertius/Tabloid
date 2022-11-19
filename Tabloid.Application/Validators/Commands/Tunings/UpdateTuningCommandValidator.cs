@@ -2,26 +2,25 @@
 
 using Tabloid.Application.CQRS.Tunings.Commands.UpdateTuning;
 
-namespace Tabloid.Application.Validators.Commands.Tunings
+namespace Tabloid.Application.Validators.Commands.Tunings;
+
+public class UpdateTuningCommandValidator : AbstractValidator<UpdateTuningCommand>
 {
-    public class UpdateTuningCommandValidator : AbstractValidator<UpdateTuningCommand>
+    public UpdateTuningCommandValidator()
     {
-        public UpdateTuningCommandValidator()
-        {
-            RuleFor(x => x.Tuning)
-                .NotEmpty();
+        RuleFor(x => x.Tuning)
+            .NotEmpty();
 
-            RuleFor(x => x.Tuning.Id)
-                .NotEmpty();
+        RuleFor(x => x.Tuning.Id)
+            .NotEmpty();
 
-            RuleFor(x => x.Tuning.Name)
-                .NotEmpty();
+        RuleFor(x => x.Tuning.Name)
+            .NotEmpty();
 
-            RuleFor(x => x.Tuning.Strings)
-                .NotEmpty();
+        RuleFor(x => x.Tuning.Strings)
+            .NotEmpty();
 
-            RuleFor(x => x.Tuning.Instrument)
-                .IsInEnum();
-        }
+        RuleFor(x => x.Tuning.Instrument)
+            .IsInEnum();
     }
 }

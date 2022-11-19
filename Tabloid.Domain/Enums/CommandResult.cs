@@ -1,10 +1,9 @@
-﻿namespace Tabloid.Domain.Enums
+﻿namespace Tabloid.Domain.Enums;
+
+public enum CommandResult
 {
-    public enum CommandResult
-    {
-        Failure = 400,
-        NotFound = 404,
-        Success = 200,
-        InternalServerError = 500,
-    }
+    Failure = 400,
+    NotFound = 404,
+    Success = 200,
+    InternalServerError = 500,
 }

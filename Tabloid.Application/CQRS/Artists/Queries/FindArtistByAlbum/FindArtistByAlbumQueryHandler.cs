@@ -10,32 +10,36 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Artists.Queries.FindArtistByAlbum
+namespace Tabloid.Application.CQRS.Artists.Queries.FindArtistByAlbum;
+
+internal class FindArtistByAlbumQueryHandler : IRequestHandler<FindArtistByAlbumQuery, ArtistDto?>
 {
-    internal class FindArtistByAlbumQueryHandler : IRequestHandler<FindArtistByAlbumQuery, ArtistDto>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public FindArtistByAlbumQueryHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public FindArtistByAlbumQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
+    public async Task<ArtistDto?> Handle(FindArtistByAlbumQuery request, CancellationToken cancellationToken)
+    {
+        var album = await _unitOfWork
+            .GetRepository<IAlbumRepository>()
+            .FindById(request.Id);
+
+        if (album is null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return null;
         }
 
-        public async Task<ArtistDto> Handle(FindArtistByAlbumQuery request, CancellationToken cancellationToken)
-        {
-            var album = await _unitOfWork
-                .GetRepository<IAlbumRepository>()
-                .FindById(request.Id);
+        var result = await _unitOfWork
+            .GetRepository<IArtistRepository>()
+            .FindArtistByAlbum(album);
 
-            var result = await _unitOfWork
-                .GetRepository<IArtistRepository>()
-                .FindArtistByAlbum(album);
-
-            return _mapper.Map<ArtistDto>(result);
-        }
+        return _mapper.Map<ArtistDto>(result);
     }
 }

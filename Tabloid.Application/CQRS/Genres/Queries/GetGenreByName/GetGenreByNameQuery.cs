@@ -2,15 +2,14 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Genres.Queries.GetGenreByName
-{
-    public class GetGenreByNameQuery : IRequest<GenreDto>
-    {
-        public GetGenreByNameQuery(string name)
-        {
-            Name = name;
-        }
+namespace Tabloid.Application.CQRS.Genres.Queries.GetGenreByName;
 
-        public string Name { get; set; }
+public class GetGenreByNameQuery : IRequest<GenreDto>
+{
+    public GetGenreByNameQuery(string name)
+    {
+        Name = name;
     }
+
+    public string Name { get; set; }
 }

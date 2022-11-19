@@ -2,15 +2,14 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTabDifficulty
-{
-    public class GetAllSongsByTabDifficultyQuery : IRequest<SongDto[]>
-    {
-        public GetAllSongsByTabDifficultyQuery(double? difficulty)
-        {
-            Difficulty = difficulty;
-        }
+namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTabDifficulty;
 
-        public double? Difficulty { get; set; }
+public class GetAllSongsByTabDifficultyQuery : IRequest<SongDto[]>
+{
+    public GetAllSongsByTabDifficultyQuery(double? difficulty)
+    {
+        Difficulty = difficulty;
     }
+
+    public double? Difficulty { get; set; }
 }

@@ -10,30 +10,34 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Songs.Commands.SetMastered
+namespace Tabloid.Application.CQRS.Songs.Commands.SetMastered;
+
+internal class SetMasteredCommandHandler : IRequestHandler<SetMasteredCommand, CommandResponse<SongDto>>
 {
-    internal class SetMasteredCommandHandler : IRequestHandler<SetMasteredCommand, CommandResponse<SongDto>>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public SetMasteredCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public SetMasteredCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
+    public async Task<CommandResponse<SongDto>> Handle(SetMasteredCommand request, CancellationToken cancellationToken)
+    {
+        var song = await _unitOfWork
+            .GetRepository<ISongRepository>()
+            .FindById(request.SongId);
+
+        if (song is null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
-        public async Task<CommandResponse<SongDto>> Handle(SetMasteredCommand request, CancellationToken cancellationToken)
-        {
-            var song = await _unitOfWork
-                .GetRepository<ISongRepository>()
-                .FindById(request.SongId);
-
-            song.FullyMastered = request.IsMastered;
-
-            await _unitOfWork.Save();
-
             return new CommandResponse<SongDto>(_mapper.Map<SongDto>(song));
         }
+
+        song.FullyMastered = request.IsMastered;
+
+        await _unitOfWork.Save();
+
+        return new CommandResponse<SongDto>(_mapper.Map<SongDto>(song));
     }
 }

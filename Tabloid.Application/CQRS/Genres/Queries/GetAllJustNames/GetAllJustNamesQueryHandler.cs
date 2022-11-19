@@ -11,30 +11,29 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Genres.Queries.GetAllJustNames
+namespace Tabloid.Application.CQRS.Genres.Queries.GetAllJustNames;
+
+internal class GetAllJustNamesQueryHandler : IRequestHandler<GetAllJustNamesQuery, JustNameDto[]>
 {
-    internal class GetAllJustNamesQueryHandler : IRequestHandler<GetAllJustNamesQuery, JustNameDto[]>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllJustNamesQueryHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetAllJustNamesQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<JustNameDto[]> Handle(GetAllJustNamesQuery request, CancellationToken cancellationToken)
+    {
+        var artists = await _unitOfWork
+            .GetRepository<IGenreRepository>()
+            .GetAll();
 
-        public async Task<JustNameDto[]> Handle(GetAllJustNamesQuery request, CancellationToken cancellationToken)
-        {
-            var artists = await _unitOfWork
-                .GetRepository<IGenreRepository>()
-                .GetAll();
-
-            return artists
-                .Select(x => _mapper.Map<JustNameDto>(x))
-                .ToArray();
-        }
+        return artists
+            .Select(x => _mapper.Map<JustNameDto>(x))
+            .ToArray();
     }
 }

@@ -2,14 +2,13 @@
 
 using Tabloid.Application.CQRS.Genres.Commands.DeleteGenre;
 
-namespace Tabloid.Application.Validators.Commands.Genres
+namespace Tabloid.Application.Validators.Commands.Genres;
+
+public class DeleteGenreCommandValidator : AbstractValidator<DeleteGenreCommand>
 {
-    public class DeleteGenreCommandValidator : AbstractValidator<DeleteGenreCommand>
+    public DeleteGenreCommandValidator()
     {
-        public DeleteGenreCommandValidator()
-        {
-            RuleFor(x => x.Id)
-                .NotEmpty();
-        }
+        RuleFor(x => x.Id)
+            .NotEmpty();
     }
 }

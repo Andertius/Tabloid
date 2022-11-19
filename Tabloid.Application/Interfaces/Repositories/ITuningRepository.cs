@@ -4,14 +4,13 @@ using System.Threading.Tasks;
 
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.Interfaces.Repositories
+namespace Tabloid.Application.Interfaces.Repositories;
+
+public interface ITuningRepository : IRepository<Tuning, Guid>
 {
-    public interface ITuningRepository : IRepository<Tuning, Guid>
-    {
-        Task<ICollection<Tuning>> GetAllGuitarTuningsByStringNumber(int number);
+    Task<ICollection<Tuning>> GetAllGuitarTuningsByStringNumber(int number);
 
-        Task<Tuning> FindGuitarTuningByName(string tuning);
+    Task<Tuning?> FindGuitarTuningByName(string tuning);
 
-        Task<ICollection<Tuning>> GetAllJustTunings();
-    }
+    Task<ICollection<Tuning>> GetAllJustTunings();
 }

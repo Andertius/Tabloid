@@ -2,13 +2,12 @@
 
 using Tabloid.Application.MapProfiles;
 
-namespace Tabloid.ServiceConfigurations
+namespace Tabloid.ServiceConfigurations;
+
+public static class MapperConfiguration
 {
-    public static class MapperConfiguration
+    public static IServiceCollection AddMapper(this IServiceCollection services)
     {
-        public static IServiceCollection AddMapper(this IServiceCollection services)
-        {
-            return services.AddAutoMapper(typeof(TuningProfile).Assembly);
-        }
+        return services.AddAutoMapper(typeof(TuningProfile).Assembly);
     }
 }

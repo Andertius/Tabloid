@@ -7,37 +7,35 @@ using FluentValidation;
 
 using MediatR;
 
-namespace Tabloid.Application.Services
+namespace Tabloid.Application.Services;
+
+public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : class, IRequest<TResponse>
 {
-    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class, IRequest<TResponse>
+    private readonly IEnumerable<IValidator<TRequest>> _validators;
+
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+        => _validators = validators;
+
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        private readonly IEnumerable<IValidator<TRequest>> _validators;
-
-        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
-            => _validators = validators;
-
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        if (!_validators.Any())
         {
-            if (!_validators.Any())
-            {
-                return await next();
-            }
-
-            var context = new ValidationContext<TRequest>(request);
-
-            var errorsDictionary = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
-                .Where(x => x != null)
-                .ToList();
-
-            if (errorsDictionary.Any())
-            {
-                throw new ValidationException(errorsDictionary);
-            }
-
             return await next();
         }
+
+        var context = new ValidationContext<TRequest>(request);
+
+        var errorsDictionary = _validators
+            .Select(x => x.Validate(context))
+            .SelectMany(x => x.Errors)
+            .Where(x => x != null)
+            .ToList();
+
+        if (errorsDictionary.Any())
+        {
+            throw new ValidationException(errorsDictionary);
+        }
+
+        return await next();
     }
 }

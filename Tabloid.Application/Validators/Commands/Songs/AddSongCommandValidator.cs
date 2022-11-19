@@ -2,17 +2,16 @@
 
 using Tabloid.Application.CQRS.Songs.Commands.AddSong;
 
-namespace Tabloid.Application.Validators.Commands.Songs
-{
-    public class AddSongCommandValidator : AbstractValidator<AddSongCommand>
-    {
-        public AddSongCommandValidator()
-        {
-            RuleFor(x => x.Song)
-                .NotEmpty();
+namespace Tabloid.Application.Validators.Commands.Songs;
 
-            RuleFor(x => x.Song.Name)
-                .NotEmpty();
-        }
+public class AddSongCommandValidator : AbstractValidator<AddSongCommand>
+{
+    public AddSongCommandValidator()
+    {
+        RuleFor(x => x.Song)
+            .NotEmpty();
+
+        RuleFor(x => x.Song.Name)
+            .NotEmpty();
     }
 }

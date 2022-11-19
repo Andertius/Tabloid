@@ -3,19 +3,18 @@
 using Tabloid.Domain.DataTransferObjects;
 using Tabloid.Domain.Entities;
 
-namespace Tabloid.Application.MapProfiles
+namespace Tabloid.Application.MapProfiles;
+
+public class ArtistProfile : Profile
 {
-    public class ArtistProfile : Profile
+    public ArtistProfile()
     {
-        public ArtistProfile()
-        {
-            CreateMap<Artist, ArtistDto>();
+        CreateMap<Artist, ArtistDto>();
 
-            CreateMap<ArtistDto, Artist>();
+        CreateMap<ArtistDto, Artist>();
 
-            CreateMap<Artist, JustNameDto>();
+        CreateMap<Artist, JustNameDto>();
 
-            CreateMap<ArtistDto, JustNameDto>();
-        }
+        CreateMap<ArtistDto, JustNameDto>();
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Tabloid.Domain.Enums
+﻿namespace Tabloid.Domain.Enums;
+
+public enum Instrument
 {
-    public enum Instrument
-    {
-        Guitar = 0,
-        Bass = 1,
-    }
+    Guitar = 0,
+    Bass = 1,
 }

@@ -1,23 +1,22 @@
 ﻿using Tabloid.Domain.Enums;
 
-namespace Tabloid.Application.CQRS
+namespace Tabloid.Application.CQRS;
+
+public class CommandResponse<T>  where T : class
 {
-    public class CommandResponse<T>  where T : class
+    public CommandResponse(
+        T? obj = null,
+        CommandResult result = CommandResult.Success,
+        string errorMessage = "")
     {
-        public CommandResponse(
-            T obj = null,
-            CommandResult result = CommandResult.Success,
-            string errorMessage = "")
-        {
-            Object = obj;
-            Result = result;
-            ErrorMessage = errorMessage;
-        }
-
-        public CommandResult Result { get; set; }
-
-        public T Object { get; set; }
-
-        public string ErrorMessage { get; set; }
+        Object = obj;
+        Result = result;
+        ErrorMessage = errorMessage;
     }
+
+    public CommandResult Result { get; set; }
+
+    public T? Object { get; set; }
+
+    public string ErrorMessage { get; set; }
 }

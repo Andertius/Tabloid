@@ -11,34 +11,38 @@ using Tabloid.Application.Interfaces;
 using Tabloid.Application.Interfaces.Repositories;
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning
+namespace Tabloid.Application.CQRS.Songs.Queries.GetAllSongsByTuning;
+
+internal class GetAllSongsByTuningQueryHandler : IRequestHandler<GetAllSongsByTuningQuery, SongDto[]>
 {
-    internal class GetAllSongsByTuningQueryHandler : IRequestHandler<GetAllSongsByTuningQuery, SongDto[]>
+    private readonly IUnitOfWork<Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetAllSongsByTuningQueryHandler(
+        IUnitOfWork<Guid> unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork<Guid> _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetAllSongsByTuningQueryHandler(
-            IUnitOfWork<Guid> unitOfWork,
-            IMapper mapper)
+    public async Task<SongDto[]> Handle(GetAllSongsByTuningQuery request, CancellationToken cancellationToken)
+    {
+        var tuning = await _unitOfWork
+            .GetRepository<ITuningRepository>()
+            .FindById(request.Id);
+
+        if (tuning is null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return Array.Empty<SongDto>();
         }
 
-        public async Task<SongDto[]> Handle(GetAllSongsByTuningQuery request, CancellationToken cancellationToken)
-        {
-            var tuning = await _unitOfWork
-                .GetRepository<ITuningRepository>()
-                .FindById(request.Id);
+        var result = await _unitOfWork
+            .GetRepository<ISongRepository>()
+            .GetAllSongsByTuning(tuning);
 
-            var result = await _unitOfWork
-                .GetRepository<ISongRepository>()
-                .GetAllSongsByTuning(tuning);
-
-            return result
-                .Select(x => _mapper.Map<SongDto>(x))
-                .ToArray();
-        }
+        return result
+            .Select(x => _mapper.Map<SongDto>(x))
+            .ToArray();
     }
 }

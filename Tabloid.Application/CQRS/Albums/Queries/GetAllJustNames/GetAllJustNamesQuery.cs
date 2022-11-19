@@ -2,9 +2,8 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Albums.Queries.GetAllJustNames
+namespace Tabloid.Application.CQRS.Albums.Queries.GetAllJustNames;
+
+public class GetAllJustNamesQuery : IRequest<JustNameDto[]>
 {
-    public class GetAllJustNamesQuery : IRequest<JustNameDto[]>
-    {
-    }
 }

@@ -2,9 +2,8 @@
 
 using Tabloid.Domain.DataTransferObjects;
 
-namespace Tabloid.Application.CQRS.Artists.Queries.GetAllArtists
+namespace Tabloid.Application.CQRS.Artists.Queries.GetAllArtists;
+
+public class GetAllArtistsQuery : IRequest<ArtistDto[]>
 {
-    public class GetAllArtistsQuery : IRequest<ArtistDto[]>
-    {
-    }
 }
