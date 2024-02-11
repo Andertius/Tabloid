@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <Nullable>Enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.0" />
-    <PackageReference Include="FluentValidation" Version="11.3.0" />
-    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Tabloid.Core\Tabloid.Core.csproj" />
-    <ProjectReference Include="..\Tabloid.Domain\Tabloid.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\Tabloid.Domain\Tabloid.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

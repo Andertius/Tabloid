@@ -15,12 +15,11 @@ namespace Tabloid.Infrastructure.Context;
 public class UnitOfWork<TId> : IUnitOfWork<TId>
 {
     private readonly TabDbContext _context;
-    private IDictionary<Type, Type> _repositories;
+    private IDictionary<Type, Type> _repositories = new Dictionary<Type, Type>();
 
     public UnitOfWork(TabDbContext context)
     {
         _context = context;
-        _repositories = new Dictionary<Type, Type>();
     }
 
     public async Task Save()
@@ -47,7 +46,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
             GetImplementations(implementationAssembly));
     }
 
-    private static IList<Type> GetInterfaces(Assembly assembly)
+    private static IReadOnlyList<Type> GetInterfaces(Assembly assembly)
     {
         var it = typeof(IRepository<IEntity<TId>, TId>);
         var types = assembly
@@ -66,7 +65,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
         return types;
     }
 
-    private static IList<Type> GetImplementations(Assembly assembly)
+    private static IReadOnlyList<Type> GetImplementations(Assembly assembly)
     {
         var baseClass = typeof(Repository<IEntity<TId>, TId>);
         var types = assembly
@@ -79,7 +78,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
         return types;
     }
 
-    private static IDictionary<Type, Type> CreateRepositoryDictionary(IList<Type> interfaces, IList<Type> implementations)
+    private static IDictionary<Type, Type> CreateRepositoryDictionary(IReadOnlyList<Type> interfaces, IReadOnlyList<Type> implementations)
     {
         if (interfaces.Count != implementations.Count)
         {
@@ -101,7 +100,7 @@ public class UnitOfWork<TId> : IUnitOfWork<TId>
             .ToDictionary(item => item.it, item => item.im);
     }
 
-    private static bool CheckPairings(IList<Type> interfaces, IList<Type> implementations)
+    private static bool CheckPairings(IReadOnlyList<Type> interfaces, IReadOnlyList<Type> implementations)
     {
         for (int i = 0; i < implementations.Count; i++)
         {

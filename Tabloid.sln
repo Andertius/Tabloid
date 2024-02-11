@@ -3,17 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid", "Tabloid\Tabloid.csproj", "{E335A674-0FFD-4111-815F-91050A155678}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Api", "src\Server\Tabloid.Api\Tabloid.Api.csproj", "{E335A674-0FFD-4111-815F-91050A155678}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Domain", "Tabloid.Domain\Tabloid.Domain.csproj", "{980589D2-C4B7-42D8-AC64-6FE926348BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Domain", "src\Common\Tabloid.Domain\Tabloid.Domain.csproj", "{980589D2-C4B7-42D8-AC64-6FE926348BB2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Application", "Tabloid.Application\Tabloid.Application.csproj", "{65B56589-750B-4160-B46D-99D06B22B15B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Application", "src\Server\Tabloid.Application\Tabloid.Application.csproj", "{65B56589-750B-4160-B46D-99D06B22B15B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Infrastructure", "Tabloid.Infrastructure\Tabloid.Infrastructure.csproj", "{47C3C168-1FFF-4227-ABD5-E2BF61B6AB45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Infrastructure", "src\Server\Tabloid.Infrastructure\Tabloid.Infrastructure.csproj", "{47C3C168-1FFF-4227-ABD5-E2BF61B6AB45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Tests", "Tabloid.Tests\Tabloid.Tests.csproj", "{7B4C3A78-CBD4-4E87-B1FA-FC72BD26F742}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Tests", "src\Server\Tabloid.Tests\Tabloid.Tests.csproj", "{7B4C3A78-CBD4-4E87-B1FA-FC72BD26F742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tabloid.Core", "Tabloid.Core\Tabloid.Core.csproj", "{46A37320-782F-4B76-BA54-73100070CE4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tabloid.Core", "src\Server\Tabloid.Core\Tabloid.Core.csproj", "{46A37320-782F-4B76-BA54-73100070CE4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{78ADB979-9B19-44AE-8B2F-D0307EDB5230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tabloid.Avalonia", "src\Desktop\Tabloid.Avalonia\Tabloid.Avalonia.csproj", "{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tabloid.MVVM.Core", "src\Desktop\Tabloid.MVVM.Core\Tabloid.MVVM.Core.csproj", "{B3875063-F747-4043-82EF-D294EE278C4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tabloid.MVVM.Tests", "src\Desktop\Tabloid.MVVM.Tests\Tabloid.MVVM.Tests.csproj", "{6C7F12BC-D106-417F-92D2-35D6E81D8885}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{99854CF5-EA9E-49A6-9743-4E35D0988CA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +57,32 @@ Global
 		{46A37320-782F-4B76-BA54-73100070CE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46A37320-782F-4B76-BA54-73100070CE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46A37320-782F-4B76-BA54-73100070CE4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3875063-F747-4043-82EF-D294EE278C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3875063-F747-4043-82EF-D294EE278C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3875063-F747-4043-82EF-D294EE278C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3875063-F747-4043-82EF-D294EE278C4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7F12BC-D106-417F-92D2-35D6E81D8885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7F12BC-D106-417F-92D2-35D6E81D8885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7F12BC-D106-417F-92D2-35D6E81D8885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7F12BC-D106-417F-92D2-35D6E81D8885}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E335A674-0FFD-4111-815F-91050A155678} = {5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}
+		{980589D2-C4B7-42D8-AC64-6FE926348BB2} = {99854CF5-EA9E-49A6-9743-4E35D0988CA7}
+		{65B56589-750B-4160-B46D-99D06B22B15B} = {5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}
+		{47C3C168-1FFF-4227-ABD5-E2BF61B6AB45} = {5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}
+		{7B4C3A78-CBD4-4E87-B1FA-FC72BD26F742} = {5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}
+		{46A37320-782F-4B76-BA54-73100070CE4C} = {5B9C9BA0-05BA-4144-ABBC-05EF0EBA0E38}
+		{16AB90BD-6F4C-4DDA-AAD7-E0C5A8308C89} = {78ADB979-9B19-44AE-8B2F-D0307EDB5230}
+		{B3875063-F747-4043-82EF-D294EE278C4C} = {78ADB979-9B19-44AE-8B2F-D0307EDB5230}
+		{6C7F12BC-D106-417F-92D2-35D6E81D8885} = {78ADB979-9B19-44AE-8B2F-D0307EDB5230}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30952A30-F1B4-4BFE-BC6F-7AFDEB6F4AC0}

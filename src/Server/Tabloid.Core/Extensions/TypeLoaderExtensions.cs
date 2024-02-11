@@ -11,7 +11,7 @@ public static class TypeLoaderExtensions
     {
         if (assembly is null)
         {
-            throw new ArgumentNullException(nameof(assembly));
+            ArgumentNullException.ThrowIfNull(assembly, nameof(assembly));
         }
 
         try
